@@ -1,5 +1,3 @@
-## Welcome to GitHub Pages
+TensorFlow.js هي عبارة عن مكتبة تم بناؤها على deeplearn.js للسماح للمستخدمين من إنشاء هياكل تعليم متعمق Deep learning modules على المتصفح مباشرة. وبالتالي يمكن إنشاء RNN CNN الخ بسهولة بالغة بإستخدام ال GPU للعميل وليس السيرفر. في هذا المقال سأقوم بشرح مباديء بسيطة عن هذه المكتبة وكيفية إستخدامها لإنشاء هياكل معقدة.
 
-You can use the [editor on GitHub](https://github.com/zaidalyafeai/zaidalyafeai.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
