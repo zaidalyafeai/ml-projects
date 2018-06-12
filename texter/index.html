@@ -154,6 +154,7 @@ return tf.tidy(()=>{
 async function loadModel()
 {
     model = await tf.loadModel('model/model.json')
+    alert('model loaded') 
     loadDict()
     /*var c1 = document.getElementById("canvas");
 
