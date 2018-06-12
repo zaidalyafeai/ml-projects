@@ -192,7 +192,6 @@ function erase()
     canvas.clear();
     console.log('cleared')
 }
-loadModel()
 
 var model;
 var canvas;
@@ -217,6 +216,7 @@ var symbols = [];
 <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #000000;"></canvas>
   <button class = 'btn btn-default' onclick ='getFrame()'>Predict</button>
   <button class = 'btn btn-default' onclick ='erase()'>Clear</button>
+<button class = 'btn btn-default' onclick ='loadMosel()'>Load</button>
 <span id = 'msg' class="label label-default">Default Label</span>	
 	<p id="myLog"></p>
  <table class="table text-center">
