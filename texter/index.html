@@ -157,11 +157,11 @@ return tf.tidy(()=>{
 async function loadModel()
 {
    
-    alert('entered') 
+    console.log('entered') 
   //  model = await tf.loadModel('model/model.json')
     console.log('model loaded') 
     loadDict()
-	
+consol.log('dictate loaded') 
     /*var c1 = document.getElementById("canvas");
 
     var ctx1 = c1.getContext('2d');
@@ -216,7 +216,7 @@ var symbols = [];
 <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #000000;"></canvas>
   <button class = 'btn btn-default' onclick ='getFrame()'>Predict</button>
   <button class = 'btn btn-default' onclick ='erase()'>Clear</button>
-<button class = 'btn btn-default' onclick ='loadMosel()'>Load</button>
+<button class = 'btn btn-default' onclick ='loadModel()'>Load</button>
 <span id = 'msg' class="label label-default">Default Label</span>	
 	<p id="myLog"></p>
  <table class="table text-center">
