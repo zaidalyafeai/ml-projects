@@ -157,8 +157,8 @@ return tf.tidy(()=>{
 async function loadModel()
 {
    
-    console.log('entered') 
-    model = await tf.loadModel('model/model.json')
+    console.log('model loading') 
+    model = tf.loadModel('model/model.json')
     console.log('model loaded') 
     loadDict()
     console.log('dict loaded') 
