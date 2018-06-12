@@ -57,10 +57,10 @@ function getFrame()
     console.log(probs)
     setTable(symbols, probs)
 }
-function show(msg)
+function showCase(msg)
 {
 var el = document.getElementById('msg') 
-el.textContent = msg	
+el.innerHTML = msg	
 }
 function getSymbols(indices)
 {
@@ -156,8 +156,8 @@ return tf.tidy(()=>{
 
 async function loadModel()
 {
-   alert('hey')
-   show('loading model') 
+   
+    showCase('loading model') 
     model = await tf.loadModel('model/model.json')
     alert('model loaded') 
     loadDict()
