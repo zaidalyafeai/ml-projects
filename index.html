@@ -1,0 +1,241 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Maths Equations</title>
+  <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<script src="fabric.js"></script>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+  MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+  </script>
+  <script>
+    function setTable(symbols, probs)
+    {
+     
+   for (var i = 0; i < symbols.length; i++) { 
+    let sym = document. getElementById('sym'+(i+1))
+    let tex = document. getElementById('tex'+(i+1))
+    let prb = document. getElementById('prb'+(i+1))
+    sym.innerHTML = '$$'+symbols[i]+'$$'
+    tex.innerHTML = symbols[i]
+    prb.innerHTML = probs[i]
+    } 
+   MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
+    }
+    
+
+var canvas;
+
+$(function () {
+    canvas = window._canvas = new fabric.Canvas('canvas');
+    canvas.backgroundColor = '#ffffff';
+    canvas.isDrawingMode= 1;
+    canvas.freeDrawingBrush.color = "black";
+    canvas.freeDrawingBrush.width = 15;
+    canvas.renderAll();
+})
+
+function getFrame()
+{
+    const ctx = canvas.getContext("2d");
+
+    //get image data
+    imgData = ctx.getImageData(0, 0, 300, 300);
+    const pred = model.predict(preprocess(imgData)).dataSync()
+    const indices = findIndicesOfMax(pred, 5)
+    const probs  = findTopValues(pred, 5)
+    const symbols = getSymbols(indices)
+    console.log(symbols)
+    console.log(probs)
+    setTable(symbols, probs)
+}
+
+function getSymbols(indices)
+{
+    var outp = []
+    for (var i= 0 ; i < indices.length ; i++)
+        outp[i] = symbols[indices[i]]
+    return outp
+}
+async function loadDict()
+{
+  await $.ajax({
+  url: 'symbols.csv',
+  dataType: 'text',}).done(success);
+}
+
+
+function findIndicesOfMax(inp, count) {
+    var outp = [];
+    for (var i = 0; i < inp.length; i++) {
+        outp.push(i); // add index to output array
+        if (outp.length > count) {
+            outp.sort(function(a, b) { return inp[b] - inp[a]; }); // descending sort the output array
+            outp.pop(); // remove the last index (index of smallest element in output array)
+        }
+    }
+    return outp;
+}
+
+function findTopValues(inp, count){
+    var outp = [];
+    let indices = findIndicesOfMax(inp, count)
+    // show 3 greatest scores
+    for (var i = 0; i < indices.length; i++)
+        outp[i] = inp[indices[i]]
+    return outp
+}
+
+function success(data)
+{
+    var wd_idx = new Object();
+    lst = data.split(/\r?\n|\r/)
+    symbols = []
+    for(var i = 1 ; i < lst.length -1 ; i++)
+    {
+        let symbol = lst[i].split(',')[1]
+        symbols[i-1] = symbol
+    }
+}
+
+async function createImg(path)
+{
+  return await new Promise((resolve, reject) => {
+  let i = new Image();
+  i.onload = () => resolve(i);
+  i.onerror = reject;
+  i.crossOrigin = 'anonymous';
+  i.src = path;
+  i.width = 224;
+  i.height = 224;
+  })
+  
+}
+
+async function createImg(path)
+{
+  return await new Promise((resolve, reject) => {
+  let i = new Image();
+  i.onload = () => resolve(i);
+  i.onerror = reject;
+  i.crossOrigin = 'anonymous';
+  i.src = path;
+  i.width = 32;
+  i.height = 32;
+  })
+  
+}
+
+function preprocess(imgData)
+{
+return tf.tidy(()=>{
+    let tensor = tf.fromPixels(imgData)
+    resized = tf.image.resizeBilinear(tensor, [32, 32]).toFloat()
+    const sliced   = resized.slice([0, 0, 1], [32, 32, 1])
+    const offset = tf.scalar(255.0);
+    // Normalize the image 
+    const normalized = sliced.div(offset);
+  
+    //We add a dimension to get a batch shape 
+    const batched = normalized.expandDims(0)
+    return batched
+})
+}
+
+async function loadModel()
+{
+    model = await tf.loadModel('model/model.json')
+    loadDict()
+    /*var c1 = document.getElementById("canvas");
+
+    var ctx1 = c1.getContext('2d');
+
+    const cImg = await createImg('hasy-data/v2-00036.png')
+
+    cT = preprocess(cImg)
+
+    ctx1.drawImage(cImg,0,0,cImg.width,cImg.width);
+
+    model = await tf.loadModel('model/model.json')
+    const pred = model.predict(cT)
+    pred.argMax(1).print()
+    console.log(pred.argMax(1).dataSync())
+    console.log(arr[297])*/
+}
+
+function clear()
+{
+    canvas.clear();
+}
+loadModel()
+
+var model;
+var canvas;
+var symbols = [];
+  </script>
+  <style>
+.table tbody tr td{
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace
+}
+ table thead tr th {
+	font-famiy : Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 26.4px;
+}
+    .sym {
+      font-size :30px
+    }
+</style
+</head>
+<body>
+<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #000000;"></canvas>
+  <button class = 'btn btn-default' onclick ='getFrame()'>Predict</button>
+  <button class = 'btn btn-default' onclick ='clear()'>Clear</button>
+ <table class="table text-center">
+    <thead>
+  <tr>
+    <th class= 'text-center'>Symbol</th>
+    <th class ='text-center'>Latex</th> 
+    <th class ='text-center'>Prob</th>
+  </tr>
+    </thead>
+   <tbody>
+  <tr>
+  <td id ='sym1' class = 'sym' ></td>
+  <td id ='tex1'></td>
+  <td id ='prb1'></td>
+ </tr>
+   <tr>
+  <td id ='sym2' class = 'sym'></td>
+  <td id ='tex2'></td>
+  <td id ='prb2'></td>
+ </tr>
+   <tr>
+  <td id ='sym3' class = 'sym'></td>
+  <td id ='tex3'></td>
+  <td id ='prb3'></td>
+ </tr>
+   <tr>
+  <td id ='sym4' class = 'sym'></td>
+  <td id ='tex4'></td>
+  <td id ='prb4'></td>
+ </tr>
+   <tr>
+  <td id ='sym5' class = 'sym'></td>
+  <td id ='tex5'></td>
+  <td id ='prb5'></td>
+ </tr>
+    </tbody>
+</table>
+</body>
+</html>
