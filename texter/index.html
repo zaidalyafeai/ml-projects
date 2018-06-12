@@ -42,8 +42,7 @@ $(function () {
     canvas.freeDrawingBrush.color = "black";
     canvas.freeDrawingBrush.width = 15;
     canvas.renderAll();
-})
-
+})	  
 function getFrame()
 {
     const ctx = canvas.getContext("2d");
@@ -58,7 +57,13 @@ function getFrame()
     console.log(probs)
     setTable(symbols, probs)
 }
+function show(msg)
 
+{
+var el = document.getElementById('msg') 
+el.innerHTML = msg
+	
+}
 function getSymbols(indices)
 {
     var outp = []
@@ -153,6 +158,8 @@ return tf.tidy(()=>{
 
 async function loadModel()
 {
+
+   show('loading model') 
     model = await tf.loadModel('model/model.json')
     alert('model loaded') 
     loadDict()
