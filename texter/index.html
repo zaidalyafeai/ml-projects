@@ -158,9 +158,9 @@ async function loadModel()
 {
    
     console.log('model loading') 
-    model = tf.loadModel('model/model.json')
+   // model = await tf.loadModel('model/model.json')
     console.log(model) 
-    loadDict()
+    await loadDict()
     console.log('dict loaded') 
     /*var c1 = document.getElementById("canvas");
 
