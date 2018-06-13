@@ -48,6 +48,7 @@ $(function () {
 var canvas;
 function getFrame()
 {
+    $('button').prop('disabled', true);
     const ctx = canvas.getContext("2d");
 
     //get image data
@@ -57,6 +58,7 @@ function getFrame()
     const probs  = findTopValues(pred, 5)
     const symbols = getSymbols(indices)
     setTable(symbols, probs)
+    $('button').prop('disabled', false);
 }
 	  
 function getSymbols(indices)
