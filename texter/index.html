@@ -152,12 +152,9 @@ return tf.tidy(()=>{
 
 async function loadModel()
 {
-   
-    console.log('model 2 loading') 
     model = await tf.loadModel('model2/model.json')
-    console.log('model loaded') 
+    $('#tgl').prop('disabled', false);
     await loadDict()
-    console.log('dict loaded') 
     /*var c1 = document.getElementById("canvas");
 
     var ctx1 = c1.getContext('2d');
@@ -188,7 +185,8 @@ function erase()
     canvas.clear();
     console.log('cleared')
 }
-
+$('#tgle').prop('disabled', true);	  
+loadModel()
 var model;
 var canvas;
 var symbols = [];
@@ -210,10 +208,8 @@ var symbols = [];
 </head>
 <body>
 <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #000000;"></canvas>
-  <button class = 'btn btn-default' onclick ='getFrame()'>Predict</button>
-  <button class = 'btn btn-default' onclick ='erase()'>Clear</button>
-<button class = 'btn btn-default' onclick ='loadModel()'>Load</button>
-<span id = 'msg' class="label label-default">Default Label</span>	
+  <button class = 'btn btn-default' id ='tgl' onclick ='getFrame()'>Predict</button>
+  <button class = 'btn btn-default' onclick ='erase()'>Clear</button>	
 	<p id="myLog"></p>
  <table class="table text-center">
     <thead>
