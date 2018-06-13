@@ -34,15 +34,6 @@
     
 
 var canvas;
-
-$(function () {
-    canvas = window._canvas = new fabric.Canvas('canvas');
-    canvas.backgroundColor = '#ffffff';
-    canvas.isDrawingMode= 1;
-    canvas.freeDrawingBrush.color = "black";
-    canvas.freeDrawingBrush.width = 15;
-    canvas.renderAll();
-})	  
 function getFrame()
 {
     const ctx = canvas.getContext("2d");
