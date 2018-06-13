@@ -58,11 +58,7 @@ function getFrame()
     const symbols = getSymbols(indices)
     setTable(symbols, probs)
 }
-function showCase(msg)
-{
-var el = document.getElementById('msg') 
-el.innerHTML = msg	
-}
+	  
 function getSymbols(indices)
 {
     var outp = []
@@ -160,21 +156,6 @@ async function loadModel()
     model = await tf.loadModel('model2/model.json')
     $('button').prop('disabled', false);
     await loadDict()
-    /*var c1 = document.getElementById("canvas");
-
-    var ctx1 = c1.getContext('2d');
-
-    const cImg = await createImg('hasy-data/v2-00036.png')
-
-    cT = preprocess(cImg)
-
-    ctx1.drawImage(cImg,0,0,cImg.width,cImg.width);
-
-    model = await tf.loadModel('model/model.json')
-    const pred = model.predict(cT)
-    pred.argMax(1).print()
-    console.log(pred.argMax(1).dataSync())
-    console.log(arr[297])*/
 }
 
 window.console = {
@@ -188,7 +169,6 @@ window.console = {
 function erase()
 {
     canvas.clear();
-    console.log('cleared')
 }
 $('#tgle').prop('disabled', true);	  
 loadModel()
