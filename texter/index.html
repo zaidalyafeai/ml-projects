@@ -29,10 +29,9 @@
    for (var i = 0; i < symbols.length; i++) { 
     let sym = document. getElementById('sym'+(i+1))
     let tex = document. getElementById('tex'+(i+1))
-    let prb = document. getElementById('prb'+(i+1))
+    
     sym.innerHTML = '$$'+symbols[i]+'$$'
     tex.innerHTML = symbols[i]
-    prb.innerHTML = probs[i]
     } 
    MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
     }
@@ -190,7 +189,7 @@ var symbols = [];
 	line-height: 26.4px;
 }
     .sym {
-      font-size :30px
+      font-size :50px
     }
 </style>
 </head>
@@ -211,46 +210,40 @@ but I focused on making the model light with around 1 million parameters. </p>
 
 <div class="row">
   <div class="col">
-<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #000000;margin-left:50px;"></canvas>
-    <div class="btn-group" style ='margin-left:120px'>
+<canvas id="canvas" width="300" height="300" class="shadow p-4 mb-4 bg-white" style="border:1px solid #b9bfc9;margin-left:50px;margin-top:50px;"></canvas>
+    <div class="btn-group" style ='margin-left:150px'>
   <button type="button" class="btn btn-outline-dark" onclick ='getFrame()' disabled>Predict </button>
 <button type="button" class="btn btn-outline-dark" onclick ='erase()' disabled>Clear</button>
     </div>
 </div>
   <div class="col">
 <table class="table text-center table-borderless" style='margin-right:50px'>
-    <thead>
-  <tr>
-    <th class= 'text-center'>SYM</th>
-    <th class ='text-center'>TEX</th> 
-    <th class ='text-center'>PRB</th>
-  </tr>
-    </thead>
+  
    <tbody>
   <tr>
-  <td id ='sym1' class = 'sym' ></td>
+  <td id ='sym1' class = 'sym' >$\sim$</td>
   <td id ='tex1'></td>
-  <td id ='prb1'></td>
+  
  </tr>
    <tr>
   <td id ='sym2' class = 'sym'></td>
   <td id ='tex2'></td>
-  <td id ='prb2'></td>
+  
  </tr>
    <tr>
   <td id ='sym3' class = 'sym'></td>
   <td id ='tex3'></td>
-  <td id ='prb3'></td>
+
  </tr>
    <tr>
   <td id ='sym4' class = 'sym'></td>
   <td id ='tex4'></td>
-  <td id ='prb4'></td>
+  
  </tr>
    <tr>
   <td id ='sym5' class = 'sym'></td>
   <td id ='tex5'></td>
-  <td id ='prb5'></td>
+  
  </tr>
     </tbody>
 </table>
