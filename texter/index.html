@@ -32,7 +32,14 @@
    MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
     }
     
-
+$(function () {
+    canvas = window._canvas = new fabric.Canvas('canvas');
+    canvas.backgroundColor = '#ffffff';
+    canvas.isDrawingMode= 1;
+    canvas.freeDrawingBrush.color = "black";
+    canvas.freeDrawingBrush.width = 15;
+    canvas.renderAll();
+})	  
 var canvas;
 function getFrame()
 {
