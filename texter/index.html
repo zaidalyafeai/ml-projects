@@ -3,16 +3,21 @@
   <meta charset="UTF-8" />
   <title>Maths Equations</title>
   <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
-<script src="fabric.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	
+   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<script src="fabric.js"></script>
+
+
   MathJax.Hub.Config({
   tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 });
@@ -153,7 +158,7 @@ return tf.tidy(()=>{
 async function loadModel()
 {
     model = await tf.loadModel('model2/model.json')
-    $('#tgl').prop('disabled', false);
+    $('button').prop('disabled', false);
     await loadDict()
     /*var c1 = document.getElementById("canvas");
 
@@ -208,9 +213,8 @@ var symbols = [];
 </head>
 <body>
 <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #000000;"></canvas>
-  <button class = 'btn btn-default' id ='tgl' onclick ='getFrame()' disabled>Predict</button>
-  <button class = 'btn btn-default' onclick ='erase()' disabled>Clear</button>	
-  <button type="button" class="btn btn-outline-primary">Primary</button>
+  <button type="button" class="btn btn-outline-primary" onclick ='getFrame()' disabled>Predict </button>
+<button type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
 	<p id="myLog"></p>
  <table class="table text-center">
     <thead>
