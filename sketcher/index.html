@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sketcher 1</title>
+  <title>Sketcher 2</title>
   <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -23,9 +23,9 @@
 });
   </script>
   <script>
-    function setTable(symbols, probs)
+    function setTable(syms, probs)
     {
-   alert(symbols.length)  
+   alert(syms.length)  
    for (var i = 0; i < symbols.length; i++) { 
 	   
     let sym = document. getElementById('sym'+(i+1))
@@ -58,7 +58,7 @@ function getFrame()
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
     const syms = getSymbols(indices)
-    setTable(symbols, probs)
+    setTable(syms, probs)
     $('button').prop('disabled', false);
 }
 	  
