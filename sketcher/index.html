@@ -147,7 +147,7 @@ return tf.tidy(()=>{
     const offset = tf.scalar(255.0);
     // Normalize the image 
     const normalized = sliced.div(offset);
-  
+   const normalized = tf.scalar(1.0).sub(normalized)
     //We add a dimension to get a batch shape 
     const batched = normalized.expandDims(0)
     return batched
