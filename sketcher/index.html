@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sketcher 7</title>
+  <title>Sketcher 8</title>
   <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -101,14 +101,13 @@ function success(data)
 {
     
     lst = data.split(/\n/)
-alert(lst.length)
     symbols = []
-    for(var i = 0 ; i < lst.length  ; i++)
+    for(var i = 0 ; i < lst.length -1  ; i++)
     {
         let symbol = lst[i]
         symbols[i] = symbol
     }
-    
+    alert(symbols) 
 }
 
 async function createImg(path)
