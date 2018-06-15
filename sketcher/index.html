@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sketcher 4</title>
+  <title>Sketcher 5</title>
   <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -99,8 +99,9 @@ function findTopValues(inp, count){
 
 function success(data)
 {
-    alert(data) 
-    lst = data.split(/\r?\n|\r/)
+    
+    lst = data.split(/\n/)
+alert(lst)
     symbols = []
     for(var i = 0 ; i < lst.length  ; i++)
     {
