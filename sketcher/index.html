@@ -1,0 +1,253 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Texter</title>
+  <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	
+   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+<script src="fabric.js"></script>
+
+<script>
+  MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+});
+  </script>
+  <script>
+    function setTable(symbols, probs)
+    {
+     
+   for (var i = 0; i < symbols.length; i++) { 
+    let sym = document. getElementById('sym'+(i+1))
+    let tex = document. getElementById('tex'+(i+1))
+    
+    sym.innerHTML = symbols[i]
+    sym.style.fontSize = "20px";      
+    tex.style.fontSize = "20px";     
+    } 
+    }
+    
+$(function () {
+    canvas = window._canvas = new fabric.Canvas('canvas');
+    canvas.backgroundColor = '#ffffff';
+    canvas.isDrawingMode= 1;
+    canvas.freeDrawingBrush.color = "black";
+    canvas.freeDrawingBrush.width = 15;
+    canvas.renderAll();
+})	  
+var canvas;
+function getFrame()
+{
+    $('button').prop('disabled', true);
+    const ctx = canvas.getContext("2d");
+
+    //get image data
+    imgData = ctx.getImageData(0, 0, 300, 300);
+    const pred = model.predict(preprocess(imgData)).dataSync()
+    const indices = findIndicesOfMax(pred, 5)
+    const probs  = findTopValues(pred, 5)
+    const symbols = getSymbols(indices)
+    setTable(symbols, probs)
+    $('button').prop('disabled', false);
+}
+	  
+function getSymbols(indices)
+{
+    var outp = []
+    for (var i= 0 ; i < indices.length ; i++)
+        outp[i] = symbols[indices[i]]
+    return outp
+}
+async function loadDict()
+{
+  await $.ajax({
+  url: 'class_names.txt',
+  dataType: 'text',}).done(success);
+}
+
+
+function findIndicesOfMax(inp, count) {
+    var outp = [];
+    for (var i = 0; i < inp.length; i++) {
+        outp.push(i); // add index to output array
+        if (outp.length > count) {
+            outp.sort(function(a, b) { return inp[b] - inp[a]; }); // descending sort the output array
+            outp.pop(); // remove the last index (index of smallest element in output array)
+        }
+    }
+    return outp;
+}
+
+function findTopValues(inp, count){
+    var outp = [];
+    let indices = findIndicesOfMax(inp, count)
+    // show 3 greatest scores
+    for (var i = 0; i < indices.length; i++)
+        outp[i] = inp[indices[i]]
+    return outp
+}
+
+function success(data)
+{
+    lst = data.split(/\r?\n|\r/)
+    symbols = []
+    for(var i = 0 ; i < lst.length  ; i++)
+    {
+        let symbol = lst[i]
+        symbols[i] = symbol
+    }
+}
+
+async function createImg(path)
+{
+  return await new Promise((resolve, reject) => {
+  let i = new Image();
+  i.onload = () => resolve(i);
+  i.onerror = reject;
+  i.crossOrigin = 'anonymous';
+  i.src = path;
+  i.width = 224;
+  i.height = 224;
+  })
+  
+}
+
+async function createImg(path)
+{
+  return await new Promise((resolve, reject) => {
+  let i = new Image();
+  i.onload = () => resolve(i);
+  i.onerror = reject;
+  i.crossOrigin = 'anonymous';
+  i.src = path;
+  i.width = 32;
+  i.height = 32;
+  })
+  
+}
+
+function preprocess(imgData)
+{
+return tf.tidy(()=>{
+    let tensor = tf.fromPixels(imgData)
+    resized = tf.image.resizeBilinear(tensor, [32, 32]).toFloat()
+    const sliced   = resized.slice([0, 0, 1], [32, 32, 1])
+    const offset = tf.scalar(255.0);
+    // Normalize the image 
+    const normalized = sliced.div(offset);
+  
+    //We add a dimension to get a batch shape 
+    const batched = normalized.expandDims(0)
+    return batched
+})
+}
+
+async function loadModel()
+{
+    model = await tf.loadModel('model2/model.json')
+    $('button').prop('disabled', false);
+    await loadDict()
+}
+
+window.console = {
+  log: function(str){
+    var node = document.createElement("div");
+    node.appendChild(document.createTextNode(str));
+    document.getElementById("myLog").appendChild(node);
+  }
+}
+	  
+function erase()
+{
+    canvas.clear();
+    canvas.backgroundColor = '#ffffff';
+}
+$('#tgle').prop('disabled', true);	  
+loadModel()
+var model;
+var canvas;
+var symbols = [];
+  </script>
+  <style>
+.table tbody tr td{
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace
+}
+ table thead tr th {
+	font-famiy : Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 26.4px;
+}
+    .sym {
+      font-size :50px
+    }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#"><h1>TEX<small>TER</small></h1></a>
+  </nav>
+<div class="container-fluid"> 
+
+<blockquote class="blockquote text-justify" style="margin:30px;">
+    <p>Texter is a simple tool that uses CNN to recognize mathematical symbols and generates the equivalent $\LaTeX$ code. 
+ The CNN was trained to recognize 369 symbols using this <a href="https://github.com/MartinThoma/HASY">dataset</a>. It achieves 3% top 5 error. The accuracy could be improved
+but I focused on making the model light with around 1 million parameters. The table on the right will show the top 5 predictions. </p>
+    <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
+  </blockquote>
+</div>
+
+<div class="row">
+  <div class="col">
+<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-left:50px;margin-top:50px;"></canvas>
+ <div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
+  <button type="button" class="btn btn-secondary" onclick ='getFrame()' disabled>Predict </button>
+<button type="button" class="btn btn-secondary" onclick ='erase()' disabled>Clear</button>
+    </div>   
+</div>
+  <div class="col">
+<table class="table text-center table-borderless" style='margin-right:50px'>
+  
+   <tbody>
+  <tr>
+  <td id ='sym1' class = 'sym' ></td>
+  <td id ='tex1'></td>
+  
+ </tr>
+   <tr>
+  <td id ='sym2' class = 'sym'></td>
+  <td id ='tex2'></td>
+  
+ </tr>
+   <tr>
+  <td id ='sym3' class = 'sym'></td>
+  <td id ='tex3'></td>
+
+ </tr>
+   <tr>
+  <td id ='sym4' class = 'sym'></td>
+  <td id ='tex4'></td>
+  
+ </tr>
+   <tr>
+  <td id ='sym5' class = 'sym'></td>
+  <td id ='tex5'></td>
+  
+ </tr>
+    </tbody>
+</table>
+</div>
+</div>
+ 
+</body>
+</html>
