@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sketcher 2</title>
+  <title>Sketcher</title>
   <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -25,13 +25,13 @@
   <script>
     function setTable(syms, probs)
     {
-   alert(syms.length)  
-   for (var i = 0; i < symbols.length; i++) { 
+   
+   for (var i = 0; i < syms.length; i++) { 
 	   
     let sym = document. getElementById('sym'+(i+1))
     let tex = document. getElementById('tex'+(i+1))
     
-    sym.innerHTML = symbols[i]
+    sym.innerHTML = syms[i]
     sym.style.fontSize = "20px";      
     tex.style.fontSize = "20px";     
     } 
