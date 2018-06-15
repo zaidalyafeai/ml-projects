@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sketcher 3</title>
+  <title>Sketcher 4</title>
   <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -99,6 +99,7 @@ function findTopValues(inp, count){
 
 function success(data)
 {
+    alert(data) 
     lst = data.split(/\r?\n|\r/)
     symbols = []
     for(var i = 0 ; i < lst.length  ; i++)
@@ -106,7 +107,7 @@ function success(data)
         let symbol = lst[i]
         symbols[i] = symbol
     }
-    alert(len(symbols)) 
+    
 }
 
 async function createImg(path)
