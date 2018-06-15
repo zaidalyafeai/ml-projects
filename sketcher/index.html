@@ -53,9 +53,9 @@ function getFrame()
     //get image data
     imgData = ctx.getImageData(0, 0, 300, 300);
     const pred = model.predict(preprocess(imgData)).dataSync()
+    alert(pred) 
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
-    alert(probs) 
     const syms = getSymbols(indices)
     setTable(symbols, probs)
     $('button').prop('disabled', false);
