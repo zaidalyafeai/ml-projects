@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sketcher 9</title>
+  <title>Sketcher</title>
   <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
@@ -53,7 +53,7 @@ function getFrame()
     //get image data
     imgData = ctx.getImageData(0, 0, 300, 300);
     const pred = model.predict(preprocess(imgData)).dataSync()
-    alert(pred) 
+    
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
     const syms = getSymbols(indices)
@@ -107,7 +107,6 @@ function success(data)
         let symbol = lst[i]
         symbols[i] = symbol
     }
-    alert(symbols) 
 }
 
 async function createImg(path)
