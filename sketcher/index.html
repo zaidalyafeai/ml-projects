@@ -55,7 +55,8 @@ function getFrame()
     const pred = model.predict(preprocess(imgData)).dataSync()
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
-    const symbols = getSymbols(indices)
+    const syms = getSymbols(indices)
+    alert(syms)
     setTable(symbols, probs)
     $('button').prop('disabled', false);
 }
@@ -105,7 +106,7 @@ function success(data)
         let symbol = lst[i]
         symbols[i] = symbol
     }
-    alert(symbols)
+    
 }
 
 async function createImg(path)
