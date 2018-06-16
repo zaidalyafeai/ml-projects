@@ -198,57 +198,37 @@ var symbols = [];
 <body>
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <!-- Brand/logo -->
-  <a class="navbar-brand" href="#"><h1>TEX<small>TER</small></h1></a>
+  <a class="navbar-brand" href="#"><h1>SKETCH<small>ER</small></h1></a>
   </nav>
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-    <p>Texter is a simple tool that uses CNN to recognize mathematical symbols and generates the equivalent $\LaTeX$ code. 
- The CNN was trained to recognize 369 symbols using this <a href="https://github.com/MartinThoma/HASY">dataset</a>. It achieves 3% top 5 error. The accuracy could be improved
-but I focused on making the model light with around 1 million parameters. The table on the right will show the top 5 predictions. </p>
+    <p>Texter is a simple tool that uses CNN to recognize drawings. 
+ The CNN was trained to recognize 369 classes using this <a href='https://github.com/googlecreativelab/quickdraw-dataset"> dataset</a>. It achieves 3% top 5 error. The accuracy could be improved
+but I focused on making the model light with around 1 million parameters. The table  will show the top 5 predictions. </p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
 
 <div class="row">
   <div class="col">
+	 <table class="table text-center table-borderless" style='margin-right:50px'>
+  
+   <tbody>
+  <tr>
+  <td id ='sym1' class = 'sym' ></td>
+  <td id ='sym2' class = 'sym' ></td>
+<td id ='sym3' class = 'sym' ></td>
+	 <td id ='sym4' class = 'sym' ></td>
+	 <td id ='sym5' class = 'sym' ></td>
+ </tr>
+    </tbody>
+</table>
 <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-left:50px;margin-top:50px;"></canvas>
  <div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
   <button type="button" class="btn btn-secondary" onclick ='getFrame()' disabled>Predict </button>
 <button type="button" class="btn btn-secondary" onclick ='erase()' disabled>Clear</button>
     </div>   
-</div>
-  <div class="col">
-<table class="table text-center table-borderless" style='margin-right:50px'>
-  
-   <tbody>
-  <tr>
-  <td id ='sym1' class = 'sym' ></td>
-  <td id ='tex1'></td>
-  
- </tr>
-   <tr>
-  <td id ='sym2' class = 'sym'></td>
-  <td id ='tex2'></td>
-  
- </tr>
-   <tr>
-  <td id ='sym3' class = 'sym'></td>
-  <td id ='tex3'></td>
-
- </tr>
-   <tr>
-  <td id ='sym4' class = 'sym'></td>
-  <td id ='tex4'></td>
-  
- </tr>
-   <tr>
-  <td id ='sym5' class = 'sym'></td>
-  <td id ='tex5'></td>
-  
- </tr>
-    </tbody>
-</table>
 </div>
 </div>
  
