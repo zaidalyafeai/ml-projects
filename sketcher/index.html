@@ -107,34 +107,6 @@ function success(data)
     }
 }
 
-async function createImg(path)
-{
-  return await new Promise((resolve, reject) => {
-  let i = new Image();
-  i.onload = () => resolve(i);
-  i.onerror = reject;
-  i.crossOrigin = 'anonymous';
-  i.src = path;
-  i.width = 224;
-  i.height = 224;
-  })
-  
-}
-
-async function createImg(path)
-{
-  return await new Promise((resolve, reject) => {
-  let i = new Image();
-  i.onload = () => resolve(i);
-  i.onerror = reject;
-  i.crossOrigin = 'anonymous';
-  i.src = path;
-  i.width = 32;
-  i.height = 32;
-  })
-  
-}
-
 function preprocess(imgData)
 {
 return tf.tidy(()=>{
@@ -157,14 +129,6 @@ async function loadModel()
     $('button').prop('disabled', false);
     await loadDict()
 }
-
-window.console = {
-  log: function(str){
-    var node = document.createElement("div");
-    node.appendChild(document.createTextNode(str));
-    document.getElementById("myLog").appendChild(node);
-  }
-}
 	  
 function erase()
 {
@@ -177,20 +141,6 @@ var model;
 var canvas;
 var symbols = [];
   </script>
-  <style>
-.table tbody tr td{
-	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace
-}
- table thead tr th {
-	font-famiy : Helvetica, Arial, sans-serif;
-	font-size: 24px;
-	font-weight: 400;
-	line-height: 26.4px;
-}
-    .sym {
-      font-size :50px
-    }
-</style>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -207,8 +157,7 @@ but I focused on making the model light with around 1 million parameters. The ta
   </blockquote>
 </div>
 
-<div class="row">
-  <div class="col">
+<div class="container-fluid text-center">
 	 <table class="table text-center table-borderless" style='margin-right:50px'>
   
    <tbody>
@@ -226,7 +175,6 @@ but I focused on making the model light with around 1 million parameters. The ta
   <button type="button" class="btn btn-secondary" onclick ='getFrame()' disabled>Predict </button>
 <button type="button" class="btn btn-secondary" onclick ='erase()' disabled>Clear</button>
     </div>   
-</div>
 </div>
  
 </body>
