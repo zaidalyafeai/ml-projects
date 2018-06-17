@@ -20,14 +20,19 @@
     </script>
 
     <script type="text/javascript">
+	    async function loadModel(){
       posenet.load().then(function(net) {
+	      alert('loaded')
+	      /*
 	const imageScaleFactor = 0.50;
         const flipHorizontal = false;
         const outputStride = 16;      
         const imageElement = document.getElementById('pose');
         const pose = await net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
-        alert(pose)              
+        alert(pose)    */          
       });
+		  }
+	    loadModel()
     </script>
     
 </head>
@@ -40,8 +45,7 @@
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
     <p> Poser is a simple tool that uses the pose estimators network. 
- The CNN was trained to recognize 100 <a href='https://github.com/zaidalyafeai/zaidalyafeai.github.io/blob/master/sketcher/mini_classes.txt'>classes</a> using the quick draw <a href='https://github.com/googlecreativelab/quickdraw-dataset'> dataset</a>. It achieves 6% top 5 error. The accuracy could be improved
-but I focused on making the model light with around 1 million parameters. </p>
+ The CNN was trained to recognize 100 <a href='https://github.com/zaidalyafeai/zaidalyafeai.github.io/blob/master/sketcher/mini_classes.txt'>classes</a> using the quick draw <a href='https://github.com/googlecreativelab/quickdraw-dataset'> dataset</a>. </p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
