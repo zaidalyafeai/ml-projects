@@ -123,6 +123,8 @@ const imageElement = document.getElementById('pose');
 // load the posenet model
 const net = await posenet.load();
 const pose = await net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
+	    $('#tgle').prop('disabled', false);
+	    alert(pose)
       });
 }
 	  
