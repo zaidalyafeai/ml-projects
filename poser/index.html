@@ -20,7 +20,7 @@
     </script>
 
     <script type="text/javascript">
-	async function loadNet(){
+	async function loadNet(net){
 	const imageElement = document.getElementById('pose');
 	alert('net loading')	
         const pose = await net.estimateSinglePose(imageElement, 0.5, false, 16);
@@ -28,7 +28,7 @@
 	}
       posenet.load().then(function(net) {
 	      alert('model loaded') 
-        loadNet()
+        loadNet(net)
       });
 
     </script>
@@ -43,7 +43,7 @@
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
     <p> Poser is a simple tool that uses the pose estimators network. 
- The CNN was trained to recognize <a href='https://github.com/zaidalyafeai/zaidalyafeai.github.io/blob/master/sketcher/mini_classes.txt'>posenet</a> using the quick draw <a href='https://github.com/googlecreativelab/quickdraw-dataset'> dataset</a>. </p>
+ The CNN was trained to recognize <a href='https://github.com/zaidalyafeai/zaidalyafeai.github.io/blob/master/sketcher/mini_classes.txt'>posenet</a> </p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
