@@ -18,123 +18,13 @@
     <!-- Load Posenet -->
     <script src="https://unpkg.com/@tensorflow-models/posenet">
     </script>
-<script>
 
-
-    function setTable(syms, probs)
-    {
-   
-   for (var i = 0; i < syms.length; i++) { 
-	   
-    let sym = document. getElementById('sym'+(i+1))
-    sym.innerHTML = syms[i]
-    sym.style.fontSize = "20px";      
-    } 
-    }
-    
-var canvas;
-function getFrame()
-{
-    $('button').prop('disabled', true);
-    const ctx = canvas.getContext("2d");
-
-    //get image data
-    imgData = ctx.getImageData(0, 0, 300, 300);
-    const pred = model.predict(preprocess(imgData)).dataSync()
-    
-    const indices = findIndicesOfMax(pred, 5)
-    const probs  = findTopValues(pred, 5)
-    const syms = getSymbols(indices)
-    setTable(syms, probs)
-    $('button').prop('disabled', false);
-}
-	  
-function getSymbols(indices)
-{
-    var outp = []
-    for (var i= 0 ; i < indices.length ; i++)
-        outp[i] = symbols[indices[i]]
-    return outp
-}
-async function loadDict()
-{
-  await $.ajax({
-  url: 'model2/class_names.txt',
-  dataType: 'text',}).done(success);
-}
-
-
-function findIndicesOfMax(inp, count) {
-    var outp = [];
-    for (var i = 0; i < inp.length; i++) {
-        outp.push(i); // add index to output array
-        if (outp.length > count) {
-            outp.sort(function(a, b) { return inp[b] - inp[a]; }); // descending sort the output array
-            outp.pop(); // remove the last index (index of smallest element in output array)
-        }
-    }
-    return outp;
-}
-
-function findTopValues(inp, count){
-    var outp = [];
-    let indices = findIndicesOfMax(inp, count)
-    // show 3 greatest scores
-    for (var i = 0; i < indices.length; i++)
-        outp[i] = inp[indices[i]]
-    return outp
-}
-
-function success(data)
-{
-    
-    lst = data.split(/\n/)
-    symbols = []
-    for(var i = 0 ; i < lst.length -1  ; i++)
-    {
-        let symbol = lst[i]
-        symbols[i] = symbol
-    }
-}
-
-function preprocess(imgData)
-{
-return tf.tidy(()=>{
-    let tensor = tf.fromPixels(imgData)
-    resized = tf.image.resizeBilinear(tensor, [28, 28]).toFloat()
-    const sliced   = resized.slice([0, 0, 1], [28, 28, 1])
-    const offset = tf.scalar(255.0);
-    // Normalize the image 
-    const normalized = sliced.div(offset);
-    const norm = tf.scalar(1.0).sub(normalized)
-    //We add a dimension to get a batch shape 
-    const batched = norm.expandDims(0)
-    return batched
-})
-}
-
-async function loadModel()
-{
-    posenet.load().then(function(net) {
-	    alert('here') 
-        const imageScaleFactor = 0.50;
-const flipHorizontal = false;
-const outputStride = 16;
-const imageElement = document.getElementById('pose');
-// load the posenet model
-const net = await posenet.load();
-const pose = await net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
-	    $('#tgle').prop('disabled', false);
-	    alert(pose)
+    <script type="text/javascript">
+      posenet.load().then(function(net) {
+        // posenet model loaded
       });
-}
-	  
-$('#tgle').prop('disabled', true);	  
-loadModel()
-var model;
-var canvas;
-var symbols = [];
-  </script>
+    </script>
+    
 </head>
 <body>
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
@@ -144,7 +34,7 @@ var symbols = [];
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-    <p> Poser is a simple tool that uses CNN to recognize drawings. 
+    <p> Poser is a simple tool that uses the pose estimators network. 
  The CNN was trained to recognize 100 <a href='https://github.com/zaidalyafeai/zaidalyafeai.github.io/blob/master/sketcher/mini_classes.txt'>classes</a> using the quick draw <a href='https://github.com/googlecreativelab/quickdraw-dataset'> dataset</a>. It achieves 6% top 5 error. The accuracy could be improved
 but I focused on making the model light with around 1 million parameters. The table  will show the top 5 predictions. </p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
