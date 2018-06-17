@@ -21,7 +21,12 @@
 
     <script type="text/javascript">
       posenet.load().then(function(net) {
-        alert('loaded') 
+	const imageScaleFactor = 0.50;
+        const flipHorizontal = false;
+        const outputStride = 16;      
+        const imageElement = document.getElementById('pose');
+        const pose = await net.estimateSinglePose(imageElement, scaleFactor, flipHorizontal, outputStride);
+        alert(pose)              
       });
     </script>
     
