@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser 3</title>
+  <title>Poser 5</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -38,7 +38,6 @@ function isMobile() {
         alert(pose)     
 	}
       posenet.load().then(function(net){
-alert('loaded model ') 
          try{
 	      loadVideo()}
          catch(err){alert(err)}
@@ -47,7 +46,6 @@ alert('loaded model ')
 const videoWidth = 600;
 const videoHeight = 500;	    
  async function setupCamera() {
-alert('setting up camera') 
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     alert(
         'Browser API navigator.mediaDevices.getUserMedia not available');
@@ -67,9 +65,9 @@ alert('setting up camera')
       height: mobile ? undefined : videoHeight,
     },
   });
-  }catch(err){alert(err)}
+  
   video.srcObject = stream;
-
+}catch(err){alert(err)}
   return new Promise((resolve) => {
     video.onloadedmetadata = () => {
       resolve(video);
@@ -78,10 +76,10 @@ alert('setting up camera')
 }
 
 async function loadVideo() {
-  alert('loading') 
+  try{
   const video = await setupCamera();
-   alert('finished') 
   video.play();
+	  } catch(err){alert(err)}
   return video;
 }
 
