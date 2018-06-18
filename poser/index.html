@@ -31,13 +31,7 @@ function isiOS() {
 function isMobile() {
   return isAndroid() || isiOS();
 }
-      posenet.load().then(function(net){
-	      alert('loaded') 
-         try{
-	      loadVideo(net)}
-         catch(err){alert(err)}
-       // loadNet(net)
-      });
+      
 const videoWidth = 500;
 const videoHeight = 500;	    
  async function setupCamera() {
@@ -70,10 +64,11 @@ const videoHeight = 500;
   });
 }
 
-async function loadVideo(net) {
+async function loadVideo() {
   try{
   const video = await setupCamera();
-  video.play();
+	  video.play();
+	  const net = await posenet.load(0.75);
 	  detectPoseInRealTime(video, net);
 	  } catch(err){alert(err)}
   	
@@ -172,7 +167,7 @@ async function poseDetectionFrame(net) {
         </video>
 	<canvas id="output"></canvas>
 	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
-  <button type="button" class="btn btn-outline-primary" onclick ='getFrame()' disabled>Predict </button>
+  <button type="button" class="btn btn-outline-primary" onclick ='loadVideo()'>Predict </button>
 <button type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
     </div>   
 </div>
