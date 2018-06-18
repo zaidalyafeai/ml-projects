@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser 7</title>
+  <title>Poser 8</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -32,6 +32,7 @@ function isMobile() {
   return isAndroid() || isiOS();
 }
       posenet.load().then(function(net){
+	      alert('loaded') 
          try{
 	      loadVideo(net)}
          catch(err){alert(err)}
