@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser 1</title>
+  <title>Poser 2</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -74,7 +74,7 @@ async function loadVideo(net) {
   try{
   const video = await setupCamera();
   video.play();
-	  //detectPoseInRealTime(video, net);
+	  detectPoseInRealTime(video, net);
 	  } catch(err){alert(err)}
   	
   return video;
