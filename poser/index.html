@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser 4</title>
+  <title>Poser 5</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -120,10 +120,12 @@ async function poseDetectionFrame(net) {
 
     let poses = [];
     let minPoseConfidence = 0.3;
-        const pose = await net.estimateSinglePose(
-            video, imageScaleFactor, flipHorizontal, outputStride);
-        poses.push(pose);
-
+	
+        try{const pose = await net.estimateSinglePose(
+            video, imageScaleFactor, flipHorizontal, outputStride);}
+        catch(err){alert(err)}
+	poses.push(pose);
+        alert(poses)
     ctx.clearRect(0, 0, videoWidth, videoHeight);
 
     
@@ -138,7 +140,6 @@ async function poseDetectionFrame(net) {
     // scores
     poses.forEach(({score, keypoints}) => {
       if (score >= minPoseConfidence) {
-	      alert('draw') 
           drawKeypoints(keypoints, minPartConfidence, ctx);
         }
     });
