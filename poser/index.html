@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser 2</title>
+  <title>Poser 3</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -113,7 +113,7 @@ function detectPoseInRealTime(video, net) {
   canvas.height = videoHeight;
 
 async function poseDetectionFrame(net) {
-
+alert('here') 
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
     const imageScaleFactor = 0.5;
