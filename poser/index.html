@@ -70,9 +70,7 @@ async function loadVideo() {
 	  video.play();
 try{	
 	  const net = await posenet.load(0.75);
-	alert(net)
-	
-	 // detectPoseInRealTime(video, net);
+	  detectPoseInRealTime(video, net);
 	  } catch(err){alert(err)}
   	
   return video;
@@ -110,7 +108,7 @@ function detectPoseInRealTime(video, net) {
   canvas.width = videoWidth;
   canvas.height = videoHeight;
 
-async function poseDetectionFrame(net) {
+async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
     const imageScaleFactor = 0.5;
@@ -171,7 +169,6 @@ async function poseDetectionFrame(net) {
 	<canvas id="output"></canvas>
 	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
   <button type="button" class="btn btn-outline-primary" onclick ='loadVideo()'>Start </button>
-<button type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
     </div>   
 </div>
  
