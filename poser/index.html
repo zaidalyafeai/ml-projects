@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser 5</title>
+  <title>Poser 6</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -31,12 +31,6 @@ function isiOS() {
 function isMobile() {
   return isAndroid() || isiOS();
 }
-	async function loadNet(net){
-	const imageElement = document.getElementById('pose');
-	alert('net loading')	
-        const pose = await net.estimateSinglePose(imageElement, 0.5, false, 16);
-        alert(pose)     
-	}
       posenet.load().then(function(net){
          try{
 	      loadVideo(net)}
@@ -132,7 +126,7 @@ function detectPoseInRealTime(video, net) {
             video, imageScaleFactor, flipHorizontal, outputStride);
         poses.push(pose);
 
-        minPoseConfidence = minPoseConfidence;
+        minPoseConfidence = 0.3;
 
     ctx.clearRect(0, 0, videoWidth, videoHeight);
 
