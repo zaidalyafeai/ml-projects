@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser</title>
+  <title>Poser 2</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -46,7 +46,121 @@ const videoHeight = 500;
  async function setupCamera() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     throw new Error(
+        'Browser API navigator.mediaDevices.getUserMedia not available');<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Poser</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<!-- Load TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <!-- Load Posenet -->
+    <script src="https://unpkg.com/@tensorflow-models/posenet">
+    </script>
+
+    <script type="text/javascript">
+	    function isAndroid() {
+  return /Android/i.test(navigator.userAgent);
+}
+
+function isiOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function isMobile() {
+  return isAndroid() || isiOS();
+}
+	async function loadNet(net){
+	const imageElement = document.getElementById('pose');
+	alert('net loading')	
+        const pose = await net.estimateSinglePose(imageElement, 0.5, false, 16);
+        alert(pose)     
+	}
+      posenet.load().then(function(net){
+alert('loaded model ') 
+         try{
+	      loadVideo()}
+         catch(err){alert(err)}
+       // loadNet(net)
+      });
+const videoWidth = 600;
+const videoHeight = 500;	    
+ async function setupCamera() {
+alert('setting up camera') 
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert(
         'Browser API navigator.mediaDevices.getUserMedia not available');
+  }
+
+  const video = document.getElementById('video');
+  video.width = videoWidth;
+  video.height = videoHeight;
+
+  const mobile = isMobile();
+  try{
+  const stream = await navigator.mediaDevices.getUserMedia({
+    'audio': false,
+    'video': {
+      facingMode: 'user',
+      width: mobile ? undefined : videoWidth,
+      height: mobile ? undefined : videoHeight,
+    },
+  });
+  }catch(err){alert(err)}
+  video.srcObject = stream;
+
+  return new Promise((resolve) => {
+    video.onloadedmetadata = () => {
+      resolve(video);
+    };
+  });
+}
+
+async function loadVideo() {
+  alert('loading') 
+  const video = await setupCamera();
+   alert('finished') 
+  video.play();
+  return video;
+}
+
+    </script>
+    
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="#"><h1>POS<small>ER</small></h1></a>
+  </nav>
+<div class="container-fluid"> 
+
+<blockquote class="blockquote text-justify" style="margin:30px;">
+    <p> Poser is a simple tool that uses the pose estimators network. 
+ The CNN was trained to recognize <a href=''>posenet</a> of single pose estimation.  </p>
+    <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
+  </blockquote>
+</div>
+
+<div class="container-fluid text-center">
+<video id="video" playsinline>
+        </video>
+	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
+  <button type="button" class="btn btn-outline-primary" onclick ='getFrame()' disabled>Predict </button>
+<button type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
+    </div>   
+</div>
+ 
+</body>
+</html>
   }
 
   const video = document.getElementById('video');
