@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser 9</title>
+  <title>Poser 1</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -103,8 +103,50 @@ function drawPoint(ctx, y, x, r, color) {
   ctx.fillStyle = color;
   ctx.fill();
 }
+function detectPoseInRealTime(video, net) {
+  const canvas = document.getElementById('output');
+  const ctx = canvas.getContext('2d');
+  // since images are being fed from a webcam
+  const flipHorizontal = true;
 
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
 
+async function poseDetectionFrame(net) {
+
+    // Scale an image down to a certain factor. Too large of an image will slow
+    // down the GPU
+    const imageScaleFactor = 0.5;
+    const outputStride = 16;
+
+    let poses = [];
+    let minPoseConfidence = 0.3;
+        const pose = await net.estimateSinglePose(
+            video, imageScaleFactor, flipHorizontal, outputStride);
+        poses.push(pose);
+
+    ctx.clearRect(0, 0, videoWidth, videoHeight);
+
+    
+      ctx.save();
+      ctx.scale(-1, 1);
+      ctx.translate(-videoWidth, 0);
+      ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
+      ctx.restore();
+
+    // For each pose (i.e. person) detected in an image, loop through the poses
+    // and draw the resulting skeleton and keypoints if over certain confidence
+    // scores
+    poses.forEach(({score, keypoints}) => {
+      if (score >= minPoseConfidence) {
+          drawKeypoints(keypoints, minPartConfidence, ctx);
+        }
+    });
+    requestAnimationFrame(poseDetectionFrame);
+  }
+
+  poseDetectionFrame();
+}
 
 	    
     </script>
