@@ -39,7 +39,7 @@ function isMobile() {
 	}
       posenet.load().then(function(net){
          try{
-	      loadVideo()}
+	      loadVideo(net)}
          catch(err){alert(err)}
        // loadNet(net)
       });
@@ -75,14 +75,90 @@ const videoHeight = 500;
   });
 }
 
-async function loadVideo() {
+async function loadVideo(net) {
   try{
   const video = await setupCamera();
   video.play();
+	  detectPoseInRealTime(video, net);
 	  } catch(err){alert(err)}
+  	
   return video;
 }
 
+	    
+	    
+var imageScaleFactor = 0.5;
+var outputStride  = 32; 
+function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+  for (let i = 0; i < keypoints.length; i++) {
+    const keypoint = keypoints[i];
+
+    if (keypoint.score < minConfidence) {
+      continue;
+    }
+
+    const {y, x} = keypoint.position;
+    drawPoint(ctx, y * scale, x * scale, 3, color);
+  }
+}
+
+export function drawPoint(ctx, y, x, r, color) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+function detectPoseInRealTime(video, net) {
+  const canvas = document.getElementById('output');
+  const ctx = canvas.getContext('2d');
+  // since images are being fed from a webcam
+  const flipHorizontal = true;
+
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
+
+  async function poseDetectionFrame() {
+
+    // Scale an image down to a certain factor. Too large of an image will slow
+    // down the GPU
+    const imageScaleFactor = imageScaleFactor;
+    const outputStride = outputStride;
+
+    let poses = [];
+    let minPoseConfidence;
+    let minPartConfidence;
+        const pose = await net.estimateSinglePose(
+            video, imageScaleFactor, flipHorizontal, outputStride);
+        poses.push(pose);
+
+        minPoseConfidence = minPoseConfidence;
+
+    ctx.clearRect(0, 0, videoWidth, videoHeight);
+
+    
+      ctx.save();
+      ctx.scale(-1, 1);
+      ctx.translate(-videoWidth, 0);
+      ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
+      ctx.restore();
+
+    // For each pose (i.e. person) detected in an image, loop through the poses
+    // and draw the resulting skeleton and keypoints if over certain confidence
+    // scores
+    poses.forEach(({score, keypoints}) => {
+      if (score >= minPoseConfidence) {
+          drawKeypoints(keypoints, minPartConfidence, ctx);
+        }
+      }
+    });
+    requestAnimationFrame(poseDetectionFrame);
+  }
+
+  poseDetectionFrame();
+}
+
+	    
     </script>
     
 </head>
@@ -103,6 +179,7 @@ async function loadVideo() {
 <div class="container-fluid text-center">
 <video id="video" playsinline>
         </video>
+	<canvas id="output" />
 	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
   <button type="button" class="btn btn-outline-primary" onclick ='getFrame()' disabled>Predict </button>
 <button type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
