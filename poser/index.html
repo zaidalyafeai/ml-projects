@@ -65,11 +65,14 @@ const videoHeight = 500;
 }
 
 async function loadVideo() {
-  try{
+  
   const video = await setupCamera();
 	  video.play();
+try{	
 	  const net = await posenet.load(0.75);
-	  detectPoseInRealTime(video, net);
+	alert(net)
+	
+	 // detectPoseInRealTime(video, net);
 	  } catch(err){alert(err)}
   	
   return video;
@@ -167,7 +170,7 @@ async function poseDetectionFrame(net) {
         </video>
 	<canvas id="output"></canvas>
 	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
-  <button type="button" class="btn btn-outline-primary" onclick ='loadVideo()'>Predict </button>
+  <button type="button" class="btn btn-outline-primary" onclick ='loadVideo()'>Start </button>
 <button type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
     </div>   
 </div>
