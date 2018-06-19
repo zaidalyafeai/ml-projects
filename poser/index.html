@@ -75,8 +75,8 @@ async function loadVideo() {
 
 	    
 	    
-var imageScaleFactor = 0.5;
-var outputStride  = 32; 
+var imageScaleFactor = 0.7;
+var outputStride  = 8; 
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   
   for (let i = 0; i < keypoints.length; i++) {
@@ -151,8 +151,7 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-    <p> Poser is a simple tool that uses the pose estimators network. 
- The CNN was trained to recognize <a href=''>posenet</a> of single pose estimation.  </p>
+	<p> Poser is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
