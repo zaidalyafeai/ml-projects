@@ -109,14 +109,16 @@ function detectPoseInRealTime(video, net) {
 async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
+
     const imageScaleFactor = 0.1;
     const outputStride = 32;
-
+alert('here')
     let poses = [];
     let minPoseConfidence = 0.1;
     let minPartConfidence = 0.5; 
 	const pose = await net.estimateSinglePose(
 	    video, imageScaleFactor, flipHorizontal, outputStride)
+	alert('here')
 	poses.push(pose);
       ctx.clearRect(0, 0, videoWidth, videoHeight); 
     ctx.save();
@@ -151,7 +153,7 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 1 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 2 is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
