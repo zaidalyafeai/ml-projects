@@ -85,6 +85,7 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
     drawPoint(ctx, y * scale, x * scale, 10, color);
   }
 	SetCoord(keys);
+	drawSquare(ctx, 0,0);
 }
 function SetCoord(keys)
 {
@@ -125,7 +126,7 @@ function detectPoseInRealTime(video, net) {
 
   canvas.width = videoWidth;
   canvas.height = videoHeight;
-L = videoWidth; 
+L = videoWidth / 5; 
 async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
