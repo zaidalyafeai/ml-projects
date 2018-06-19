@@ -74,7 +74,7 @@ async function loadVideo() {
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   let keys = [0.0,0.0,0.0,0.0]; 
 	let j = 0;	
-  for (let i = 1; i < 3; i++) {
+  for (let i = 9; i < 11; i++) {
     const keypoint = keypoints[i];
     if (keypoint.score < minConfidence) {
       continue;
@@ -178,12 +178,12 @@ async function poseDetectionFrame() {
     </thead>
     <tbody>
       <tr>
-        <td>Left</td>
+        <td>Right</td>
         <td id="l0">0.0</td>
         <td id="l1">0.0</td>
       </tr>
        <tr>
-        <td>Right</td>
+        <td>Left</td>
         <td id="l2">0.0</td>
         <td id="l3">0.0</td>
       </tr>
