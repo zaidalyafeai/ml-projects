@@ -32,8 +32,8 @@ function isMobile() {
   return isAndroid() || isiOS();
 }
       
-const videoWidth = 500;
-const videoHeight = 500;
+const videoWidth = 800;
+const videoHeight = 800;
 const color = 'aqua';		    
  async function setupCamera() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -117,7 +117,11 @@ async function poseDetectionFrame() {
 	    video, imageScaleFactor, flipHorizontal, outputStride)
 	poses.push(pose);
       ctx.clearRect(0, 0, videoWidth, videoHeight); 
-
+    ctx.save();
+      ctx.scale(-1, 1);
+      ctx.translate(-videoWidth, 0);
+      ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
+      ctx.restore();
     // For each pose (i.e. person) detected in an image, loop through the poses
     // and draw the resulting skeleton and keypoints if over certain confidence
     // scores
@@ -144,13 +148,13 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 2 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 3 is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
 
 <div class="container-fluid text-center">
-<video id="video" width = "500" height="500" playsinline style="display:none;">
+<video id="video" width = "800" height="800" playsinline style="display:none;">
         </video>
 	<canvas id="output"></canvas>
 	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
