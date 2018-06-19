@@ -74,7 +74,7 @@ async function loadVideo() {
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   let keys = [0.0,0.0,0.0,0.0]; 
 	let j = 0;	
-  for (let i = 9; i < 11; i++) {
+  for (let i = 1; i < 3; i++) {
     const keypoint = keypoints[i];
     if (keypoint.score < minConfidence) {
       continue;
