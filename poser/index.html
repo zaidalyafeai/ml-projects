@@ -147,7 +147,7 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 2 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser  is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
@@ -156,7 +156,29 @@ async function poseDetectionFrame() {
 <video id="video" width = "500" height="500" playsinline style="display:none;">
         </video>
 	<canvas id="output"></canvas>
+	<table class="table table-dark">
+    <thead>
+      <tr>
+        <th>point</th>
+        <th>x</th>
+        <th>y</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Left</td>
+        <td id="l0">0.0</td>
+        <td id="l1">0.0</td>
+      </tr>
+       <tr>
+        <td>Right</td>
+        <td id="r0">0.0</td>
+        <td id="r1">0.0</td>
+      </tr>
+    </tbody>
+    <table>
 	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
+		
   <button type="button" class="btn btn-outline-primary" onclick ='loadVideo()'>Start Video</button>
     </div>   
 </div>
