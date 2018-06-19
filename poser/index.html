@@ -114,8 +114,8 @@ ctx.fillRect(x,y,x+L,y+L);
 function checkInside(keys){
 const f = convertToLbl(keys[0],keys[1]);
 const l = convertToLbl(keys[2],keys[3]); 
-const nexI = Math.floor(Math.random() * 5); 
-const nexJ = Math.floor(Math.random() * 5); 
+const nexI = Math.floor(Math.random() * 4 +1); 
+const nexJ = Math.floor(Math.random() * 4 +1); 
 	
 if(f[0] == currI &&  f[1] == currJ && l[0] == currI && l[1] == currJ )
 {currI = nexI; currJ = nexJ}
@@ -127,8 +127,8 @@ function convertToLbl(x,y){
     return p
 }
 	    var L ;
-	    var currI= 0;
-	    var currJ= 0;
+	    var currI= 1;
+	    var currJ= 1;
 function detectPoseInRealTime(video, net) {
   const canvas = document.getElementById('output');
   const ctx = canvas.getContext('2d');
