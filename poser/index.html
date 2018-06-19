@@ -84,6 +84,7 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
 	  keys[++j]= x; keys[++j]=y;   
     drawPoint(ctx, y * scale, x * scale, 10, color);
   }
+	
 	SetCoord(keys);
 }
 function SetCoord(keys)
@@ -91,7 +92,7 @@ function SetCoord(keys)
      for(var i= 0 ; i < keys.length;  i++ )
      {
        const lbl = 'l'+i; 
-       let el = document. getElementById(lbl)
+       let el = document.getElementById(lbl)
        el.innerHTML = keys[i]
 
      }
@@ -159,7 +160,7 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 1  is a simple tool that uses the pose estimators network.</p>
+	<p> Poser is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
@@ -179,13 +180,13 @@ async function poseDetectionFrame() {
     <tbody>
       <tr>
         <td>Left</td>
-        <td id="0">0.0</td>
-        <td id="1">0.0</td>
+        <td id="l0">0.0</td>
+        <td id="l1">0.0</td>
       </tr>
        <tr>
         <td>Right</td>
-        <td id="2">0.0</td>
-        <td id="3">0.0</td>
+        <td id="l2">0.0</td>
+        <td id="l3">0.0</td>
       </tr>
     </tbody>
     <table>
