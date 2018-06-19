@@ -108,7 +108,7 @@ function drawPoint(ctx, y, x, r, color) {
 	    function drawSquare(ctx, i,j){
 let x = i * L; 
 let y = j * L; 
-ctx.fillRect(x,y,x+L,y+L);
+ctx.fillRect(x,y,L,L);
 }
 
 function checkInside(keys){
@@ -117,7 +117,7 @@ const l = convertToLbl(keys[2],keys[3]);
 const nexI = Math.floor(Math.random() * 4 +1); 
 const nexJ = Math.floor(Math.random() * 4 +1); 
 	
-if(f[0] == currI &&  f[1] == currJ && l[0] == currI && l[1] == currJ )
+if((f[0] == currI &&  f[1] == currJ) || (l[0] == currI && l[1] == currJ ))
 {currI = nexI; currJ = nexJ}
 }
 function convertToLbl(x,y){
