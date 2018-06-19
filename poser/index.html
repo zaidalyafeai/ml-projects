@@ -150,7 +150,7 @@ async function poseDetectionFrame() {
     poses.forEach(({score, keypoints}) => {
       if (score >= minPoseConfidence) {
           drawKeypoints(keypoints, minPartConfidence, ctx);
-	    drawSkeleton(keypoints, minPartConfidence, ctx);  
+	  //  drawSkeleton(keypoints, minPartConfidence, ctx);  
         }
     });
     requestAnimationFrame(poseDetectionFrame);
@@ -171,7 +171,7 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 5 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 6 is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
