@@ -96,12 +96,27 @@ function SetCoord(keys)
 
      }
 }
+	   	    
 function drawPoint(ctx, y, x, r, color) {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
 }
+	    
+	    function drawSquare(ctx, i,j){
+let x = i * L; 
+let y = j * L; 
+ctx.rect(x,y,x+L,y+L);
+}
+
+function convertToLbl(x,y){
+    const p = [0,0];
+    p[0] = int(x) % L;
+    p[1] = int(y) % L;
+    return p
+}
+	    var L ;
 function detectPoseInRealTime(video, net) {
   const canvas = document.getElementById('output');
   const ctx = canvas.getContext('2d');
@@ -110,7 +125,7 @@ function detectPoseInRealTime(video, net) {
 
   canvas.width = videoWidth;
   canvas.height = videoHeight;
-
+L = videoWidth; 
 async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
