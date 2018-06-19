@@ -81,9 +81,9 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
     }
 
     const {y, x} = keypoint.position;
-	  keys[++j]= x; keys[++j]=y;   
+	  keys[j++]= x; keys[j++]=y;   
     drawPoint(ctx, y * scale, x * scale, 10, color);
-  }alert(keys)
+  }
 	SetCoord(keys);
 }
 function SetCoord(keys)
