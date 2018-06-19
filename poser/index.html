@@ -70,13 +70,7 @@ async function loadVideo() {
 	  const net = await posenet.load(0.75);
 	  detectPoseInRealTime(video, net);
 }
-
 	    
-	    
-var imageScaleFactor = 0.5;
-var outputStride  = 16; 
-	    
-
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   
   for (let i = 0; i < keypoints.length; i++) {
@@ -110,8 +104,8 @@ async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
 
-    const imageScaleFactor = 0.1;
-    const outputStride = 32;
+    const imageScaleFactor = 0.5;
+    const outputStride = 16;
 alert('here')
     let poses = [];
     let minPoseConfidence = 0.1;
@@ -157,7 +151,7 @@ alert('here')
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 3 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
