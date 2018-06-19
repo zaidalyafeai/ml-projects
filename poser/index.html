@@ -89,6 +89,10 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
 }
 function SetCoord(keys)
 {
+
+	const l = convertToLbl(keys[0], keys[1]);
+	const k = convertToLbl(keys[2], keys[3]);
+	keys= [l[0],l[1],k[0],k[1]];
      for(var i= 0 ; i < keys.length;  i++ )
      {
        const lbl = 'l'+i; 
