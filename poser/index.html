@@ -76,27 +76,7 @@ async function loadVideo() {
 var imageScaleFactor = 0.5;
 var outputStride  = 16; 
 	    
-function drawSegment([ay, ax], [by, bx], color, scale, ctx) {
-  ctx.beginPath();
-  ctx.moveTo(ax * scale, ay * scale);
-  ctx.lineTo(bx * scale, by * scale);
-  ctx.lineWidth = lineWidth;
-  ctx.strokeStyle = color;
-  ctx.stroke();
-}
 
-/**
- * Draws a pose skeleton by looking up all adjacent keypoints/joints
- */
-function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
-  const adjacentKeyPoints = posenet.getAdjacentKeyPoints(
-    keypoints, minConfidence);
-
-  adjacentKeyPoints.forEach((keypoints) => {
-    drawSegment(toTuple(keypoints[0].position),
-      toTuple(keypoints[1].position), color, scale, ctx);
-  });    }
-	    
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   
   for (let i = 0; i < keypoints.length; i++) {
@@ -171,7 +151,7 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 6 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 1 is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
