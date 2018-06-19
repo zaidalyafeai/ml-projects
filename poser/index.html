@@ -85,7 +85,7 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
     drawPoint(ctx, y * scale, x * scale, 10, color);
   }
 	SetCoord(keys);
-	drawSquare(ctx, 0,0);
+	drawSquare(ctx, currI,currJ);
 }
 function SetCoord(keys)
 {
@@ -111,13 +111,24 @@ let y = j * L;
 ctx.fillRect(x,y,x+L,y+L);
 }
 
+function checkInside(keys){
+const f = convertToLbl(keys[0],keys[1]);
+const l = convertToLbl(keys[2],keys[3]); 
+const nexI = Math.floor(Math.random() * 5); 
+const nexJ = Math.floor(Math.random() * 5); 
+	
+if(f[0] == currI &&  f[1] == currJ && l[0] == currI && l[1] == currJ )
+{currI = nexI; currJ = nexJ}
+}
 function convertToLbl(x,y){
     const p = [0,0];
-    p[0] = int(x) % L;
-    p[1] = int(y) % L;
+    p[0] = Math.floor(x / L);
+    p[1] = Math.floor(y / L);
     return p
 }
 	    var L ;
+	    var currI= 0;
+	    var currJ= 0;
 function detectPoseInRealTime(video, net) {
   const canvas = document.getElementById('output');
   const ctx = canvas.getContext('2d');
