@@ -72,7 +72,8 @@ async function loadVideo() {
 }
 	    
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
-  
+  let keys = [0.0,0.0,0.0,0.0]; 
+	let j = 0;	
   for (let i = 1; i < 3; i++) {
     const keypoint = keypoints[i];
     if (keypoint.score < minConfidence) {
@@ -80,10 +81,21 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
     }
 
     const {y, x} = keypoint.position;
+	  keys[++j]= x; keys[++j]=y;   
     drawPoint(ctx, y * scale, x * scale, 10, color);
   }
+	SetCoord(keys);
 }
+function SetCoord(keys)
+{
+     for(var i= 0 ; i < keys.length;  i++ )
+     {
+       const lbl = 'l'+i; 
+       let el = document. getElementById(lbl)
+       el.innerHTML = keys[i]
 
+     }
+}
 function drawPoint(ctx, y, x, r, color) {
   ctx.beginPath();
   ctx.arc(x, y, r, 0, 2 * Math.PI);
@@ -147,7 +159,7 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser  is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 1  is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
@@ -167,13 +179,13 @@ async function poseDetectionFrame() {
     <tbody>
       <tr>
         <td>Left</td>
-        <td id="l0">0.0</td>
-        <td id="l1">0.0</td>
+        <td id="0">0.0</td>
+        <td id="1">0.0</td>
       </tr>
        <tr>
         <td>Right</td>
-        <td id="r0">0.0</td>
-        <td id="r1">0.0</td>
+        <td id="2">0.0</td>
+        <td id="3">0.0</td>
       </tr>
     </tbody>
     <table>
