@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser 1</title>
+  <title>Poser</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -33,7 +33,8 @@ function isMobile() {
 }
       
 const videoWidth = 500;
-const videoHeight = 500;	    
+const videoHeight = 500;
+const color = 'aqua';		    
  async function setupCamera() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
     alert(
@@ -77,6 +78,7 @@ async function loadVideo() {
 var imageScaleFactor = 0.5;
 var outputStride  = 32; 
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+  
   for (let i = 0; i < keypoints.length; i++) {
     const keypoint = keypoints[i];
 
