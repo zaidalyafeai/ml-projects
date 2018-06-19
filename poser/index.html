@@ -116,9 +116,13 @@ alert('here')
     let poses = [];
     let minPoseConfidence = 0.1;
     let minPartConfidence = 0.5; 
+	try{
+	
 	const pose = await net.estimateSinglePose(
-	    video, imageScaleFactor, flipHorizontal, outputStride)
-	alert('here')
+	    video, imageScaleFactor, flipHorizontal, outputStride)}
+	catch(err){alert(err)}
+	
+	
 	poses.push(pose);
       ctx.clearRect(0, 0, videoWidth, videoHeight); 
     ctx.save();
@@ -153,7 +157,7 @@ alert('here')
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 2 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 3 is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
