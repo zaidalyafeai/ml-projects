@@ -32,8 +32,8 @@ function isMobile() {
   return isAndroid() || isiOS();
 }
       
-const videoWidth = 800;
-const videoHeight = 800;
+const videoWidth = 500;
+const videoHeight = 500;
 const color = 'aqua';		    
  async function setupCamera() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -95,7 +95,7 @@ function drawSkeleton(keypoints, minConfidence, ctx, scale = 1) {
   adjacentKeyPoints.forEach((keypoints) => {
     drawSegment(toTuple(keypoints[0].position),
       toTuple(keypoints[1].position), color, scale, ctx);
-  });    
+  });    }
 	    
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   
@@ -171,13 +171,13 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 4 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 5 is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
 
 <div class="container-fluid text-center">
-<video id="video" width = "800" height="800" playsinline style="display:none;">
+<video id="video" width = "500" height="500" playsinline style="display:none;">
         </video>
 	<canvas id="output"></canvas>
 	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
