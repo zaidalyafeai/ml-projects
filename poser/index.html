@@ -117,11 +117,6 @@ async function poseDetectionFrame() {
 	    video, imageScaleFactor, flipHorizontal, outputStride)
 	poses.push(pose);
       ctx.clearRect(0, 0, videoWidth, videoHeight); 
-      ctx.save();
-      ctx.scale(-1, 1);
-      ctx.translate(-videoWidth, 0);
-      ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
-      ctx.restore();
 
     // For each pose (i.e. person) detected in an image, loop through the poses
     // and draw the resulting skeleton and keypoints if over certain confidence
@@ -144,12 +139,12 @@ async function poseDetectionFrame() {
 <body>
 <nav class="navbar navbar-expand-sm bg-light navbar-light">
   <!-- Brand/logo -->
-  <a class="navbar-brand" href="#"><h1>POS<small>ER 1</small></h1></a>
+  <a class="navbar-brand" href="#"><h1>POS<small>ER </small></h1></a>
   </nav>
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 2 is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
