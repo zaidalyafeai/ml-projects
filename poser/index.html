@@ -1,7 +1,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Poser</title>
+  <title>Poser 1 </title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -42,8 +42,6 @@ const color = 'aqua';
   }
 
   const video = document.getElementById('video');
-  video.width = videoWidth;
-  video.height = videoHeight;
 
   const mobile = isMobile();
   try{
@@ -75,8 +73,8 @@ async function loadVideo() {
 
 	    
 	    
-var imageScaleFactor = 0.7;
-var outputStride  = 8; 
+var imageScaleFactor = 0.5;
+var outputStride  = 16; 
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   
   for (let i = 0; i < keypoints.length; i++) {
@@ -157,7 +155,7 @@ async function poseDetectionFrame() {
 </div>
 
 <div class="container-fluid text-center">
-<video id="video" playsinline>
+<video id="video" width = "500" height="500" playsinline>
         </video>
 	<canvas id="output"></canvas>
 	<div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
