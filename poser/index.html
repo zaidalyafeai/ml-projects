@@ -73,9 +73,8 @@ async function loadVideo() {
 	    
 function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   
-  for (let i = 0; i < keypoints.length; i++) {
+  for (let i = 1; i < 3; i++) {
     const keypoint = keypoints[i];
-
     if (keypoint.score < minConfidence) {
       continue;
     }
@@ -148,7 +147,7 @@ async function poseDetectionFrame() {
 <div class="container-fluid"> 
 
 <blockquote class="blockquote text-justify" style="margin:30px;">
-	<p> Poser 1 is a simple tool that uses the pose estimators network.</p>
+	<p> Poser 2 is a simple tool that uses the pose estimators network.</p>
     <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
   </blockquote>
 </div>
