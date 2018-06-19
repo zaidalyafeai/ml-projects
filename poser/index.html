@@ -111,7 +111,8 @@ async function poseDetectionFrame() {
     const outputStride = 32;
 
     let poses = [];
-    let minPoseConfidence = 0.3;
+    let minPoseConfidence = 0.1;
+    let minPartConfidence = 0.5; 
 	const pose = await net.estimateSinglePose(
 	    video, imageScaleFactor, flipHorizontal, outputStride)
 	poses.push(pose);
