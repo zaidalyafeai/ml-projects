@@ -115,8 +115,8 @@ ctx.fillRect(x,y,L,L);
 function checkInside(keys){
 const f = convertToLbl(keys[0],keys[1]);
 const l = convertToLbl(keys[2],keys[3]); 
-const nexI = Math.floor(Math.random() * 4 +1); 
-const nexJ = Math.floor(Math.random() * 4 +1); 
+const nexI = Math.floor(Math.random() * 3 +1); 
+const nexJ = Math.floor(Math.random() * 3 +1); 
 	
 if((f[0] == currI &&  f[1] == currJ) || (l[0] == currI && l[1] == currJ ))
 {currI = nexI; currJ = nexJ}
