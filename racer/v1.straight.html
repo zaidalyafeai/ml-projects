@@ -125,6 +125,12 @@ function fireKey(key){
     case 1:
         keyRight= true
         break;
+     case 2:
+        keyFaster = true
+        break;
+    case 3:
+        keySlower= true
+        break;   
     default:
         alert('er') 
 }
@@ -314,7 +320,9 @@ function fireKey(key){
 
   </script>
 <button  onclick="fireKey(0)">left</button>
-  <button onclick="fireKey(1)">up</button>
+  <button onclick="fireKey(1)">right</button>
   
+  <button  onclick="fireKey(2)">upper</button>
+  <button onclick="fireKey(3)">bottom</button>
 </body> 
 
