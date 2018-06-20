@@ -117,14 +117,11 @@
     //=========================================================================
     // UPDATE THE GAME WORLD
     //=========================================================================
-function fireKey(el, key)
-{
-  alert('f') 
+function fireKey(key){
     var e = jQuery.Event("keyup");
 // e.which is used to set the keycode
 e.which = key;
-$(el).trigger(e);
-  alert('end') 
+$("#left").trigger(e);
 } 
     function update(dt) {
 
@@ -310,9 +307,9 @@ $(el).trigger(e);
     //=========================================================================
 
   </script>
-<button onclick="fireKey(this, 37)">left</button>
-  <button onclick="fireKey(this, 38)">up</button>
-  <button onclick="fireKey(this, 39)">right</button>
-  <button onclick="fireKey(this, 40)">down</button>
+<button id='left' onclick="fireKey(37)">left</button>
+  <button onclick="fireKey(38)">up</button>
+  <button onclick="fireKey(39)">right</button>
+  <button onclick="fireKey(40)">down</button>
 </body> 
 
