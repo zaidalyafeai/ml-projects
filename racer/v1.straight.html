@@ -120,28 +120,17 @@
     //=========================================================================
     // UPDATE THE GAME WORLD
     //=========================================================================
-function fireKey(key){
+function moveRight(){
         keyLeft = false;
-        keyRight      = false;
-        keyFaster     = true;
-        keySlower     = false;
-    switch(key) {
-    case 0:
-        keyLeft = true
-        break;
-    case 1:
-        keyRight= true
-        break;
-     case 2:
-        keyFaster = true
-        break;
-    case 3:
-        keySlower= true
-        break;   
-    default:
-        alert('er') 
-}
+        keyRight= true;
+	
 } 
+	  
+function moveLeft(){
+        keyLeft = true;
+        keyRight= false;
+	
+}   
     function update(dt) {
 
       position = Util.increase(position, dt * speed, trackLength);
@@ -388,6 +377,13 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
 	  keys[j++]= x; keys[j++]=y;   
     drawPoint(ctx, y * scale, x * scale, 10, color);
   }
+	decideDirection(keys[0], keys[1])
+}function decideDirection(x, y){
+    if (x < currX)
+	    moveLeft();
+    if (x > currX)
+	    moveRight();
+    currX = x ; 
 }
 	   	    
 function drawPoint(ctx, y, x, r, color) {
@@ -397,9 +393,8 @@ function drawPoint(ctx, y, x, r, color) {
   ctx.fill();
 }
 	    
-	    var L ;
-	    var currI= 1;
-	    var currJ= 1;
+	    var currX= 0.0;
+	    var currY= 0.0;
 function detectPoseInRealTime(video, net) {
   const canvas = document.getElementById('output');
   const ctx = canvas.getContext('2d');
