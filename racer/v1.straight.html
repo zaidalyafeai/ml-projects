@@ -118,10 +118,7 @@
     // UPDATE THE GAME WORLD
     //=========================================================================
 function fireKey(key){
-    var e = jQuery.Event("keyup");
-// e.which is used to set the keycode
-e.which = key;
-$("#left").trigger(e);
+    keyLeft = true; 
 } 
     function update(dt) {
 
