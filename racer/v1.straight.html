@@ -379,7 +379,7 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   }
 	decideDirection(keys[0], keys[1])
 }function decideDirection(x, y){
-	const margin = 5;
+	const margin = 3;
 	
     if (x < currX - margin){
 	    moveLeft();
