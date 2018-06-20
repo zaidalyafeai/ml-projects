@@ -63,11 +63,6 @@
     </tr>
   </table>
 
-  <div id='instructions'>
-    <p>Use the <b>arrow keys</b> to drive the car.</p>
-  </div>
-<button onclick="fireKey(this)">UP</button>
-
   <div id="racer">
     <canvas id="canvas">
       Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
@@ -121,10 +116,9 @@
     //=========================================================================
     // UPDATE THE GAME WORLD
     //=========================================================================
-function fireKey(el)
+function fireKey(el, key)
 {
-    //Set key to corresponding code. This one is set to the left arrow key.
-    var key = 37;
+    //Set key to corresponding code
     if(document.createEventObject)
     {
         var eventObj = document.createEventObject();
@@ -322,6 +316,9 @@ function fireKey(el)
     //=========================================================================
 
   </script>
-
+<button onclick="fireKey(this, 37)">left</button>
+  <button onclick="fireKey(this, 38)">up</button>
+  <button onclick="fireKey(this, 39)">right</button>
+  <button onclick="fireKey(this, 40)">down</button>
 </body> 
 
