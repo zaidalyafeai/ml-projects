@@ -118,7 +118,8 @@
     // UPDATE THE GAME WORLD
     //=========================================================================
 function fireKey(key){
-    keyFaster = true; 
+    el.dispatchEvent(new KeyboardEvent('keydown',{'key':'Up'}));
+el.dispatchEvent(new KeyboardEvent('keyup',{'key':'Up'}))
 } 
     function update(dt) {
 
@@ -304,7 +305,7 @@ function fireKey(key){
     //=========================================================================
 
   </script>
-<button id='left' onclick="fireKey(37)">left</button>
+<button id='left' onclick="fireKey(this)">left</button>
   <button onclick="fireKey(38)">up</button>
   <button onclick="fireKey(39)">right</button>
   <button onclick="fireKey(40)">down</button>
