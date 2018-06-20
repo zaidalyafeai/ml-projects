@@ -379,11 +379,20 @@ function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
   }
 	decideDirection(keys[0], keys[1])
 }function decideDirection(x, y){
-    if (x < currX)
+	const margin = 10;
+	
+    if (x < currX - margin){
 	    moveLeft();
-    if (x > currX)
+	    currX = x ; 
+    }
+    else if (x > currX + margin){
 	    moveRight();
-    currX = x ; 
+	    currX = x ;
+    }else{
+	keyLeft = false;
+        keyRight= false;
+    }
+    
 }
 	   	    
 function drawPoint(ctx, y, x, r, color) {
