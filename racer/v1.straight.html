@@ -66,6 +66,7 @@
   <div id='instructions'>
     <p>Use the <b>arrow keys</b> to drive the car.</p>
   </div>
+<button onclick="fireKey(this)">UP</button>
 
   <div id="racer">
     <canvas id="canvas">
@@ -74,10 +75,6 @@
     Loading...
   </div>
 
-  <audio id='music'>
-    <source src="music/racer.ogg">
-    <source src="music/racer.mp3">
-  </audio>
   <span id="mute"></span>
 
   <script src="stats.js"></script>
@@ -124,7 +121,23 @@
     //=========================================================================
     // UPDATE THE GAME WORLD
     //=========================================================================
-
+function fireKey(el)
+{
+    //Set key to corresponding code. This one is set to the left arrow key.
+    var key = 37;
+    if(document.createEventObject)
+    {
+        var eventObj = document.createEventObject();
+        eventObj.keyCode = key;
+        el.fireEvent("onkeydown", eventObj);   
+    }else if(document.createEvent)
+    {
+        var eventObj = document.createEvent("Events");
+        eventObj.initEvent("keydown", true, true);
+        eventObj.which = key;
+        el.dispatchEvent(eventObj);
+    }
+} 
     function update(dt) {
 
       position = Util.increase(position, dt * speed, trackLength);
