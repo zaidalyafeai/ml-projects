@@ -119,10 +119,12 @@
     //=========================================================================
 function fireKey(el, key)
 {
+  alert('f') 
     var e = jQuery.Event("keyup");
 // e.which is used to set the keycode
 e.which = key;
 $(el).trigger(e);
+  alert('end') 
 } 
     function update(dt) {
 
