@@ -6,6 +6,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <link href="common.css" rel="stylesheet" type="text/css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <!-- Load Posenet -->
+    <script src="https://unpkg.com/@tensorflow-models/posenet">
 </head> 
 
 <body> 
@@ -321,12 +324,135 @@ function fireKey(key){
     }
 
     //=========================================================================
+function isAndroid() {
+  return /Android/i.test(navigator.userAgent);
+}
 
+function isiOS() {
+  return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+function isMobile() {
+  return isAndroid() || isiOS();
+}
+      
+const videoWidth = 500;
+const videoHeight = 500;
+const color = 'aqua';		    
+ async function setupCamera() {
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert(
+        'Browser API navigator.mediaDevices.getUserMedia not available');
+  }
+
+  const video = document.getElementById('video');
+
+  const mobile = isMobile();
+  try{
+  const stream = await navigator.mediaDevices.getUserMedia({
+    'audio': false,
+    'video': {
+      facingMode: 'user',
+      width: mobile ? undefined : videoWidth,
+      height: mobile ? undefined : videoHeight,
+    },
+  });
+  
+  video.srcObject = stream;
+}catch(err){alert(err)}
+  return new Promise((resolve) => {
+    video.onloadedmetadata = () => {
+      resolve(video);
+    };
+  });
+}
+
+async function loadVideo() {
+  
+  const video = await setupCamera();
+	  video.play();
+	  const net = await posenet.load(0.75);
+	  detectPoseInRealTime(video, net);
+}
+	    
+function drawKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+  let keys = [0.0,0.0,0.0,0.0]; 
+	let j = 0;	
+  for (let i = 1; i < 3; i++) {
+    const keypoint = keypoints[i];
+    if (keypoint.score < minConfidence) {
+      continue;
+    }
+
+    const {y, x} = keypoint.position;
+	  keys[j++]= x; keys[j++]=y;   
+    drawPoint(ctx, y * scale, x * scale, 10, color);
+  }
+}
+	   	    
+function drawPoint(ctx, y, x, r, color) {
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+	    
+	    var L ;
+	    var currI= 1;
+	    var currJ= 1;
+function detectPoseInRealTime(video, net) {
+  const canvas = document.getElementById('output');
+  const ctx = canvas.getContext('2d');
+  // since images are being fed from a webcam
+  const flipHorizontal = true;
+
+  canvas.width = videoWidth;
+  canvas.height = videoHeight;
+L = videoWidth / 5; 
+async function poseDetectionFrame() {
+    // Scale an image down to a certain factor. Too large of an image will slow
+    // down the GPU
+
+    const imageScaleFactor = 0.3;
+    const outputStride = 16;
+    let poses = [];
+    let minPoseConfidence = 0.1;
+    let minPartConfidence = 0.5; 
+	const pose = await net.estimateSinglePose(
+	    video, imageScaleFactor, flipHorizontal, outputStride)
+	
+	
+	
+	poses.push(pose);
+      ctx.clearRect(0, 0, videoWidth, videoHeight); 
+    ctx.save();
+      ctx.scale(-1, 1);
+      ctx.translate(-videoWidth, 0);
+      ctx.drawImage(video, 0, 0, videoWidth, videoHeight);
+      ctx.restore();
+    // For each pose (i.e. person) detected in an image, loop through the poses
+    // and draw the resulting skeleton and keypoints if over certain confidence
+    // scores
+    poses.forEach(({score, keypoints}) => {
+      if (score >= minPoseConfidence) {
+          drawKeypoints(keypoints, minPartConfidence, ctx);
+	  //  drawSkeleton(keypoints, minPartConfidence, ctx);  
+        }
+    });
+    requestAnimationFrame(poseDetectionFrame);
+  }
+
+  poseDetectionFrame();
+}
   </script>
 <button  onclick="fireKey(0)">left</button>
   <button onclick="fireKey(1)">right</button>
   
   <button  onclick="fireKey(2)">upper</button>
   <button onclick="fireKey(3)">bottom</button>
+  <button onclick="loadVideo()">Start</button>
+  <video id="video" width = "500" height="500" playsinline style="display:none;">
+        </video>
+	<canvas id="output"></canvas>
 </body> 
 
