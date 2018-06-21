@@ -318,8 +318,8 @@ function isMobile() {
   return isAndroid() || isiOS();
 }
       
-const videoWidth = 200;
-const videoHeight = 200;
+const videoWidth = 150;
+const videoHeight = 150;
 const color = 'aqua';		    
  async function setupCamera() {
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -445,7 +445,7 @@ async function poseDetectionFrame() {
 }
   </script>
   <button onclick="loadVideo()">Start</button>
-  <video id="video" width = "200" height="200" playsinline style="display:none;">
+  <video id="video" width = "150" height="150" playsinline style="display:none;">
         </video>
 	
 </body> 
