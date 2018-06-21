@@ -411,6 +411,8 @@ function detectPoseInRealTime(video, net) {
   canvas.width = videoWidth;
   canvas.height = videoHeight;
 L = videoWidth / 5; 
+  currX= videoWidth/2;
+  currY= videoHeight/2;
 async function poseDetectionFrame() {
     // Scale an image down to a certain factor. Too large of an image will slow
     // down the GPU
