@@ -56,6 +56,9 @@
       <th><label for="fogDensity">Fog Density (<span id="currentFogDensity"></span>) :</label></th>
       <td><input id="fogDensity" type='range' min='0' max='50' title="integer (0-50)"></td>
     </tr>
+	  <tr>
+	  <canvas id="output"></canvas></tr>
+		  
   </table>
   <div id="racer">
     <canvas id="canvas">
@@ -444,6 +447,6 @@ async function poseDetectionFrame() {
   <button onclick="loadVideo()">Start</button>
   <video id="video" width = "200" height="200" playsinline style="display:none;">
         </video>
-	<canvas id="output"></canvas>
+	
 </body> 
 
