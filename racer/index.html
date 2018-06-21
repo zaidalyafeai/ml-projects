@@ -57,7 +57,8 @@
       <td><input id="fogDensity" type='range' min='0' max='50' title="integer (0-50)"></td>
     </tr>
 	  <tr>
-	 <td> <canvas id="output"></canvas></td></tr>
+		<th><label for="output">Steering Box</label> <button onclick="loadVideo()">Start</button> </th>
+	 <td> <canvas id="output" style="display:none;"></canvas></td></tr>
 		  
   </table>
   <div id="racer">
@@ -405,6 +406,7 @@ function detectPoseInRealTime(video, net) {
 
   canvas.width = videoWidth;
   canvas.height = videoHeight;
+	document.getElementById("output").style.display = "inline";
 L = videoWidth / 5; 
   currX= videoWidth/2;
   currY= videoHeight/2;
@@ -444,7 +446,7 @@ async function poseDetectionFrame() {
   poseDetectionFrame();
 }
   </script>
-  <button onclick="loadVideo()">Start</button>
+  
   <video id="video" width = "130" height="130" playsinline style="display:none;">
         </video>
 	
