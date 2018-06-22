@@ -133,21 +133,14 @@ async function loadModel()
     $('button').prop('disabled', false);
     await loadDict()
 }
-
-window.console = {
-  log: function(str){
-    var node = document.createElement("div");
-    node.appendChild(document.createTextNode(str));
-    document.getElementById("myLog").appendChild(node);
-  }
-}
 	  
 function erase()
 {
     canvas.clear();
     canvas.backgroundColor = '#ffffff';
 }
-$('#tgle').prop('disabled', true);	  
+$('#tgle').prop('disabled', true);	
+canvas.deactivateAll();	  
 loadModel()
 var model;
 var canvas;
@@ -185,7 +178,7 @@ but I focused on making the model light with around 1 million parameters. The ta
 
 <div class="row">
   <div class="col">
-<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-left:50px;margin-top:50px;"></canvas>
+<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-left:50px;margin-top:50px;" disabled></canvas>
  <div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
   <button type="button" class="btn btn-secondary" onclick ='getFrame()' disabled>Predict </button>
 <button type="button" class="btn btn-secondary" onclick ='erase()' disabled>Clear</button>
