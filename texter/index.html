@@ -61,7 +61,9 @@ function getFrame()
     setTable(symbols, probs)
     $('button').prop('disabled', false);
 }
-	  
+canvas.on('mouse:down', function(options) {
+  getFrame();
+});  
 function getSymbols(indices)
 {
     var outp = []
@@ -110,33 +112,6 @@ function success(data)
     }
 }
 
-async function createImg(path)
-{
-  return await new Promise((resolve, reject) => {
-  let i = new Image();
-  i.onload = () => resolve(i);
-  i.onerror = reject;
-  i.crossOrigin = 'anonymous';
-  i.src = path;
-  i.width = 224;
-  i.height = 224;
-  })
-  
-}
-
-async function createImg(path)
-{
-  return await new Promise((resolve, reject) => {
-  let i = new Image();
-  i.onload = () => resolve(i);
-  i.onerror = reject;
-  i.crossOrigin = 'anonymous';
-  i.src = path;
-  i.width = 32;
-  i.height = 32;
-  })
-  
-}
 
 function preprocess(imgData)
 {
