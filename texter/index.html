@@ -88,8 +88,7 @@ function getFrame()
     //get image data
 	
     const mbb = getMinBox()
-    imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x, mbb.max.y);
-    alert(imgData.width+'\n'+ mbb.max.x)
+    imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x - mbb.min.x, mbb.max.y - mbb.min.y);
     const pred = model.predict(preprocess(imgData)).dataSync()
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
