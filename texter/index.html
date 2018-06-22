@@ -86,12 +86,13 @@ function getFrame()
     const ctx = canvas.getContext("2d");
 
     //get image data
-    imgData = ctx.getImageData(0, 0, 300, 300);
+	
+    const mbb = getMinBox()
+    imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x, mbb.max.y);
     const pred = model.predict(preprocess(imgData)).dataSync()
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
     const symbols = getSymbols(indices)
-    alert(getMinBox())
     coodrs = []
     setTable(symbols, probs)
    
