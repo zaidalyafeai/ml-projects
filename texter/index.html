@@ -41,7 +41,7 @@
 $(function () {
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
-    canvas.isDrawingMode= 1;
+    canvas.isDrawingMode= 0;
     canvas.freeDrawingBrush.color = "black";
     canvas.freeDrawingBrush.width = 15;
     canvas.renderAll();
@@ -130,7 +130,7 @@ return tf.tidy(()=>{
 async function loadModel()
 {
     model = await tf.loadModel('model2/model.json')
-    $('button').prop('disabled', false);
+    document.getElementById('status').innerHTML ='Model Loaded'
     await loadDict()
 }
 	  
@@ -139,8 +139,6 @@ function erase()
     canvas.clear();
     canvas.backgroundColor = '#ffffff';
 }
-$('#tgle').prop('disabled', true);	
-canvas.deactivateAll();	  
 loadModel()
 var model;
 var canvas;
@@ -178,7 +176,8 @@ but I focused on making the model light with around 1 million parameters. The ta
 
 <div class="row">
   <div class="col">
-<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-left:50px;margin-top:50px;" disabled></canvas>
+<h3 id ='status' >Loading Model... </h3>	  
+<canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-left:50px;margin-top:50px;"></canvas>
  <div class="btn-group" style ='margin-left:140px; margin-top:55px; '>
   <button type="button" class="btn btn-secondary" onclick ='getFrame()' disabled>Predict </button>
 <button type="button" class="btn btn-secondary" onclick ='erase()' disabled>Clear</button>
