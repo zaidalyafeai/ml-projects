@@ -88,8 +88,8 @@ function getFrame()
     //get image data
 	
     const mbb = getMinBox()
-    alert(mbb.min.x+' '+mbb.min.y)
     imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x, mbb.max.y);
+    alert(imgData.width+'\n'+ mbb.max.x)
     const pred = model.predict(preprocess(imgData)).dataSync()
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
@@ -151,7 +151,6 @@ function preprocess(imgData)
 {
 return tf.tidy(()=>{
     let tensor = tf.fromPixels(imgData)
-    alert(tensor.shape)
     resized = tf.image.resizeBilinear(tensor, [32, 32]).toFloat()
     const sliced   = resized.slice([0, 0, 1], [32, 32, 1])
     const offset = tf.scalar(255.0);
