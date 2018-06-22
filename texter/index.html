@@ -66,6 +66,10 @@ canvas.on('mouse:up', function(options) {
  alert('done') ;
  getFrame();
 });  
+	  
+canvas.on({'touch:gesture': function() {
+    alert('hey') 
+  }});
 function getSymbols(indices)
 {
     var outp = []
