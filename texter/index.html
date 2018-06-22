@@ -61,8 +61,10 @@ function getFrame()
     setTable(symbols, probs)
     $('button').prop('disabled', false);
 }
-canvas.on('mouse:down', function(options) {
-  getFrame();
+canvas.on('mouse:up', function(options) {
+	
+ alert('done') ;
+ getFrame();
 });  
 function getSymbols(indices)
 {
