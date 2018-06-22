@@ -130,16 +130,21 @@ return tf.tidy(()=>{
 async function loadModel()
 {
     model = await tf.loadModel('model2/model.json')
-    document.getElementById('status').innerHTML ='Model Loaded'
+    allowDrawing()
     await loadDict()
 }
-	  
+function allowDrawing(){
+    canvas.isDrawingMode= 1;
+    document.getElementById('status').innerHTML ='Model Loaded'
+}	  
 function erase()
 {
     canvas.clear();
     canvas.backgroundColor = '#ffffff';
 }
+	  
 loadModel()
+	  
 var model;
 var canvas;
 var symbols = [];
