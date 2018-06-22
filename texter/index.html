@@ -46,8 +46,20 @@ $(function () {
     canvas.freeDrawingBrush.width = 15;
     canvas.renderAll();
     canvas.on('mouse:up', function(e){getFrame()});
-})	  
-var canvas;
+    canvas.on('mouse:move', function(e){recordCoor(e)});
+})
+function recordCoor(event)
+{
+  var pointer = canvas.getPointer(event.e);
+  var posX = pointer.x;
+  var posY = pointer.y;
+  alert(posX)
+  coors.push(pointer) 
+}	  
+	  
+var canvas; 
+var coors = [];	  
+	  
 function getFrame()
 {
     const ctx = canvas.getContext("2d");
