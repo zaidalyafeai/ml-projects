@@ -53,12 +53,33 @@ function recordCoor(event)
   var pointer = canvas.getPointer(event.e);
   var posX = pointer.x;
   var posY = pointer.y;
-  alert(posX)
-  coors.push(pointer) 
+  coodrs.push(pointer) 
 }	  
 	  
 var canvas; 
-var coors = [];	  
+var coodrs = [];
+function getMinBox(){
+   let minX = 0;
+   let minY = 0;
+   let maxX = 300
+   let maxY = 300; 
+	
+   var coorX = coodrs.map(function(p) {return p.x});
+   var coorY = coodrs.map(function(p) {return p.y});
+
+   var min_coords = {
+    x : Math.min.apply(null, coorX),
+    y : Math.min.apply(null, coorY)
+   }
+   var max_coords = {
+    x : Math.max.apply(null, coorX),
+    y : Math.max.apply(null, coorY)
+   }
+   return {
+    min : min_coords,
+    max : max_coords
+   }
+}	  
 	  
 function getFrame()
 {
@@ -70,6 +91,8 @@ function getFrame()
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
     const symbols = getSymbols(indices)
+    alert(getMinBox())
+    coodrs = []
     setTable(symbols, probs)
    
 }
