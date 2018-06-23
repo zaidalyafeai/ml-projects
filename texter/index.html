@@ -172,7 +172,7 @@ function allowDrawing(){
     document.getElementById('status').innerHTML ='Model Loaded';
     $('button').prop('disabled', false); 
     var slider = document.getElementById('myRange');
-    slider.oninput(function(){alert(this.value)});
+    slider.oninput = function(){alert(this.value)};
 }	  
 function erase()
 {
