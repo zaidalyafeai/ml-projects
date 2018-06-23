@@ -2,7 +2,9 @@
 <head>
   <meta charset="UTF-8" />
   <title>Texter</title>
-  <script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML">
+</script>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 
 <!-- jQuery library -->
@@ -30,10 +32,8 @@
     let sym = document. getElementById('sym'+(i+1))
     let tex = document. getElementById('tex'+(i+1))
     
-    sym.innerHTML = '$$'+symbols[i]+'$$'
+    sym.innerHTML = '$$ \Large '+symbols[i]+'$$'
     tex.innerHTML = symbols[i]
-    sym.style.fontSize = "20px";      
-    tex.style.fontSize = "20px";     
     } 
    MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
     }
