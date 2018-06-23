@@ -93,7 +93,6 @@ function getFrame()
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
     const symbols = getSymbols(indices)
-    coodrs = []
     setTable(symbols, probs)
    
 }
@@ -177,6 +176,7 @@ function erase()
 {
     canvas.clear();
     canvas.backgroundColor = '#ffffff';
+    coords = [] ;
 }
 	  
 loadModel()
