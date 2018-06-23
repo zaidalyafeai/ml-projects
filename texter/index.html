@@ -32,7 +32,8 @@
     let sym = document. getElementById('sym'+(i+1))
     let tex = document. getElementById('tex'+(i+1))
     
-    sym.innerHTML = '$$ \\Large '+symbols[i]+'\\quad \\text{'+symbols[i]+'}$$'
+    sym.innerHTML = '$$ \\Large '+symbols[i]+'$$'
+    tex.innerHTML = symbols[i]
    } 
    MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
     }
