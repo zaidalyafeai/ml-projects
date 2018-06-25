@@ -146,14 +146,13 @@ function success(data)
     var wd_idx = new Object();
     lst = data.split(/\r?\n|\r/)
     symbols = []
-    let text = '$$'
+    let txt = '$$'
     for(var i = 1 ; i < lst.length -1 ; i++)
     {
         let symbol = lst[i].split(',')[1]
         symbols[i-1] = symbol 
 	txt+= symbol +' '
     }
-	alert(txt)
     txt+= '$$' 
 	document.getElementById('latex').innerHTML = txt
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
