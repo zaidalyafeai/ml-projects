@@ -164,6 +164,8 @@ return tf.tidy(()=>{
 async function loadModel()
 {
     model = await tf.loadModel('model/model.json')
+    //warm up 
+    model.predict(tf.zeros([1,32,32,1])
     allowDrawing()
     await loadDict()
 }
