@@ -146,11 +146,16 @@ function success(data)
     var wd_idx = new Object();
     lst = data.split(/\r?\n|\r/)
     symbols = []
+    let text = '$$'
     for(var i = 1 ; i < lst.length -1 ; i++)
     {
         let symbol = lst[i].split(',')[1]
-        symbols[i-1] = symbol
+        symbols[i-1] = symbol 
+	txt+= symbol +' '
     }
+    txt+= '$$' 
+	document.getElementById('latex').innerHTML = txt
+	MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
 }
 
 //preprocess the data 
@@ -309,6 +314,6 @@ but I focused on making the model light with around 110K parameters. The table o
 </table>
 </div>
 </div>
- 
+ <p id = 'latex'></p>
 </body>
 </html>
