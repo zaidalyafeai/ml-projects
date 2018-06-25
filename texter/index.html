@@ -24,9 +24,10 @@
   tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
 });
   </script>
-  <script>
-    function setTable(symbols, probs)
-    {
+  <script>
+//set the table with predictions 	  
+function setTable(symbols, probs)
+   {
      
    for (var i = 0; i < symbols.length; i++) { 
     let sym = document. getElementById('sym'+(i+1))
@@ -35,9 +36,10 @@
     sym.innerHTML = '$$ \\huge{'+symbols[i]+'}$$'
     tex.innerHTML = symbols[i]
    } 
-   MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
-    }
-    
+   //render MathJax 
+   MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
+}
+ //prepare the drawing canvas 
 $(function () {
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
@@ -48,16 +50,17 @@ $(function () {
     canvas.on('mouse:up', function(e){getFrame()});
     canvas.on('mouse:move', function(e){recordCoor(e)});
 })
+	  
+//record the current drawing coordinates 	  
 function recordCoor(event)
 {
   var pointer = canvas.getPointer(event.e);
   var posX = pointer.x;
   var posY = pointer.y;
   coodrs.push(pointer) 
-}	  
+}
 	  
-var canvas; 
-var coodrs = [];
+//get the best bounding box by trimming around the trimming   
 function getMinBox(){
    let minX = 0;
    let minY = 0;
@@ -79,23 +82,26 @@ function getMinBox(){
     min : min_coords,
     max : max_coords
    }
-}	  
+}
 	  
+//get the current frame of the canvas 	  	  
 function getFrame()
 {
     const ctx = canvas.getContext("2d");
 
-    //get image data
-	
+    //get the minimum bounding box
     const mbb = getMinBox()
     imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x - mbb.min.x, mbb.max.y - mbb.min.y);
+    //get the predictions, top 5 
     const pred = model.predict(preprocess(imgData)).dataSync()
     const indices = findIndicesOfMax(pred, 5)
     const probs  = findTopValues(pred, 5)
     const symbols = getSymbols(indices)
+    //set the table 
     setTable(symbols, probs)
    
 }
+//get the latex symbols by indices 
 function getSymbols(indices)
 {
     var outp = []
@@ -103,6 +109,8 @@ function getSymbols(indices)
         outp[i] = symbols[indices[i]]
     return outp
 }
+	  
+//load the symbols 	  
 async function loadDict()
 {
   await $.ajax({
@@ -110,7 +118,7 @@ async function loadDict()
   dataType: 'text',}).done(success);
 }
 
-
+//get indices of the top probs
 function findIndicesOfMax(inp, count) {
     var outp = [];
     for (var i = 0; i < inp.length; i++) {
@@ -122,11 +130,12 @@ function findIndicesOfMax(inp, count) {
     }
     return outp;
 }
-
+	  
+//find the top 5 predictions 
 function findTopValues(inp, count){
     var outp = [];
     let indices = findIndicesOfMax(inp, count)
-    // show 3 greatest scores
+    // show 5 greatest scores
     for (var i = 0; i < indices.length; i++)
         outp[i] = inp[indices[i]]
     return outp
@@ -144,7 +153,7 @@ function success(data)
     }
 }
 
-
+//preprocess the data 
 function preprocess(imgData)
 {
 return tf.tidy(()=>{
@@ -160,15 +169,18 @@ return tf.tidy(()=>{
     return batched
 })
 }
-
+	  
+//load the model 
 async function loadModel()
 {
     model = await tf.loadModel('model/model.json')
     //warm up 
-    model.predict(tf.zeros([1,32,32,1])
+    model.predict(tf.zeros([1,32,32,1]))
     allowDrawing()
     await loadDict()
 }
+	  
+//allow drawing on canvas 	  
 function allowDrawing(){
     canvas.isDrawingMode= 1;
     document.getElementById('status').innerHTML ='Model Loaded';
@@ -188,6 +200,8 @@ loadModel()
 var model;
 var canvas;
 var symbols = [];
+var canvas; 
+var coodrs = [];
   </script>
   <style>
 .table tbody tr td{
