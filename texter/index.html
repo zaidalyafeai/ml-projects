@@ -153,6 +153,7 @@ function success(data)
         symbols[i-1] = symbol 
 	txt+= symbol +' '
     }
+	alert(txt)
     txt+= '$$' 
 	document.getElementById('latex').innerHTML = txt
 	MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
