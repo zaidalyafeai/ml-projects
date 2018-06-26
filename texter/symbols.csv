@@ -345,8 +345,8 @@ z,z
 \circ,\degree
 \ohm,\ohm
 \Huge ♀,\venus
-\Huge ♂,\mars
-\astrosun,\astrosun
+\Huge ♂,\mars 
+\odot,\astrosun
 \bigcirc,\fullmoon
 \leftmoon,\leftmoon
 \Huge ♀,\female
