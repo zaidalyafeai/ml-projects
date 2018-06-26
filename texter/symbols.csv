@@ -341,8 +341,8 @@ z,z
 \mathscr{L},\mathscr{L}
 \mathscr{P},\mathscr{P}
 \mathscr{S},\mathscr{S}
-\celsius,\celsius
-\degree,\degree
+{}^\circ C,\celsius
+\circ,\degree
 \ohm,\ohm
 ♀,\venus
 ♂,\mars
