@@ -33,7 +33,7 @@ function setTable(symbols, probs)
     let sym = document. getElementById('sym'+(i+1))
     let tex = document. getElementById('tex'+(i+1))
     
-    sym.innerHTML = '$$ \\huge{'+symbols[i]+'}$$'
+    sym.innerHTML = '$$ \\huge{'+rendered[i]+'}$$'
     tex.innerHTML = symbols[i]
    } 
    //render MathJax 
@@ -140,22 +140,19 @@ function findTopValues(inp, count){
         outp[i] = inp[indices[i]]
     return outp
 }
-
+	  
+//load the symbols table 
 function success(data)
 {
-    var wd_idx = new Object();
-    lst = data.split(/\r?\n|\r/)
-    symbols = []
-    let txt = '$$'
+    let lst = data.split(/\r?\n|\r/)
     for(var i = 1 ; i < lst.length -1 ; i++)
     {
-        let symbol = lst[i].split(',')[1]
-        symbols[i-1] = symbol 
-	txt+= symbol +' '
+        let row = lst[i].split(',') 
+	rendered[i-1] = row[0]
+        symbols[i-1] = row[1]
     }
-    txt+= '$$' 
-	document.getElementById('latex').innerHTML = txt
-	MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
+    
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
 }
 
 //preprocess the data 
@@ -205,6 +202,7 @@ loadModel()
 var model;
 var canvas;
 var symbols = [];
+var rendered = [];
 var canvas; 
 var coodrs = [];
   </script>
