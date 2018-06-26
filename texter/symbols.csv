@@ -116,7 +116,7 @@ z,z
 \mathbb{R},\mathbb{R}
 \$,\$
 \{,\{
-\copyright,\copyright
+\Huge ©,\copyright
 \dots,\dots
 \},\}
 \S,\S
@@ -365,6 +365,6 @@ z,z
 \overset{\circ}{\mathrm {A}},\AA
 \O,\O
 \o,\o
-\ae,\ae
+\Huge æ,\ae
 \AE,\AE
 \guillemotleft,\guillemotleft
