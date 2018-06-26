@@ -344,14 +344,14 @@ z,z
 {}^\circ C,\celsius
 \circ,\degree
 \ohm,\ohm
-♀,\venus
-♂,\mars
+\Huge ♀,\venus
+\Huge ♂,\mars
 \astrosun,\astrosun
 \bigcirc,\fullmoon
 \leftmoon,\leftmoon
-♀,\female
-♂,\male
-\checked,\checked
+\Huge ♀,\female
+\Huge ♂,\male
+\Huge ⎷,\checked
 \diameter,\diameter
 ☉,\sun
 \Bowtie,\Bowtie
