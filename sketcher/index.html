@@ -38,8 +38,9 @@ $(function () {
     canvas.freeDrawingBrush.color = "black";
     canvas.freeDrawingBrush.width = 10;
     canvas.renderAll();
-    canvas.on('mouse:up', function(e){getFrame()});
-    canvas.on('mouse:down', function(e){recordCoor(e)});
+    canvas.on('mouse:up', function(e){getFrame(); mousePressed = false});
+    canvas.on('mouse:down', function(e){mousePressed = true});
+    canvas.on('mouse:move', function(e){recordCoor(e)});
 })
 	  
 //record the current drawing coordinates 	  
@@ -48,9 +49,12 @@ function recordCoor(event)
   var pointer = canvas.getPointer(event.e);
   var posX = pointer.x;
   var posY = pointer.y;
-  console.log(posX +' , ' + posY)
-  if(posX >=0 && posY >= 0)  
+  
+  if(posX >=0 && posY >= 0 && mousePressed)  
+  {	  
     coords.push(pointer) 
+    console.log(posX +' , ' + posY)
+  } 
 }
 	  
 //get the best bounding box by trimming around the trimming   
@@ -195,6 +199,8 @@ var canvas;
 var symbols = [{}];
 var canvas; 
 var coords = [] ;
+var mousePressed = false; 
+	  
   </script>
   <style>
 .table tbody tr td{
