@@ -84,17 +84,19 @@ function getMinBox(){
 function getFrame()
 {
     const ctx = canvas.getContext("2d");
-
-    //get the minimum bounding box
-    const mbb = getMinBox()
-    imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x - mbb.min.x, mbb.max.y - mbb.min.y);
-    //get the predictions, top 5 
-    const pred = model.predict(preprocess(imgData)).dataSync()
-    const indices = findIndicesOfMax(pred, 5)
-    const probs  = findTopValues(pred, 5)
-    const symbols = getSymbols(indices)
-    //set the table 
-    setTable(symbols, probs)
+    //make sure we have at least two recorded coordinates 
+    if (coords.length >= 2){
+	//get the minimum bounding box
+	const mbb = getMinBox()
+	imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x - mbb.min.x, mbb.max.y - mbb.min.y);
+	//get the predictions, top 5 
+	const pred = model.predict(preprocess(imgData)).dataSync()
+	const indices = findIndicesOfMax(pred, 5)
+	const probs  = findTopValues(pred, 5)
+	const symbols = getSymbols(indices)
+	//set the table 
+	setTable(symbols, probs)
+    }
    
 }
 //get the latex symbols by indices 
