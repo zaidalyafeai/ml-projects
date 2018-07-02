@@ -27,9 +27,12 @@ function setTable(top5, probs)
    for (var i = 0; i < top5.length; i++) { 
 	   
     let sym = document. getElementById('sym'+(i+1))
+    let prob = document. getElementById('prob'+(i+1))
     sym.innerHTML = top5[i]
-    sym.style.fontSize = "20px";      
+    prob.innerHTML = prob[i]
     } 
+    createPie(".pieID.legend", ".pieID.pie");
+
 }
 	  
  //prepare the drawing canvas 
@@ -179,7 +182,6 @@ async function loadModel()
     model.predict(tf.zeros([1,28,28,1]))
     allowDrawing()
     await loadDict()
-    createPie(".pieID.legend", ".pieID.pie");
 }
 	  
 //allow drawing on canvas 	  
