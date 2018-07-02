@@ -32,7 +32,6 @@ function setTable(top5, probs)
 	  
  //prepare the drawing canvas 
 $(function () {
-    coords = [] 
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode= 0;
@@ -50,7 +49,7 @@ function recordCoor(event)
   var posX = pointer.x;
   var posY = pointer.y;
   if(posX >=0 && posY >= 0)  
-    coodrs.push(pointer) 
+    coords.push(pointer) 
 }
 	  
 //get the best bounding box by trimming around the trimming   
@@ -60,8 +59,8 @@ function getMinBox(){
    let maxX = 300
    let maxY = 300; 
 	
-   var coorX = coodrs.map(function(p) {return p.x});
-   var coorY = coodrs.map(function(p) {return p.y});
+   var coorX = coords.map(function(p) {return p.x});
+   var coorY = coords.map(function(p) {return p.y});
 
    var min_coords = {
     x : Math.min.apply(null, coorX),
@@ -194,7 +193,7 @@ var model;
 var canvas;
 var symbols = [{}];
 var canvas; 
-var coodrs;
+var coords = [] ;
   </script>
   <style>
 .table tbody tr td{
