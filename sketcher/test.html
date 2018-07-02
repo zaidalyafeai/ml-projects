@@ -93,7 +93,7 @@ function getFrame()
 	//get the minimum bounding box
 	const mbb = getMinBox()
 	imgData = ctx.getImageData(0, 0, 300, 300);
-	    alert(mbb.min.x,' ',mbb.min.y,' ',mbb.max.x,' ',mbb.max.y)
+	   // alert(mbb.min.x,' ',mbb.min.y,' ',mbb.max.x,' ',mbb.max.y)
 	//get the predictions, top 5 
 	const pred = model.predict(preprocess(imgData)).dataSync()
 	const indices = findIndicesOfMax(pred, 5)
