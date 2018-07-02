@@ -6,17 +6,6 @@
   }
 }
 
-body {
-  font-family: "Open Sans", Arial;
-  background: #EEE;
-}
-main {
-  width: 400px;
-  margin: 30px auto;
-}
-section {
-  margin-top: 30px;
-}
 .pieID {
   display: inline-block;
   vertical-align: top;
