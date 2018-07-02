@@ -24,14 +24,13 @@ src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-M
 //set the table with predictions 	  
 function setTable(top5, probs)
    { 
-   for (var i = 0; i < top5.length; i++) { 
-	   
+   for (var i = 0; i < top5.length; i++) {    
     let sym = document.getElementById('sym'+(i+1))
     let prob = document.getElementById('prob'+(i+1))
-    //sym.innerHTML = top5[i]
-    //prob.innerHTML = prob[i]
+    sym.innerHTML = top5[i]
+    prob.innerHTML = prob[i]
     } 
-    createPie(".pieID.legend", ".pieID.pie");
+    //createPie(".pieID.legend", ".pieID.pie");
 
 }
 	  
