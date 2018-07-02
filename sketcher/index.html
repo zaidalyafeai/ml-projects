@@ -32,6 +32,7 @@ function setTable(top5, probs)
 	  
  //prepare the drawing canvas 
 $(function () {
+    coords = [] 
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode= 0;
@@ -193,7 +194,7 @@ var model;
 var canvas;
 var symbols = [{}];
 var canvas; 
-var coodrs = [];
+var coodrs;
   </script>
   <style>
 .table tbody tr td{
