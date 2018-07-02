@@ -108,7 +108,19 @@ async function loadDict()
   url: 'model2/class_names.txt',
   dataType: 'text',}).done(success);
 }
-
+	  
+//load the class names 
+function success(data)
+{
+    lst = data.split(/\n/)
+    symbols = []
+    for(var i = 0 ; i < lst.length -1  ; i++)
+    {
+        let symbol = lst[i]
+        symbols[i] = symbol
+    }
+}
+	  
 //get indices of the top probs
 function findIndicesOfMax(inp, count) {
     var outp = [];
@@ -131,20 +143,7 @@ function findTopValues(inp, count){
         outp[i] = inp[indices[i]]
     return outp
 }
-	  
-//load the symbols table 
-function success(data)
-{
-    let lst = data.split(/\r?\n|\r/)
-    for(var i = 1 ; i < lst.length -1 ; i++)
-    {
-        let row = lst[i].split(',') 
-        symbols[i-1] = {r:row[0], s:row[1]}
-    }
-    
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub,this.formula]);
-}
-
+	 
 //preprocess the data 
 function preprocess(imgData)
 {
