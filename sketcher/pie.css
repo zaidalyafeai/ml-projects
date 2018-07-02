@@ -67,7 +67,7 @@
               2px 2px 0 #BBB;
 }
 .legend li {
-  width: 110px;
+  width: 150px;
   height: 1.25em;
   margin-bottom: 0.7em;
   padding-left: 0.5em;
@@ -78,13 +78,4 @@
 }
 .legend span {
   float: right;
-}
-footer {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  font-size: 13px;
-  background: #DDD;
-  padding: 5px 10px;
-  margin: 5px;
 }
