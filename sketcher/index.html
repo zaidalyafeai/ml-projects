@@ -179,6 +179,7 @@ async function loadModel()
     model.predict(tf.zeros([1,28,28,1]))
     allowDrawing()
     await loadDict()
+    createPie(".pieID.legend", ".pieID.pie");
 }
 	  
 //allow drawing on canvas 	  
@@ -196,7 +197,7 @@ function erase()
     coords = [] ;
 }
 	  
-//loadModel()
+loadModel()
 	  
 var model;
 var canvas;
@@ -279,30 +280,30 @@ but I focused on making the model light with around 1 million parameters. The ta
     </div>   
 </div>
   <div class="col">
-    <section style="margin-top:50px">
+    <section style="margin-top:100px">
     <div class="pieID pie">
       
     </div>
     <ul class="pieID legend">
       <li>
-        <em>Humans</em>
-        <span>718</span>
+        <em id = "sym1">Humans</em>
+        <span id = "prob1" >718</span>
       </li>
       <li>
-        <em>Dogs</em>
-        <span>531</span>
+        <em id = "sym2">Dogs</em>
+        <span id = "prob2">531</span>
       </li>
       <li>
-        <em>Cats</em>
-        <span>868</span>
+        <em id = "sym3">Cats</em>
+        <span id = "prob3">868</span>
       </li>
       <li>
-        <em>Slugs</em>
-        <span>344</span>
+        <em id = "sym4">Slugs</em>
+        <span id = "prob4">344</span>
       </li>
       <li>
-        <em>Aliens</em>
-        <span>1145</span>
+        <em id = "sym5">Aliens</em>
+        <span id = "prob5">1145</span>
       </li>
     </ul>
   </section>
