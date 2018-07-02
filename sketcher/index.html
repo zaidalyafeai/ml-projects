@@ -48,6 +48,7 @@ function recordCoor(event)
   var pointer = canvas.getPointer(event.e);
   var posX = pointer.x;
   var posY = pointer.y;
+  console.log(posX+' '+posY)	
   coodrs.push(pointer) 
 }
 	  
@@ -82,7 +83,6 @@ function getFrame()
 
     //get the minimum bounding box
     const mbb = getMinBox()
-    console.log(mbb)
     imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x - mbb.min.x, mbb.max.y - mbb.min.y);
     //get the predictions, top 5 
     const pred = model.predict(preprocess(imgData)).dataSync()
@@ -150,7 +150,6 @@ function preprocess(imgData)
 {
 return tf.tidy(()=>{
     let tensor = tf.fromPixels(imgData)
-    console.log(tensor.shape)
     resized = tf.image.resizeBilinear(tensor, [28, 28]).toFloat()
     const sliced   = resized.slice([0, 0, 1], [28, 28, 1])
     const offset = tf.scalar(255.0);
