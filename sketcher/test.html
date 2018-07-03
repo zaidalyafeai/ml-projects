@@ -92,7 +92,7 @@ function getFrame()
     if (coords.length >= 2){
 	//get the minimum bounding box
 	const mbb = getMinBox()
-	imgData = ctx.getImageData(0, 0, 300, 300);
+	imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x-mbb.min.x, mbb.max.y-mbb.min.y);
 	
 	//get the predictions, top 5 
 	const pred = model.predict(preprocess(imgData)).dataSync()
@@ -169,7 +169,7 @@ return tf.tidy(()=>{
     const normalized = tf.scalar(1.0).sub(sliced.div(offset));
 	const data = normalized.dataSync()
     txt = ''
-	for(var i = 0 ; i < 100 ; i++ )
+	for(var i = 0 ; i < data.length ; i++ )
 	   txt +=  data[i]+' '
 	document.getElementById('txt').innerHTML = txt
     //We add a dimension to get a batch shape 
