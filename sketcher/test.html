@@ -87,12 +87,12 @@ function getMinBox(){
 //get the current frame of the canvas 	  	  
 function getFrame()
 {
-    const ctx = canvas.getContext("2d");
     //make sure we have at least two recorded coordinates 
     if (coords.length >= 2){
 	//get the minimum bounding box
 	const mbb = getMinBox()
-	imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x-mbb.min.x, mbb.max.y-mbb.min.y);
+	const dpi = window.devicePixelRatio
+	imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi, (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
 	//get the predictions, top 5 
 	const pred = model.predict(preprocess(imgData)).dataSync()
 	const indices = findIndicesOfMax(pred, 5)
