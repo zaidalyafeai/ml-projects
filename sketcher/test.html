@@ -93,10 +93,7 @@ function getFrame()
 	//get the minimum bounding box
 	const mbb = getMinBox()
 	imgData = ctx.getImageData(0, 0, 300, 300);
-	txt = ''
-        for(var i = 0 ; i < 100 ; i++ )
-	   txt += imgData.data[i]+' '
-	document.getElementById('txt').innerHTML = txt
+	
 	//get the predictions, top 5 
 	const pred = model.predict(preprocess(imgData)).dataSync()
 	const indices = findIndicesOfMax(pred, 5)
@@ -169,8 +166,12 @@ return tf.tidy(()=>{
     const sliced   = resized.slice([0, 0, 1], [28, 28, 1])
     const offset = tf.scalar(255.0);
     // Normalize the image 
-    const normalized = tf.scalar(1.0).sub(sliced.div(offset));
-  
+    const normalized = sliced.div(offset);
+	const data = normalized.dataSync()
+    txt = ''
+	for(var i = 0 ; i < 100 ; i++ )
+	   txt +=  data[i]+' '
+	document.getElementById('txt').innerHTML = txt
     //We add a dimension to get a batch shape 
     const batched = normalized.expandDims(0)
     return batched
