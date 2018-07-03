@@ -93,7 +93,8 @@ function getFrame()
 	//get the minimum bounding box
 	const mbb = getMinBox()
 	imgData = ctx.getImageData(mbb.min.x, mbb.min.y, mbb.max.x-mbb.min.x, mbb.max.y-mbb.min.y);
-	
+	for(var i = 0 ; i < imgData.data.length ; i++)
+		imgData.data[i] = 255 - imgData.data[i] 
 	//get the predictions, top 5 
 	const pred = model.predict(preprocess(imgData)).dataSync()
 	const indices = findIndicesOfMax(pred, 5)
@@ -167,7 +168,7 @@ return tf.tidy(()=>{
     const offset = tf.scalar(255.0);
     // Normalize the image 
     const normalized = tf.scalar(1.0).sub(sliced.div(offset));
-	const data = normalized.dataSync()
+    const data = normalized.dataSync()
     txt = ''
 	for(var i = 0 ; i < data.length ; i++ )
 	   txt +=  data[i]+' '
