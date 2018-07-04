@@ -1,4 +1,4 @@
-# Browser-Sentiment-Classification
+# Sketcher 
 
 ## Project Description 
 
