@@ -239,3 +239,6 @@ function erase() {
     canvas.backgroundColor = '#ffffff';
     coords = [];
 }
+
+//start the script 
+start();
