@@ -139,8 +139,7 @@ function getClassNames(indices) {
 /*
 load the class names 
 */
-async
-function loadDict() {
+async function loadDict() {
     await $.ajax({
         url: 'model2/class_names.txt',
         dataType: 'text',
@@ -203,8 +202,7 @@ function preprocess(imgData) {
 /*
 load the model
 */
-async
-function start() {
+async function start() {
     //load the model 
     model = await tf.loadModel('model2/model.json')
     
