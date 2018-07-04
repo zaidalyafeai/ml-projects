@@ -102,6 +102,7 @@ function getImageData() {
                                                       (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
         return imgData
     }
+
 /*
 get the prediction 
 */
@@ -146,7 +147,9 @@ async function loadDict() {
     }).done(success);
 }
 
-//load the class names 
+/*
+load the class names
+*/
 function success(data) {
     const lst = data.split(/\n/)
     for (var i = 0; i < lst.length - 1; i++) {
@@ -155,7 +158,9 @@ function success(data) {
     }
 }
 
-//get indices of the top probs
+/*
+get indices of the top probs
+*/
 function findIndicesOfMax(inp, count) {
     var outp = [];
     for (var i = 0; i < inp.length; i++) {
@@ -170,7 +175,9 @@ function findIndicesOfMax(inp, count) {
     return outp;
 }
 
-//find the top 5 predictions 
+/*
+find the top 5 predictions
+*/
 function findTopValues(inp, count) {
     var outp = [];
     let indices = findIndicesOfMax(inp, count)
@@ -180,7 +187,9 @@ function findTopValues(inp, count) {
     return outp
 }
 
-//preprocess the data 
+/*
+preprocess the data
+*/
 function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
