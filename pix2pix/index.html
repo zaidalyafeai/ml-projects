@@ -22,7 +22,7 @@
 <script>
   async function loadModel()
   {
-    var model = await tf.loadModel('model/model.json')
+    var model = await tf.loadModel('model2/model.json')
     model.predict(tf.zeros([255, 255, 3]))
   }
   loadModel()
