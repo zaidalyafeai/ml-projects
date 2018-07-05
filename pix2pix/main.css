@@ -7,7 +7,7 @@ table{
     -webkit-appearance: none;
     width: 230px;
     height: 1px;
-    border-radius: 3px;
+    border-radius: 1px;
     background: #d3d3d3;
     outline: none;
     opacity: 0.9;
