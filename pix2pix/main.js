@@ -107,7 +107,7 @@ function getFrame() {
         const imgData = getImageData();
 
         //get the prediction 
-        const gImg = model.predict(preprocess(imgData)).squeez();
+        const gImg = model.predict(preprocess(imgData)).squeeze();
         
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
