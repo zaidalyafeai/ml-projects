@@ -11,14 +11,14 @@ var mousePressed = false;
 /*
 color pallette click events
 */
-$(document).on("click","td", function(e){
-    //get the color 
-    const color = e.target.style.backgroundColor;
-    //set the color 
-    alert(color)
-    canvas.freeDrawingBrush.color = color;
-});
-
+$(document).ready(function(){  
+    $(document).on("click","td", function(e){
+        //get the color 
+        const color = e.target.style.backgroundColor;
+        //set the color 
+        canvas.freeDrawingBrush.color = color;
+    });
+}) 
 /*
 prepare the drawing canvas 
 */
