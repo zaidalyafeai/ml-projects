@@ -137,10 +137,13 @@ load the model
 */
 async function start() {
     //load the model 
-    //model = await tf.loadModel('model2/model.json')
+    model = await tf.loadModel('model2/model.json')
+    
+    //status 
+    document.getElementById('status').innerHTML = 'Model Loaded';
     
     //warm up 
-    //model.predict(tf.zeros([1, 28, 28, 1]))
+    model.predict(tf.zeros([1, 28, 28, 1]))
     
     //allow drawing on the canvas 
     allowDrawing()
@@ -150,8 +153,7 @@ async function start() {
 allow drawing on canvas
 */
 function allowDrawing() {
-    //status 
-    document.getElementById('status').innerHTML = 'Model Loaded';
+    //allow draing 
     canvas.isDrawingMode = 1;
     
     //alow UI 
