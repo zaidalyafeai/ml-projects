@@ -12,7 +12,10 @@ var mousePressed = false;
 color pallette click events
 */
 $(document).on("click","td", function(e){
-    alert(e.target.innerHTML);
+    //get the color 
+    const color = e.target.style.backgroundColor;
+    //set the color 
+    canvas.freeDrawingBrush.color = color;
 });
 
 /*
