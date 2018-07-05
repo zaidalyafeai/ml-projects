@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -18,15 +17,15 @@
 
 <!-- TensorFlow.js script -->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+	
+<!-- canvas script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.3/fabric.js"></script>
+	
+<!-- main script -->
+<script src = "main.js" > </script>
 
-<script>
-  async function loadModel()
-  {
-    var model = await tf.loadModel('model2/model.json')
-    model.predict(tf.zeros([255, 255, 3]))
-  }
-  loadModel()
-</script>
+<!-- main css -->
+<link rel = "stylesheet" href="main.css" > 
 	
 </head>
 <body>
@@ -50,12 +49,9 @@ but I focused on making the model light with around 1 million parameters. The ta
 <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
 <div class="btn-group" style = 'margin-top:40px; '>
 <input type="range" min="5" max="20" value="10" class="slider" id="myRange" style ='margin-top:20px;'>
-<button type="button" class="btn btn-outline-primary"  style ='margin-left:10px;' disabled>Clear</button>
-    </div>   
+<button type="button" class="btn btn-outline-primary" onclick ='erase()' style ='margin-left:10px;' disabled>Clear</button>
+</div>   
 </div>
-  <div class="col">
-   
-  </div>
 </div>  
 </body>
 </html>
