@@ -1,0 +1,42 @@
+$one: #6b717e;
+$two: #efaac4;
+$three: #ffc4d1;
+$four: #ffe8e1;
+$five: #d4dccd;
+
+h1 {
+  font-family: 'Raleway', sans-serif;
+  text-align: center;
+}
+
+table{
+    margin: auto;
+    height: 200px;
+    width: 500px;
+
+  .charm{
+    width: 3px;
+    }
+
+    .one{
+        background-color: $one;
+
+    }
+
+    .two{
+      background-color: $two;
+    }
+
+    .trois{
+      background-color: $three;
+    }
+
+    .quatre{
+      background-color: $four;
+    }
+
+    .vijf{
+      background-color: $five;
+    }
+  
+}
