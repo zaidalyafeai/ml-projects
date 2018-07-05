@@ -174,4 +174,6 @@ function erase() {
 }
 
 //start the script 
-start();
+ $(window).load(function(){
+    start();
+ });
