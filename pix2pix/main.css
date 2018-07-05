@@ -1,27 +1,24 @@
-table{
-    margin: auto;
-    height: 200px;
-    width: 500px;
+
   
-    .sky{
-        background-color: #6495ED;
+.sky{
+    background-color: #6495ED;
 
-    }
-
-    .bulidling{
-      background-color: #A9A9A9;
-    }
-
-    .car{
-      background-color: #0000FF;
-    }
-
-    .road{
-      background-color: #800080;
-    }
-
-    .tree{
-      background-color: #32CD32;
-    }
-  
 }
+
+.bulidling{
+  background-color: #A9A9A9;
+}
+
+.car{
+  background-color: #0000FF;
+}
+
+.road{
+  background-color: #800080;
+}
+
+.tree{
+  background-color: #32CD32;
+}
+
+
