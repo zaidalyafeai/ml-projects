@@ -124,7 +124,7 @@ function preprocess(imgData) {
         let tensor = tf.fromPixels(imgData)
         
         //resize 
-        const resized = tf.image.resizeBilinear(tensor, [255, 255]).toFloat()
+        const resized = tf.image.resizeBilinear(tensor, [256, 256]).toFloat()
         
         //normalize 
         const offset = tf.scalar(127.5);
@@ -147,7 +147,7 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
     
     //warm up 
-    model.predict(tf.zeros([1, 255, 255, 3]))
+    model.predict(tf.zeros([1, 256, 256, 3]))
     
     //allow drawing on the canvas 
     allowDrawing()
