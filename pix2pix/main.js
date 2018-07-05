@@ -20,7 +20,7 @@ $(document).on("click","td", function(e){
 /*
 prepare the drawing canvas 
 */
-$(function() {
+function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode = 1;
@@ -38,7 +38,7 @@ $(function() {
     canvas.on('mouse:move', function(e) {
         recordCoor(e)
     });
-})
+}
 
 /*
 record the current drawing coordinates
@@ -175,5 +175,6 @@ function erase() {
 
 //start the script 
  $(window).on('load', function(){
+    prepareCanvas();
     start();
  });
