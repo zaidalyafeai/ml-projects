@@ -42,18 +42,17 @@ but I focused on making the model light with around 1 million parameters. The ta
 
 <div class="row">
   <div class="col" style ='margin-left:100px;'>
-<h4 id ='status' >Loading Model... </h4>	  
+<h4 id ='status' >Loading Model... </h4>
+<table>
+      
+       <tr> <td class="sky" style="background-color:#87CEFA;"></td></tr>
+	<tr><td class="building" style = "background-color: #989ba0;"></td></tr>
+	<tr><td class="car" style ="background-color: #0000FF;"></td></tr>
+	<tr><td class="road" style ="background-color: #800080;"></td></tr>
+	<tr><td class="tree" style ="background-color: #32CD32;" ></td></tr>
+    </table> 
 <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
 <div class="btn-group" style = 'margin-top:40px; '>
-<table>
-      <tr>
-        <td class="sky" style="background-color:#87CEFA;"></td>
-        <td class="building" style = "background-color: #989ba0;"></td>
-        <td class="car" style ="background-color: #0000FF;"></td>
-        <td class="road" style ="background-color: #800080;"></td>
-        <td class="tree" style ="background-color: #32CD32;" ></td>
-      </tr>
-    </table> 
 <input type="range" min="5" max="20" value="10" class="slider" id="myRange" style ='margin-top:20px;'>
 <button type="button" class="btn btn-outline-primary" onclick ='erase()' style ='margin-left:10px;' disabled>Clear</button>
 </div>   
