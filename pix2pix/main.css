@@ -1,42 +1,27 @@
-$one: #6b717e;
-$two: #efaac4;
-$three: #ffc4d1;
-$four: #ffe8e1;
-$five: #d4dccd;
-
-h1 {
-  font-family: 'Raleway', sans-serif;
-  text-align: center;
-}
-
 table{
     margin: auto;
     height: 200px;
     width: 500px;
-
-  .charm{
-    width: 3px;
-    }
-
-    .one{
-        background-color: $one;
+  
+    .sky{
+        background-color: blue;
 
     }
 
-    .two{
-      background-color: $two;
+    .bulidling{
+      background-color: gray;
     }
 
-    .trois{
-      background-color: $three;
+    .car{
+      background-color: blue;
     }
 
-    .quatre{
-      background-color: $four;
+    .road{
+      background-color: gray;
     }
 
-    .vijf{
-      background-color: $five;
+    .tree{
+      background-color: brown;
     }
   
 }
