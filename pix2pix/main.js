@@ -144,16 +144,21 @@ async function start() {
     //model.predict(tf.zeros([1, 28, 28, 1]))
     
     //allow drawing on the canvas 
-    //allowDrawing()
+    allowDrawing()
 }
 
 /*
 allow drawing on canvas
 */
 function allowDrawing() {
-    canvas.isDrawingMode = 1;
+    //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
+    canvas.isDrawingMode = 1;
+    
+    //alow UI 
     $('button').prop('disabled', false);
+    
+    //setup slider 
     var slider = document.getElementById('myRange');
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
