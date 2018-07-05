@@ -97,7 +97,7 @@ function getFrame() {
         const imgData = getImageData()
 
         //get the prediction 
-        const pred = model.predict(preprocess(imgData)).dataSync()
+        //const pred = model.predict(preprocess(imgData)).dataSync()
     }
 
 }
