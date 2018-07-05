@@ -1,4 +1,7 @@
-
+table{
+  width: 150px;
+  height: 50px;
+}
   
 .sky{
     background-color: #6495ED;
