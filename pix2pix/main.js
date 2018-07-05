@@ -9,6 +9,13 @@ var coords = [];
 var mousePressed = false;
 
 /*
+color pallette click events
+*/
+$(document).on("click","tr.rows td", function(e){
+    alert(e.target.innerHTML);
+});
+
+/*
 prepare the drawing canvas 
 */
 $(function() {
