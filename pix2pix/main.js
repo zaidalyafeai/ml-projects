@@ -11,7 +11,7 @@ var mousePressed = false;
 /*
 color pallette click events
 */
-$(document).on("click","tr.rows td", function(e){
+$(document).on("click","td", function(e){
     alert(e.target.innerHTML);
 });
 
