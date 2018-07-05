@@ -4,24 +4,24 @@ table{
     width: 500px;
   
     .sky{
-        background-color: blue;
+        background-color: #6495ED;
 
     }
 
     .bulidling{
-      background-color: gray;
+      background-color: #A9A9A9;
     }
 
     .car{
-      background-color: blue;
+      background-color: #0000FF;
     }
 
     .road{
-      background-color: gray;
+      background-color: #800080;
     }
 
     .tree{
-      background-color: brown;
+      background-color: #32CD32;
     }
   
 }
