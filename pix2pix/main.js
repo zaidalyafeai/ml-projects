@@ -143,7 +143,7 @@ async function start() {
     //model.predict(tf.zeros([1, 28, 28, 1]))
     
     //allow drawing on the canvas 
-    //allowDrawing()
+    allowDrawing()
 }
 
 /*
