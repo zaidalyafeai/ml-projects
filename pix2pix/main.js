@@ -107,11 +107,11 @@ function getFrame() {
         const imgData = getImageData();
 
         //get the prediction 
-        const gImg = model.predict(preprocess(imgData)).squeeze();
+        const gImg = model.predict(preprocess(imgData))
         
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
-        tf.toPixels(gImg, gCanvas)
+        tf.toPixels(postprocess(gImg), gCanvas)
     }
 
 }
@@ -135,6 +135,14 @@ function preprocess(imgData) {
         const batched = normalized.expandDims(0)
         return batched
     })
+}
+
+/*
+post process 
+*/
+function postprocess(tensor){
+       const scale = tf.scalar(0.5);
+       return tensor.squeeze().mul(scale).add(scale)
 }
 
 /*
