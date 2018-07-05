@@ -15,6 +15,7 @@ $(document).on("click","td", function(e){
     //get the color 
     const color = e.target.style.backgroundColor;
     //set the color 
+    alert(color)
     canvas.freeDrawingBrush.color = color;
 });
 
