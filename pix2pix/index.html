@@ -23,7 +23,7 @@
   async function loadModel()
   {
     var model = await tf.loadModel('model/model.json')
-    model.predict(tf.zeros([255, 255, 3]))
+    //model.predict(tf.zeros([255, 255, 3]))
   }
   loadModel()
 </script>
@@ -58,5 +58,4 @@ but I focused on making the model light with around 1 million parameters. The ta
   </div>
 </div>  
 </body>
-<script src="pie.js"></script>
 </html>
