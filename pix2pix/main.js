@@ -106,7 +106,11 @@ function getFrame() {
         const imgData = getImageData()
 
         //get the prediction 
-        //const pred = model.predict(preprocess(imgData)).dataSync()
+        const gImg = model.predict(preprocess(imgData))
+        
+        //draw on canvas 
+        const gCanvas = document.getElementById('gCanvas');
+        tf.toPixels(gImg, gCanvas)
     }
 
 }
@@ -117,14 +121,14 @@ preprocess the data
 function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
-        let tensor = tf.fromPixels(imgData, numChannels = 1)
+        let tensor = tf.fromPixels(imgData)
         
         //resize 
-        const resized = tf.image.resizeBilinear(tensor, [28, 28]).toFloat()
+        const resized = tf.image.resizeBilinear(tensor, [255, 255]).toFloat()
         
         //normalize 
-        const offset = tf.scalar(255.0);
-        const normalized = tf.scalar(1.0).sub(resized.div(offset));
+        const offset = tf.scalar(127.5);
+        const normalized = resized.div(offset).sub(tf.scalar(1.0));
 
         //We add a dimension to get a batch shape 
         const batched = normalized.expandDims(0)
@@ -143,7 +147,7 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
     
     //warm up 
-    model.predict(tf.zeros([1, 28, 28, 1]))
+    model.predict(tf.zeros([1, 255, 255, 3]))
     
     //allow drawing on the canvas 
     allowDrawing()
