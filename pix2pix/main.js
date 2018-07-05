@@ -102,11 +102,12 @@ get the prediction
 function getFrame() {
     //make sure we have at least two recorded coordinates 
     if (coords.length >= 2) {
+        
         //get the image data from the canvas 
-        const imgData = getImageData()
+        const imgData = getImageData();
 
         //get the prediction 
-        const gImg = model.predict(preprocess(imgData))
+        const gImg = model.predict(preprocess(imgData)).squeez();
         
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
