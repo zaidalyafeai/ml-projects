@@ -150,7 +150,7 @@ load the model
 */
 async function start() {
     //load the model 
-    model = await tf.loadModel('model2/model.json')
+    model = await tf.loadModel('model3/model.json')
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
