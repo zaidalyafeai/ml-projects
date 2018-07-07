@@ -197,19 +197,13 @@ function erase() {
 
 //start the script 
  $(window).on('load', function(){
-     var c= document.getElementById("canvas");
-    var ctx= c.getContext("2d");
-    var sketch = new Image();
-     
-    sketch.src = "sketch.png";
-    
-    sketch.width = 600;
-        sketch.height = 600;
-     
-    //prepareCanvas();
-    sketch.onload = function() { 
-        
-        ctx.drawImage(sketch,0,0); 
-        alert(sketch.width)
-        start(); }
+     var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    var img = new Image;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0,0,c.width,c.height);
+    img.src = "sketch.png"
+    img.onload = function () {
+        ctx.drawImage(img, (c.width / 2) - (img.width / 2), 0, img.width, c.height);
+}
  });
