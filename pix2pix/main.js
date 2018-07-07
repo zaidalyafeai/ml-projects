@@ -9,15 +9,6 @@ var coords = [];
 var mousePressed = false;
 
 /*
-color pallette click events
-*/
-$(document).on("click","td", function(e){
-    //get the color 
-    const color = e.target.style.backgroundColor;
-    //set the color 
-    canvas.freeDrawingBrush.color = color;
-});
-/*
 prepare the drawing canvas 
 */
 function prepareCanvas() {
@@ -174,7 +165,7 @@ async function start() {
     model.predict(tf.zeros([1, 256, 256, 3]))
     
     //allow drawing on the canvas 
-    //allowDrawing()
+    allowDrawing()
 }
 
 /*
@@ -182,7 +173,7 @@ allow drawing on canvas
 */
 function allowDrawing() {
     //allow draing 
-    canvas.isDrawingMode = 1;
+    //canvas.isDrawingMode = 1;
     
     //alow UI 
     $('button').prop('disabled', false);
