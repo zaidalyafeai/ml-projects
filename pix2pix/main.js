@@ -123,7 +123,7 @@ function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
         let tensor = tf.fromPixels(imgData).toFloat()
-        tensor = tf.scalar(255).sub(tensor)
+        //tensor = tf.scalar(255).sub(tensor)
         //resize 
         let resized = tf.image.resizeBilinear(tensor, [256, 256])
                 
@@ -151,7 +151,7 @@ load the model
 */
 async function start() {
     //load the model 
-    model = await tf.loadModel('model4/model.json')
+    model = await tf.loadModel('model5/model.json')
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
