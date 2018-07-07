@@ -116,6 +116,20 @@ function getFrame() {
 
 }
 
+function getFrame2()
+{
+    //get the image data from the canvas 
+        var c= document.getElementById("canvas");
+        var ctx= c.getContext("2d");
+        const imgData = ctx.getImageData(0, 0, 300, 300);
+
+        //get the prediction 
+        const gImg = model.predict(preprocess(imgData))
+        
+        //draw on canvas 
+        const gCanvas = document.getElementById('gCanvas');
+        tf.toPixels(postprocess(gImg), gCanvas)   
+}
 /*
 preprocess the data
 */
@@ -160,7 +174,7 @@ async function start() {
     model.predict(tf.zeros([1, 256, 256, 3]))
     
     //allow drawing on the canvas 
-    allowDrawing()
+    //allowDrawing()
 }
 
 /*
@@ -184,18 +198,19 @@ function allowDrawing() {
 clear the canvs 
 */
 function erase() {
-    canvas.clear();
-    canvas.backgroundColor = '#ffffff';
-    coords = [];
+    getFrame2();
+    //canvas.clear();
+    //canvas.backgroundColor = '#ffffff';
+    //coords = [];
 }
 
 //start the script 
  $(window).on('load', function(){
     //prepareCanvas();
-    //start();
-    var c= document.getElementById("gCanvas");
+    start();
+    var c= document.getElementById("canvas");
     var ctx= c.getContext("2d");
     var sketch = new Image();
-    sketch.src = "sticky.png";
+    sketch.src = "sketch.png";
     ctx.drawImage(sketch,0,0);
  });
