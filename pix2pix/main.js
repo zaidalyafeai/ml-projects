@@ -25,7 +25,7 @@ function prepareCanvas() {
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode = 1;
     canvas.freeDrawingBrush.color = "black";
-    canvas.freeDrawingBrush.width = 5;
+    canvas.freeDrawingBrush.width = 1;
     canvas.renderAll();
     //setup listeners 
     canvas.on('mouse:up', function(e) {
