@@ -210,5 +210,6 @@ function erase() {
     sketch.onload = function() { 
         
         ctx.drawImage(sketch,0,0); 
+        alert(img.width)
         start(); }
  });
