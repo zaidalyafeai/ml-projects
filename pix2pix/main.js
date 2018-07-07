@@ -15,7 +15,7 @@ function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode = 1;
-    canvas.freeDrawingBrush.color = "black";
+    canvas.freeDrawingBrush.color = "#706969";
     canvas.freeDrawingBrush.width = 1;
     canvas.renderAll();
     //setup listeners 
