@@ -203,7 +203,7 @@ function erase() {
     sketch.src = "sketch.png";
     sketch.width = 300;
     sketch.height = 300;
-    ctx.drawImage(sketch,0,0);
+    
     //prepareCanvas();
-    start(); 
+    sketch.onload = function() { ctx.drawImage(sketch,0,0); start(); }
  });
