@@ -125,7 +125,7 @@ function preprocess(imgData) {
         let tensor = tf.fromPixels(imgData)
         
         //resize 
-        const resized = tf.image.resizeBilinear(tensor, [256, 256]).toFloat()
+        let resized = tf.image.resizeBilinear(tensor, [256, 256]).toFloat()
         
         resized = tf.scalar(255.0).sub(resized)
         
