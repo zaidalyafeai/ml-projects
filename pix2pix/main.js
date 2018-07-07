@@ -197,13 +197,13 @@ function erase() {
 
 //start the script 
  $(window).on('load', function(){
-    //prepareCanvas();
-    start();
-    var c= document.getElementById("canvas");
+     var c= document.getElementById("canvas");
     var ctx= c.getContext("2d");
     var sketch = new Image();
     sketch.src = "sketch.png";
     sketch.width = 300;
     sketch.height = 300;
     ctx.drawImage(sketch,0,0);
+    //prepareCanvas();
+    start(); 
  });
