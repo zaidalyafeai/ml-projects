@@ -200,8 +200,8 @@ function erase() {
      var c= document.getElementById("canvas");
     var ctx= c.getContext("2d");
     var sketch = new Image();
-     sketch.width = 300;
-        sketch.height = 300;
+     sketch.width = 600;
+        sketch.height = 600;
     sketch.src = "sketch.png";
     
     
