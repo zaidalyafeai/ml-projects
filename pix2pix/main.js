@@ -200,13 +200,14 @@ function erase() {
      var c= document.getElementById("canvas");
     var ctx= c.getContext("2d");
     var sketch = new Image();
+     sketch.width = 300;
+        sketch.height = 300;
     sketch.src = "sketch.png";
     
     
     //prepareCanvas();
     sketch.onload = function() { 
-        sketch.width = 300;
-        sketch.height = 300;
+        
         ctx.drawImage(sketch,0,0); 
         start(); }
  });
