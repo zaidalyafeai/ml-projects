@@ -124,6 +124,7 @@ function preprocess(imgData) {
         //convert to a tensor 
         let tensor = tf.fromPixels(imgData)
         
+        tensor = tf.scalar(255.0).sub(tensor)
         //resize 
         const resized = tf.image.resizeBilinear(tensor, [256, 256]).toFloat()
         
@@ -133,6 +134,7 @@ function preprocess(imgData) {
 
         //We add a dimension to get a batch shape 
         const batched = normalized.expandDims(0)
+        
         return batched
     })
 }
