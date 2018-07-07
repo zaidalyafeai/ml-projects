@@ -122,10 +122,10 @@ preprocess the data
 function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
-        let tensor = tf.fromPixels(imgData)
+        let tensor = tf.fromPixels(imgData).toFloat()
         tensor = tf.scalar(255).sub(tensor)
         //resize 
-        let resized = tf.image.resizeBilinear(tensor, [256, 256]).toFloat()
+        let resized = tf.image.resizeBilinear(tensor, [256, 256])
                 
         //normalize 
         const offset = tf.scalar(127.5);
