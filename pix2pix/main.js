@@ -193,8 +193,9 @@ function erase() {
  $(window).on('load', function(){
     //prepareCanvas();
     //start();
-    var c=document.getElementById("gCanvas");
-    var ctx=c.getContext("2d");
-    var img=document.getElementById("sketch");
-    ctx.drawImage(img,300,300);
+    var c= document.getElementById("gCanvas");
+    var ctx= c.getContext("2d");
+    var sketch = new Image();
+    sketch.src = "sticky.png";
+    ctx.drawImage(sketch,300,300);
  });
