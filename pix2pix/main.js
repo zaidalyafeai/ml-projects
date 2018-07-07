@@ -197,5 +197,5 @@ function erase() {
     var ctx= c.getContext("2d");
     var sketch = new Image();
     sketch.src = "sticky.png";
-    ctx.drawImage(sketch,300,300);
+    ctx.drawImage(sketch,0,0);
  });
