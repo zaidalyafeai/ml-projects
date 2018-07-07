@@ -203,5 +203,7 @@ function erase() {
     var ctx= c.getContext("2d");
     var sketch = new Image();
     sketch.src = "sketch.png";
+    sketch.width = 300;
+    sketch.height = 300;
     ctx.drawImage(sketch,0,0);
  });
