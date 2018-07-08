@@ -149,7 +149,7 @@ async function start() {
     
     //warm up 
     model.predict(tf.zeros([1, 256, 256, 3]))
-    
+    $('button').prop('disabled', false);
     //allow drawing on the canvas 
     //allowDrawing()
 }
