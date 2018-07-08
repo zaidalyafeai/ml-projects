@@ -192,6 +192,6 @@ function erase() {
     ctx.fillRect(0,0,c.width,c.height);
     img.src = "sketch.png"
     img.onload = function () {
-ctx.drawImage(img, (0, 0, c.width, c.height);
-              //start();
- });
+ctx.drawImage(img, 0, 0, c.width, c.height);
+              //start()
+    }});
