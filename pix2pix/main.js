@@ -151,7 +151,7 @@ async function start() {
     model.predict(tf.zeros([1, 256, 256, 3]))
     
     //allow drawing on the canvas 
-    allowDrawing()
+    //allowDrawing()
 }
 
 /*
@@ -187,8 +187,8 @@ function erase() {
     //prepareCanvas();
     
      
-     var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
+    canvas = document.getElementById("canvas");
+    var ctx = canvas.getContext("2d");
     var img = new Image;
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,c.width,c.height);
