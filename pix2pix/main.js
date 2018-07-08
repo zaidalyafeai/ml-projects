@@ -190,10 +190,8 @@ function erase() {
     canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     var img = new Image;
-    ctx.fillStyle = "#000";
-    ctx.fillRect(0,0,c.width,c.height);
     img.src = "sketch.png"
     img.onload = function () {
-ctx.drawImage(img, 0, 0, c.width, c.height);
+ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
               start()
     }});
