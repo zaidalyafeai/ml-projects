@@ -78,7 +78,7 @@ get the current image data
 */
 function getImageData() {
     //get the minimum bounding box around the drawing 
-    const mbb = getMinBox()
+   // const mbb = getMinBox()
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
@@ -92,7 +92,7 @@ get the prediction
 */
 function getFrame() {
     //make sure we have at least two recorded coordinates 
-    if (coords.length >= 2) {
+    //if (coords.length >= 2) {
         
         //get the image data from the canvas 
         const imgData = getImageData();
@@ -103,7 +103,7 @@ function getFrame() {
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
         tf.toPixels(postprocess(gImg), gCanvas)
-    }
+    //}
 
 }
 
@@ -178,6 +178,8 @@ function erase() {
     //canvas.clear();
     //canvas.backgroundColor = '#ffffff';
     //coords = [];
+    getFrame()
+
 }
 
 //start the script 
@@ -193,5 +195,5 @@ function erase() {
     img.src = "sketch.png"
     img.onload = function () {
 ctx.drawImage(img, 0, 0, c.width, c.height);
-              //start()
+              start()
     }});
