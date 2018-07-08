@@ -175,13 +175,23 @@ function allowDrawing() {
 clear the canvs 
 */
 function erase() {
-    canvas.clear();
-    canvas.backgroundColor = '#ffffff';
-    coords = [];
+    //canvas.clear();
+    //canvas.backgroundColor = '#ffffff';
+    //coords = [];
 }
 
 //start the script 
  $(window).on('load', function(){
-    prepareCanvas();
-    start();
+    //prepareCanvas();
+    
+     
+     var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    var img = new Image;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0,0,c.width,c.height);
+    img.src = "sketch.png"
+    img.onload = function () {
+ctx.drawImage(img, (0, 0, c.width, c.height);
+              //start();
  });
