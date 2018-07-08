@@ -78,12 +78,12 @@ get the current image data
 */
 function getImageData() {
     //get the minimum bounding box around the drawing 
-   // const mbb = getMinBox()
+    const mbb = getMinBox()
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
-    const imgData = canvas.contextContainer.getImageData(0 * dpi, 0 * dpi,
-                                                  300 * dpi, 300 * dpi);
+    const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
+                                                  (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
     return imgData
 }
 
@@ -92,7 +92,7 @@ get the prediction
 */
 function getFrame() {
     //make sure we have at least two recorded coordinates 
-    //if (coords.length >= 2) {
+    if (coords.length >= 2) {
         
         //get the image data from the canvas 
         const imgData = getImageData();
@@ -103,10 +103,24 @@ function getFrame() {
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
         tf.toPixels(postprocess(gImg), gCanvas)
-    //}
+    }
 
 }
 
+function getFrame2()
+{
+    //get the image data from the canvas 
+        var c= document.getElementById("canvas");
+        var ctx= c.getContext("2d");
+        const imgData = ctx.getImageData(0, 0, 300, 300);
+
+        //get the prediction 
+        const gImg = model.predict(preprocess(imgData))
+        
+        //draw on canvas 
+        const gCanvas = document.getElementById('gCanvas');
+        tf.toPixels(postprocess(gImg), gCanvas)   
+}
 /*
 preprocess the data
 */
@@ -149,9 +163,9 @@ async function start() {
     
     //warm up 
     model.predict(tf.zeros([1, 256, 256, 3]))
-    $('button').prop('disabled', false);
+    
     //allow drawing on the canvas 
-    //allowDrawing()
+    allowDrawing()
 }
 
 /*
@@ -159,7 +173,7 @@ allow drawing on canvas
 */
 function allowDrawing() {
     //allow draing 
-    canvas.isDrawingMode = 1;
+    //canvas.isDrawingMode = 1;
     
     //alow UI 
     $('button').prop('disabled', false);
@@ -175,23 +189,22 @@ function allowDrawing() {
 clear the canvs 
 */
 function erase() {
+    getFrame2();
     //canvas.clear();
     //canvas.backgroundColor = '#ffffff';
     //coords = [];
-    getFrame()
-
 }
 
 //start the script 
  $(window).on('load', function(){
-    //prepareCanvas();
-    
-     
-    canvas = document.getElementById("canvas");
-    var ctx = canvas.getContext("2d");
+     var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
     var img = new Image;
-    img.src = "sketch.png"
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0,0,c.width,c.height);
+    img.src = "sketch.jpg"
     img.onload = function () {
-ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-              start()
-    }});
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        start();
+}
+ });
