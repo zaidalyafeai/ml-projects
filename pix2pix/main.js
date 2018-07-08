@@ -15,7 +15,7 @@ function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode = 1;
-    canvas.freeDrawingBrush.color = "#706969";
+    canvas.freeDrawingBrush.color = "black";
     canvas.freeDrawingBrush.width = 1;
     canvas.renderAll();
     //setup listeners 
@@ -82,8 +82,8 @@ function getImageData() {
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
-    const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi, mbb.min.y * dpi,
-                                                  (mbb.max.x - mbb.min.x) * dpi, (mbb.max.y - mbb.min.y) * dpi);
+    const imgData = canvas.contextContainer.getImageData(0 * dpi, 0 * dpi,
+                                                  300 * dpi, 300 * dpi);
     return imgData
 }
 
