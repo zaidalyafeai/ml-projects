@@ -202,7 +202,7 @@ function erase() {
     var img = new Image;
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,c.width,c.height);
-    img.src = "sketch.jpg"
+    img.src = "sketch.png"
     img.onload = function () {
         ctx.drawImage(img, 0, 0, c.width, c.height);
         start();
