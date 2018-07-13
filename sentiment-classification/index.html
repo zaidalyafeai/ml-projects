@@ -61,11 +61,13 @@ function create_sequences(txt)
 
 async function init()
 {
+    document.getElementById('status').innerHTML = 'loading model'
     console.log('Start loading dicionary')
     await loadDict()
     console.log('Finish loading dicionary')
     console.log('Start loading model') 
     model = await tf.loadModel('model/model.json')
+    document.getElementById('status').innerHTML = 'model loaded'
     console.log('Finish loading model') 
 }
 
@@ -76,8 +78,11 @@ function classify()
     let input = tf.tensor(seq)
     input = input.expandDims(0)
     pred = model.predict(input)
-    console.log(pred.dataSync())
-    //document.getElementById('result').innerHTML = pred[0].dataSync
+    result = pred.dataSync()[0]
+    if (result > 0.5)
+     document.getElementById('result').innerHTML = 'positive'
+    else 
+     document.getElementById('result').innerHTML = 'negative'
  }
 var model ; 
 var word_index = undefined
@@ -85,7 +90,8 @@ init()
 
 </script>
  <body>
-  <p>Enter a movie review for instance 'That was a good movie' </p> <br>
+  <p id = "status"></p> <br>
+  <p>Enter a movie review for instance 'awesome/horrible movie' </p> <br>
   <input id = 'txt' type="text" name="username"> <button onclick = "classify()" >Classify</button><br>
   <p id = "result"></p>
 </body>
