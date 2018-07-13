@@ -6,11 +6,6 @@
 </head>
 <script>
 
-async function createModel()
-{
-  const model = await tf.loadModel('model/model.json')
-  return model
-}
 
 function process(txt)
 {
@@ -68,15 +63,10 @@ async function init(model)
 {
     console.log('Start loading dicionary')
     await loadDict()
-    //console.log(word_index)
     console.log('Finish loading dicionary')
-    
     console.log('Start loading model') 
-    model = await createModel()
+    model = await await tf.loadModel('model/model.json')
     console.log('Finish loading model') 
-    
-    
-    
 }
 
 function classify()
