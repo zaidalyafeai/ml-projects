@@ -7,6 +7,7 @@ var classNames = [];
 var canvas;
 var coords = [];
 var mousePressed = false;
+var mode;
 
 /*
 prepare the drawing canvas 
@@ -141,8 +142,13 @@ function getClassNames(indices) {
 load the class names 
 */
 async function loadDict() {
+    if (mode == 'ar')
+        loc = 'model2/class_names_ar.txt'
+    else
+        loc = 'model2/class_names.txt'
+    
     await $.ajax({
-        url: 'model2/class_names.txt',
+        url: loc,
         dataType: 'text',
     }).done(success);
 }
@@ -211,7 +217,10 @@ function preprocess(imgData) {
 /*
 load the model
 */
-async function start() {
+async function start(cur_mode) {
+    //arabic or english
+    mode = cur_mode
+    
     //load the model 
     model = await tf.loadModel('model2/model.json')
     
@@ -246,6 +255,3 @@ function erase() {
     canvas.backgroundColor = '#ffffff';
     coords = [];
 }
-
-//start the script 
-start();
