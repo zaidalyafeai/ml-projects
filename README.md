@@ -24,4 +24,8 @@ Control a racing car using your eye movement check demo https://zaidalyafeai.git
 
 ![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/racer.PNG)
 
+## Sentiment Classification 
+Given a movie review classify it as positive or negative check demo https://zaidalyafeai.github.io/sentiment-classification/
+
+![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/sentiment-classification.PNG)
 
