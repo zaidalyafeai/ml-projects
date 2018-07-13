@@ -4,7 +4,6 @@
  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.8.0"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
-<body>
 <script>
 
 async function createModel()
@@ -67,7 +66,6 @@ function create_sequences(txt)
 
 async function init(model)
 {
-    txt  = "awesome movie"
     console.log('Start loading dicionary')
     await loadDict()
     //console.log(word_index)
@@ -78,13 +76,25 @@ async function init(model)
     console.log('Finish loading model') 
     input = tf.tensor(seq)
     input = input.expandDims(0)
-    pred = model.predict(input)
-    pred.print()
+    
+    
 }
 
+function classify()
+ {
+    const txt  = document.getElementById("txt").value
+    pred = model.predict(txt)
+    console.log(pred[0].datasync())
+    //document.getElementById('result').innerHTML = pred[0].dataSync
+ }
+ var model ; 
 word_index = undefined
 init()
 
 </script>
+ <body>
+  <p>Enter a movie review for instance 'That was a good movie' </p> <br>
+  <input id = 'txt' type="text" name="username"> <button onclick = "classify()" >Classify</button><br>
+  <p id = "result"></p>
 </body>
 </html>
