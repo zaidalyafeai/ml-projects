@@ -76,7 +76,7 @@ function classify()
     let input = tf.tensor(seq)
     input = input.expandDims(0)
     pred = model.predict(input)
-    console.log(pred.datasync())
+    console.log(pred.dataSync())
     //document.getElementById('result').innerHTML = pred[0].dataSync
  }
 var model ; 
