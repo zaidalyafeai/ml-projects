@@ -70,12 +70,11 @@ async function init(model)
     await loadDict()
     //console.log(word_index)
     console.log('Finish loading dicionary')
-    seq = create_sequences(txt) 
+    
     console.log('Start loading model') 
     model = await createModel()
     console.log('Finish loading model') 
-    input = tf.tensor(seq)
-    input = input.expandDims(0)
+    
     
     
 }
@@ -83,12 +82,15 @@ async function init(model)
 function classify()
  {
     const txt  = document.getElementById("txt").value
-    pred = model.predict(txt)
+    const seq = create_sequences(txt) 
+    let input = tf.tensor(seq)
+    input = input.expandDims(0)
+    pred = model.predict(input)
     console.log(pred[0].datasync())
     //document.getElementById('result').innerHTML = pred[0].dataSync
  }
- var model ; 
-word_index = undefined
+var model ; 
+var word_index = undefined
 init()
 
 </script>
