@@ -83,7 +83,8 @@ function getImageData() {
     //get image data according to dpi 
     var canvas = document.getElementById("canvas");
     const dpi = window.devicePixelRatio
-    const imgData = canvas.getImageData(0 * dpi, 0 * dpi,
+    var ctx=canvas.getContext("2d");
+    const imgData = ctx.getImageData(0 * dpi, 0 * dpi,
                                                   300 * dpi, 300 * dpi);
     return imgData
 }
@@ -97,7 +98,7 @@ function getFrame() {
         
         //get the image data from the canvas 
         const imgData = getImageData();
-
+        
         //get the prediction 
         const gImg = model.predict(preprocess(imgData))
         
