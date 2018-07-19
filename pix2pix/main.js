@@ -78,7 +78,7 @@ get the current image data
 */
 function getImageData() {
     //get the minimum bounding box around the drawing 
-    const mbb = getMinBox()
+   // const mbb = getMinBox()
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
@@ -92,7 +92,7 @@ get the prediction
 */
 function getFrame() {
     //make sure we have at least two recorded coordinates 
-    if (coords.length >= 2) {
+    //if (coords.length >= 2) {
         
         //get the image data from the canvas 
         const imgData = getImageData();
@@ -103,7 +103,7 @@ function getFrame() {
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
         tf.toPixels(postprocess(gImg), gCanvas)
-    }
+    //}
 
 }
 
@@ -114,7 +114,7 @@ function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
         let tensor = tf.fromPixels(imgData).toFloat()
-        tensor = tf.scalar(255).sub(tensor)
+        //tensor = tf.scalar(255).sub(tensor)
         //resize 
         let resized = tf.image.resizeBilinear(tensor, [256, 256])
                 
@@ -142,7 +142,7 @@ load the model
 */
 async function start() {
     //load the model 
-    model = await tf.loadModel('model9/model.json')
+    model = await tf.loadModel('model7/model.json')
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
@@ -175,13 +175,25 @@ function allowDrawing() {
 clear the canvs 
 */
 function erase() {
-    canvas.clear();
-    canvas.backgroundColor = '#ffffff';
-    coords = [];
+    //canvas.clear();
+    //canvas.backgroundColor = '#ffffff';
+    //coords = [];
+    getFrame()
+
 }
 
 //start the script 
  $(window).on('load', function(){
-    prepareCanvas();
-    start();
- });
+    //prepareCanvas();
+    
+     
+     var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    var img = new Image;
+    ctx.fillStyle = "#000";
+    ctx.fillRect(0,0,c.width,c.height);
+    img.src = "Birman_1.jpg"
+    img.onload = function () {
+ctx.drawImage(img, 0, 0, c.width, c.height);
+              start()
+    }});
