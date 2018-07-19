@@ -81,6 +81,7 @@ function getImageData() {
    // const mbb = getMinBox()
 
     //get image data according to dpi 
+    var canvas = document.getElementById("canvas");
     const dpi = window.devicePixelRatio
     const imgData = canvas.contextContainer.getImageData(0 * dpi, 0 * dpi,
                                                   300 * dpi, 300 * dpi);
