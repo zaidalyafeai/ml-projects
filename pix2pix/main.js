@@ -104,7 +104,6 @@ function getFrame() {
         
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
-        console.log(postprocess(gImg).dataSunc())
         tf.toPixels(postprocess(gImg), gCanvas)
     //}
 
