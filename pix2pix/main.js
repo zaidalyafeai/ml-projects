@@ -85,7 +85,7 @@ function getImageData() {
     const dpi = window.devicePixelRatio
     var ctx=canvas.getContext("2d");
     console.log(dpi)
-    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const imgData = ctx.getImageData(0, 0, 600, 600);
     return imgData
 }
 
