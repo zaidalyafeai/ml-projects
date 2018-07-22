@@ -82,7 +82,7 @@ function getImageData() {
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
-    const margin = 10 
+    const margin = 50 
     const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi - margin , mbb.min.y * dpi - margin ,
                                                         (mbb.max.x - mbb.min.x) * dpi + margin,
                                                         (mbb.max.y - mbb.min.y) * dpi + margin);
@@ -105,7 +105,6 @@ function getFrame() {
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
         const postImg = postprocess(gImg)
-        console.log(postImg.shape)
         toImage(postImg, gCanvas)
     }
 
@@ -187,9 +186,6 @@ function toImage(tensor, canvas) {
     const ctx = canvas.getContext('2d');
     //get the tensor shape
     const [height, width] = tensor.shape;
-    console.log(width)
-    console.log(height)
-    
     //create a buffer array
     const buffer = new Uint8ClampedArray(width * height * 4)
     //create an Image data var 
