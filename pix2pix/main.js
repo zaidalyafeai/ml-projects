@@ -103,7 +103,7 @@ function getFrame() {
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
         const postImg = postprocess(gImg)
-        print(gCanvas.width)
+        console.log(gCanvas.width)
         tf.toPixels(postImg, gCanvas)
     }
 
