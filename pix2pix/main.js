@@ -134,8 +134,17 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
-       const scale = tf.scalar(0.5);
-       return tensor.squeeze().mul(scale).add(scale)
+     return tf.tidy(() => {
+        //normalization factor  
+        const scale = tf.scalar(0.5);
+        
+        //unnormalize and sqeeze 
+        const squeezed = tensor.squeeze().mul(scale).add(scale)
+
+        //resize to canvas size 
+        let resized = tf.image.resizeBilinear(squeezed, [300, 300])
+        return resized
+    })
 }
 
 /*
