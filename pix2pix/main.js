@@ -82,8 +82,9 @@ function getImageData() {
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
+    console.log(dpi)
     const imgData = canvas.contextContainer.getImageData(0 * dpi, 0 * dpi,
-                                                  300 * dpi, 300 * dpi);
+                                                  canvas.width * dpi, canvas.height * dpi);
     return imgData
 }
 
@@ -102,7 +103,9 @@ function getFrame() {
         
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
-        tf.toPixels(postprocess(gImg), gCanvas)
+        const postImg = postprocess(gImg)
+        console.log(postImg.shape)
+        tf.toPixels(postImg, gCanvas)
     }
 
 }
@@ -142,7 +145,6 @@ load the model
 async function start() {
     //load the model 
     model = await tf.loadModel('shoes/model.json')
-    model.summary()
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
