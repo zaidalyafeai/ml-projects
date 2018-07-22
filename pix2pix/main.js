@@ -82,7 +82,6 @@ function getImageData() {
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
-    console.log(dpi)
     const imgData = canvas.contextContainer.getImageData(0 * dpi, 0 * dpi,
                                                   canvas.width * dpi, canvas.height * dpi);
     return imgData
@@ -104,7 +103,7 @@ function getFrame() {
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
         const postImg = postprocess(gImg)
-        console.log(postImg.shape)
+        print(gCanvas.width)
         tf.toPixels(postImg, gCanvas)
     }
 
