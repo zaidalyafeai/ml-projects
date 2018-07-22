@@ -194,7 +194,7 @@ function erase() {
     var img = new Image;
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,c.width,c.height);
-    img.src = "Birman_38.jpg"
+    img.src = "shoe.jpg"
     img.onload = function () {
 ctx.drawImage(img, 0, 0, c.width, c.height);
               start()
