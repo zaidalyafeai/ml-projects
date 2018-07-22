@@ -82,12 +82,12 @@ function getImageData() {
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
-    const margin = 50 
+    const margin = 5 
     
     const x = (mbb.min.x - margin) * dpi 
     const y = (mbb.min.y - margin) * dpi
-    const w = (mbb.max.x - mbb.min.x + margin) * dpi 
-    const h = (mbb.max.y - mbb.min.y + margin) * dpi 
+    const w = (mbb.max.x - mbb.min.x + 2 * margin) * dpi 
+    const h = (mbb.max.y - mbb.min.y + 2 * margin) * dpi 
     console.log(x +' '+ y +' '+w+' '+h+' ')
     const imgData = canvas.contextContainer.getImageData(x, y, w, h)
     return imgData
