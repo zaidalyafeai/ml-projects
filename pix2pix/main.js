@@ -199,10 +199,9 @@ function toImage(tensor, canvas) {
     for(var y = 0; y < height; y++) {
     for(var x = 0; x < width; x++) {
         var pos = (y * width + x) * 4;      // position in buffer based on x and y
-        console.log(data[i])
-        buffer[pos  ] = data[i]             // some R value [0, 255]
-        buffer[pos+1] = data[i+1]           // some G value
-        buffer[pos+2] = data[i+2]           // some B value
+        buffer[pos  ] = Math.floor(data[i] * 255)             // some R value [0, 255]
+        buffer[pos+1] = Math.floor(data[i+1] * 255)           // some G value
+        buffer[pos+2] = Math.floor(data[i+2] * 255)           // some B value
         buffer[pos+3] = 255;                // set alpha channel
         i+=3
     }
