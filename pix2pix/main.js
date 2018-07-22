@@ -194,6 +194,7 @@ function toImage(tensor, canvas) {
     const imageData = new ImageData(width, height);
     //get the tensor values as data
     const data = tensor.dataSync();
+    console.log(data.length)
     //map the values to the buffer
     var i = 0;
     for(var y = 0; y < height; y++) {
