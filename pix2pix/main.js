@@ -209,7 +209,7 @@ function toImage(tensor, canvas) {
     //set the buffer to the image data
     imageData.data.set(buffer)
     //show the image on canvas
-    ctx.putImageData(imageData, 0, 0);
+    ctx.putImageData(imageData, 0, 0, 0, 0, 300, 300);
   };
 /*
 clear the canvs 
