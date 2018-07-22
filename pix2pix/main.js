@@ -103,7 +103,7 @@ function getFrame() {
         //draw on canvas 
         const gCanvas = document.getElementById('gCanvas');
         const postImg = postprocess(gImg)
-        console.log(gCanvas.width)
+        console.log(postImg.shape)
         toImage(postImg, gCanvas)
     }
 
@@ -185,6 +185,9 @@ function toImage(tensor, canvas) {
     const ctx = canvas.getContext('2d');
     //get the tensor shape
     const [height, width] = tensor.shape;
+    console.log(width)
+    console.log(height)
+    
     //create a buffer array
     const buffer = new Uint8ClampedArray(width * height * 4)
     //create an Image data var 
