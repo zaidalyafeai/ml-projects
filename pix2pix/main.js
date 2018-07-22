@@ -82,7 +82,7 @@ function getImageData() {
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
-    const margin = 5 
+    const margin = 2 
     
     const x = (mbb.min.x - margin) * dpi 
     const y = (mbb.min.y - margin) * dpi
