@@ -82,7 +82,8 @@ function getImageData() {
 
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
-    const margin = 50 
+    const margin = 10 
+    console.log(mbb.min.x * dpi - margin)
     const imgData = canvas.contextContainer.getImageData(mbb.min.x * dpi - margin , mbb.min.y * dpi - margin ,
                                                         (mbb.max.x - mbb.min.x) * dpi + margin,
                                                         (mbb.max.y - mbb.min.y) * dpi + margin);
@@ -192,7 +193,6 @@ function toImage(tensor, canvas) {
     const imageData = new ImageData(width, height);
     //get the tensor values as data
     const data = tensor.dataSync();
-    console.log(data.length)
     //map the values to the buffer
     var i = 0;
     for(var y = 0; y < height; y++) {
