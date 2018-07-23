@@ -48,7 +48,6 @@ function mousedown(e) {
         fill: currColor
     });
 
-    square.set({selectable:false})
     canvas.add(square); 
     canvas.renderAll();
     canvas.setActiveObject(square); 
@@ -83,7 +82,7 @@ function mouseup(e) {
     }
 
     var square = canvas.getActiveObject();
-
+    square.set({selectable:false})
     canvas.add(square); 
     canvas.renderAll();
     getFrame();
