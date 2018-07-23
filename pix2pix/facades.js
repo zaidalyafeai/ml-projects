@@ -96,10 +96,10 @@ get the current image data
 function getImageData() {
     //get image data according to dpi 
     const dpi = window.devicePixelRatio    
-    const x = (mbb.min.x ) * dpi 
-    const y = (mbb.min.y ) * dpi
-    const w = (mbb.max.x - mbb.min.x ) * dpi 
-    const h = (mbb.max.y - mbb.min.y ) * dpi 
+    const x = 0 * dpi 
+    const y = 0 * dpi
+    const w = canvas.width * dpi 
+    const h = canvas.height * dpi 
     const imgData = canvas.contextContainer.getImageData(x, y, w, h)
     return imgData
 }
