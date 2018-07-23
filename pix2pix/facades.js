@@ -144,6 +144,9 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
+     const dpi = window.devicePixelRatio    
+     const w = canvas.width * dpi 
+     const h = canvas.height * dpi
      return tf.tidy(() => {
         //normalization factor  
         const scale = tf.scalar(0.5);
@@ -152,7 +155,7 @@ function postprocess(tensor){
         const squeezed = tensor.squeeze().mul(scale).add(scale)
 
         //resize to canvas size 
-        let resized = tf.image.resizeBilinear(squeezed, [300, 300])
+        let resized = tf.image.resizeBilinear(squeezed, [w, h])
         return resized
     })
 }
