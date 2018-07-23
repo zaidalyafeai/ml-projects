@@ -94,7 +94,7 @@ get the current image data
 */
 function getImageData() {
     //get image data according to dpi 
-    const dpi = window.devicePixelRatio    
+    const dpi = 2    
     const x = 0 * dpi 
     const y = 0 * dpi
     const w = canvas.width * dpi 
@@ -144,9 +144,9 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
-     const dpi = 2    
-     const w = canvas.width * dpi 
-     const h = canvas.height * dpi
+     const w = canvas.width  
+     const h = canvas.height 
+     
      return tf.tidy(() => {
         //normalization factor  
         const scale = tf.scalar(0.5);
