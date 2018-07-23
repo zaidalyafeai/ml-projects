@@ -49,6 +49,7 @@ function mousedown(e) {
     });
 
     canvas.add(square); 
+    square.set({selectable:false, hasControls:false, hasBorders:false})
     canvas.renderAll();
     canvas.setActiveObject(square); 
 
