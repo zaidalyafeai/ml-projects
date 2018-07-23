@@ -24,9 +24,6 @@ prepare the drawing canvas
 function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
     canvas.backgroundColor = '#ffffff';
-    canvas.isDrawingMode = 1;
-    canvas.freeDrawingBrush.color = "black";
-    canvas.freeDrawingBrush.width = 1;
     canvas.renderAll();
     //setup listeners 
     canvas.observe('mouse:down', function(e) { mousedown(e); });
@@ -41,7 +38,7 @@ var y = 0;
 
 /* Mousedown */
 function mousedown(e) {
-    var mouse = canvas.getPointer(e.memo.e);
+    var mouse = canvas.getPointer(e);
     started = true;
     x = mouse.x;
     y = mouse.y;
@@ -67,7 +64,7 @@ function mousemove(e) {
         return false;
     }
 
-    var mouse = canvas.getPointer(e.memo.e);
+    var mouse = canvas.getPointer(e);
 
     var w = Math.abs(mouse.x - x),
     h = Math.abs(mouse.y - y);
