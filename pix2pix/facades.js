@@ -20,6 +20,7 @@ prepare the drawing canvas
 */
 function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
+    fabric.Object.prototype.selectable = false;
     canvas.backgroundColor = backColor;
     canvas.renderAll();
     //setup listeners 
