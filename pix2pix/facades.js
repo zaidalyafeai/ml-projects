@@ -82,8 +82,8 @@ function mouseup(e) {
     }
 
     var square = canvas.getActiveObject();
-    square.set({selectable:false})
     canvas.add(square); 
+    square.set({selectable:false, hasControls:false, hasBorders:false})
     canvas.renderAll();
     getFrame();
  } 
@@ -170,6 +170,7 @@ async function start() {
     model.predict(tf.zeros([1, 256, 256, 3]))
     
     $('button').prop('disabled', false);
+    canvas.isDrawingMode = 1;
 }
 
 /*
