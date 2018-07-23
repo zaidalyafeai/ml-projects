@@ -84,6 +84,7 @@ function mouseup(e) {
     var square = canvas.getActiveObject();
     canvas.add(square); 
     square.set({selectable:false, hasControls:false, hasBorders:false})
+    square.lockMovementX = square.lockMovementY = true
     canvas.renderAll();
     getFrame();
  } 
