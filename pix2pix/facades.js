@@ -23,7 +23,7 @@ prepare the drawing canvas
 */
 function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
-    canvas.backgroundColor = '#ffffff';
+    canvas.backgroundColor = '#5900FF';
     canvas.renderAll();
     //setup listeners 
     canvas.observe('mouse:down', function(e) { mousedown(e); });
@@ -51,6 +51,7 @@ function mousedown(e) {
         fill: currColor
     });
 
+    square.lockUniScaling = true
     canvas.add(square); 
     canvas.renderAll();
     canvas.setActiveObject(square); 
