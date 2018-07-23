@@ -3,8 +3,8 @@ variables
 */
 var model;
 var canvas;
-var currColor = '#ffffff'
-var backColor = '#5900FF'
+var currColor = '#0030FF'
+var backColor = '#0030FF'
 /*
 color pallette click events
 */
