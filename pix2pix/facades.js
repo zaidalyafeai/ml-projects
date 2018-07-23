@@ -20,7 +20,6 @@ prepare the drawing canvas
 */
 function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
-    fabric.Object.prototype.selectable = false;
     canvas.backgroundColor = backColor;
     canvas.renderAll();
     //setup listeners 
@@ -49,7 +48,7 @@ function mousedown(e) {
         fill: currColor
     });
 
-    square.lockUniScaling = true
+    square.set({selectable:false})
     canvas.add(square); 
     canvas.renderAll();
     canvas.setActiveObject(square); 
@@ -87,6 +86,7 @@ function mouseup(e) {
 
     canvas.add(square); 
     canvas.renderAll();
+    getFrame();
  } 
 
 /*
