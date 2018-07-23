@@ -29,76 +29,80 @@ function prepareCanvas() {
     canvas.freeDrawingBrush.width = 1;
     canvas.renderAll();
     //setup listeners 
-    canvas.on('mouse:up', function(e) {
-        getFrame();
-        mousePressed = false
-    });
-    canvas.on('mouse:down', function(e) {
-        mousePressed = true
-    });
-    canvas.on('mouse:move', function(e) {
-        recordCoor(e)
-    });
+    canvas.observe('mouse:down', function(e) { mousedown(e); });
+    canvas.observe('mouse:move', function(e) { mousemove(e); });
+    canvas.observe('mouse:up', function(e) { mouseup(e); });
+
 }
 
-/*
-record the current drawing coordinates
-*/
-function recordCoor(event) {
-    var pointer = canvas.getPointer(event.e);
-    var posX = pointer.x;
-    var posY = pointer.y;
+var started = false;
+var x = 0;
+var y = 0;
 
-    if (posX >= 0 && posY >= 0 && mousePressed) {
-        coords.push(pointer)
-    }
-}
+/* Mousedown */
+function mousedown(e) {
+    var mouse = canvas.getPointer(e.memo.e);
+    started = true;
+    x = mouse.x;
+    y = mouse.y;
 
-/*
-get the best bounding box by trimming around the drawing
-*/
-function getMinBox() {
-    //get coordinates 
-    var coorX = coords.map(function(p) {
-        return p.x
-    });
-    var coorY = coords.map(function(p) {
-        return p.y
+    var square = new fabric.Rect({ 
+        width: 0, 
+        height: 0, 
+        left: x, 
+        top: y, 
+        fill: '#000'
     });
 
-    //find top left and bottom right corners 
-    var min_coords = {
-        x: Math.min.apply(null, coorX),
-        y: Math.min.apply(null, coorY)
-    }
-    var max_coords = {
-        x: Math.max.apply(null, coorX),
-        y: Math.max.apply(null, coorY)
+    canvas.add(square); 
+    canvas.renderAll();
+    canvas.setActiveObject(square); 
+
+}
+
+
+/* Mousemove */
+function mousemove(e) {
+    if(!started) {
+        return false;
     }
 
-    //return as strucut 
-    return {
-        min: min_coords,
-        max: max_coords
+    var mouse = canvas.getPointer(e.memo.e);
+
+    var w = Math.abs(mouse.x - x),
+    h = Math.abs(mouse.y - y);
+
+    if (!w || !h) {
+        return false;
     }
+
+    var square = canvas.getActiveObject(); 
+    square.set('width', w).set('height', h);
+    canvas.renderAll(); 
 }
+
+/* Mouseup */
+function mouseup(e) {
+    if(started) {
+        started = false;
+    }
+
+    var square = canvas.getActiveObject();
+
+    canvas.add(square); 
+    canvas.renderAll();
+ } 
 
 /*
 get the current image data 
 */
 function getImageData() {
-    //get the minimum bounding box around the drawing 
-    const mbb = getMinBox()
-
     //get image data according to dpi 
-    const dpi = window.devicePixelRatio
-    const margin = 2 
-    
-    const x = (mbb.min.x - margin) * dpi 
-    const y = (mbb.min.y - margin) * dpi
-    const w = (mbb.max.x - mbb.min.x + 2 * margin) * dpi 
-    const h = (mbb.max.y - mbb.min.y + 2 * margin) * dpi 
-    console.log(x +' '+ y +' '+w+' '+h+' ')
+    const dpi = window.devicePixelRatio    
+    const x = (mbb.min.x ) * dpi 
+    const y = (mbb.min.y ) * dpi
+    const w = (mbb.max.x - mbb.min.x ) * dpi 
+    const h = (mbb.max.y - mbb.min.y ) * dpi 
     const imgData = canvas.contextContainer.getImageData(x, y, w, h)
     return imgData
 }
@@ -107,21 +111,16 @@ function getImageData() {
 get the prediction 
 */
 function getFrame() {
-    //make sure we have at least two recorded coordinates 
-    if (coords.length >= 2) {
-        
-        //get the image data from the canvas 
-        const imgData = getImageData();
+    //get the image data from the canvas 
+    const imgData = getImageData();
 
-        //get the prediction 
-        const gImg = model.predict(preprocess(imgData))
-        
-        //draw on canvas 
-        const gCanvas = document.getElementById('gCanvas');
-        const postImg = postprocess(gImg)
-        tf.toPixels(postImg, gCanvas)
-    }
+    //get the prediction 
+    const gImg = model.predict(preprocess(imgData))
 
+    //draw on canvas 
+    const gCanvas = document.getElementById('gCanvas');
+    const postImg = postprocess(gImg)
+    tf.toPixels(postImg, gCanvas)
 }
 
 /*
