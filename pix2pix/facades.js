@@ -144,7 +144,7 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
-     const dpi = window.devicePixelRatio    
+     const dpi = 2    
      const w = canvas.width * dpi 
      const h = canvas.height * dpi
      return tf.tidy(() => {
