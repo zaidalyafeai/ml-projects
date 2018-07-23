@@ -170,7 +170,6 @@ async function start() {
     model.predict(tf.zeros([1, 256, 256, 3]))
     
     $('button').prop('disabled', false);
-    canvas.isDrawingMode = 1;
 }
 
 /*
