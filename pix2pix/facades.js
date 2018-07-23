@@ -3,11 +3,8 @@ variables
 */
 var model;
 var canvas;
-var classNames = [];
-var canvas;
-var coords = [];
-var mousePressed = false;
 var currColor = '#ffffff'
+var backColor = '#5900FF'
 /*
 color pallette click events
 */
@@ -23,7 +20,7 @@ prepare the drawing canvas
 */
 function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
-    canvas.backgroundColor = '#5900FF';
+    canvas.backgroundColor = backColor;
     canvas.renderAll();
     //setup listeners 
     canvas.observe('mouse:down', function(e) { mousedown(e); });
@@ -172,25 +169,7 @@ async function start() {
     //warm up 
     model.predict(tf.zeros([1, 256, 256, 3]))
     
-    //allow drawing on the canvas 
-    allowDrawing()
-}
-
-/*
-allow drawing on canvas
-*/
-function allowDrawing() {
-    //allow draing 
-    canvas.isDrawingMode = 1;
-    
-    //alow UI 
     $('button').prop('disabled', false);
-    
-    //setup slider 
-    var slider = document.getElementById('myRange');
-    slider.oninput = function() {
-        canvas.freeDrawingBrush.width = this.value;
-    };
 }
 
 /*
@@ -198,8 +177,7 @@ clear the canvas
 */
 function erase() {
     canvas.clear();
-    canvas.backgroundColor = '#ffffff';
-    coords = [];
+    canvas.backgroundColor = backColor;
 }
 
 //start the script 
