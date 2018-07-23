@@ -162,7 +162,7 @@ load the model
 */
 async function start() {
     //load the model 
-    model = await tf.loadModel('shoes/model.json')
+    model = await tf.loadModel('facades/model.json')
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
