@@ -7,7 +7,7 @@ var classNames = [];
 var canvas;
 var coords = [];
 var mousePressed = false;
-
+var currColor = '#ffffff'
 /*
 color pallette click events
 */
@@ -15,7 +15,7 @@ $(document).on("click","td", function(e){
     //get the color 
     const color = e.target.style.backgroundColor;
     //set the color 
-    canvas.freeDrawingBrush.color = color;
+    currColor = color;
 });
 
 /*
@@ -48,7 +48,7 @@ function mousedown(e) {
         height: 0, 
         left: x, 
         top: y, 
-        fill: '#000'
+        fill: currColor
     });
 
     canvas.add(square); 
