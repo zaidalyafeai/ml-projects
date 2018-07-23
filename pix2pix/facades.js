@@ -94,7 +94,7 @@ get the current image data
 */
 function getImageData() {
     //get image data according to dpi 
-    const dpi = 2    
+    const dpi = window.devicePixelRatio    
     const x = 0 * dpi 
     const y = 0 * dpi
     const w = canvas.width * dpi 
