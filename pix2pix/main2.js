@@ -3,10 +3,6 @@ variables
 */
 var model;
 var canvas;
-var classNames = [];
-var canvas;
-var coords = [];
-var mousePressed = false;
 
 /*
 prepare the drawing canvas 
@@ -21,56 +17,7 @@ function prepareCanvas() {
     //setup listeners 
     canvas.on('mouse:up', function(e) {
         getFrame();
-        mousePressed = false
     });
-    canvas.on('mouse:down', function(e) {
-        mousePressed = true
-    });
-    canvas.on('mouse:move', function(e) {
-        recordCoor(e)
-    });
-}
-
-/*
-record the current drawing coordinates
-*/
-function recordCoor(event) {
-    var pointer = canvas.getPointer(event.e);
-    var posX = pointer.x;
-    var posY = pointer.y;
-
-    if (posX >= 0 && posY >= 0 && mousePressed) {
-        coords.push(pointer)
-    }
-}
-
-/*
-get the best bounding box by trimming around the drawing
-*/
-function getMinBox() {
-    //get coordinates 
-    var coorX = coords.map(function(p) {
-        return p.x
-    });
-    var coorY = coords.map(function(p) {
-        return p.y
-    });
-
-    //find top left and bottom right corners 
-    var min_coords = {
-        x: Math.min.apply(null, coorX),
-        y: Math.min.apply(null, coorY)
-    }
-    var max_coords = {
-        x: Math.max.apply(null, coorX),
-        y: Math.max.apply(null, coorY)
-    }
-
-    //return as strucut 
-    return {
-        min: min_coords,
-        max: max_coords
-    }
 }
 
 /*
@@ -82,7 +29,6 @@ function getImageData() {
 
     //get image data according to dpi 
     var canvas = document.getElementById("canvas");
-    const dpi = window.devicePixelRatio
     var ctx=canvas.getContext("2d");
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     return imgData
@@ -132,6 +78,7 @@ post process
 */
 function postprocess(tensor){
        const scale = tf.scalar(0.5);
+       tensor.print()
        return tensor.squeeze().mul(scale).add(scale)
 }
 
