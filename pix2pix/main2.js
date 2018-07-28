@@ -42,7 +42,6 @@ function preprocess(imgData) {
         const offset = tf.scalar(127.5);
         const normalized = tensor.div(offset).sub(tf.scalar(1.0))
         
-        tf.mean(normalized).print()
         //We add a dimension to get a batch shape 
         const batched = normalized.expandDims(0)
         
@@ -54,9 +53,10 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
-       const scale = tf.scalar(0.5);
-       const unormalized = tensor.squeeze().mul(scale).add(scale)
-       return unormalized
+    tf.mean(tensor).print()
+    const scale = tf.scalar(0.5);
+    const unormalized = tensor.squeeze().mul(scale).add(scale)
+    return unormalized
 }
 
 /*
