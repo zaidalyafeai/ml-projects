@@ -114,7 +114,7 @@ function preprocess(imgData) {
         //normalize 
         const offset = tf.scalar(127.5);
         const normalized = resized.div(offset).sub(tf.scalar(1.0));
-
+        normalized.print()
         //We add a dimension to get a batch shape 
         const batched = normalized.expandDims(0)
         
