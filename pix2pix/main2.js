@@ -64,7 +64,7 @@ load the model
 */
 async function start() {
     //load the model 
-    model = await tf.loadModel('model2/model.json')
+    model = await tf.loadModel('model3/model.json')
     /*layers = model.layers;
     let tensor = tf.zeros([256, 256, 3]).mul(tf.scalar(255)).toFloat()
 
