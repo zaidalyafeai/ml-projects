@@ -76,7 +76,7 @@ async function start() {
         outputs: out_layer.output
       })
       
-    model2.predict(tf.ones([1, 256, 256, 3])) 
+    model2.predict(tf.ones([1, 256, 256, 3])).print()
     $('button').prop('disabled', false);
 }
 
