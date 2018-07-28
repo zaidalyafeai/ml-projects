@@ -68,7 +68,7 @@ async function start() {
     //model.summary()
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
-
+    model.summary()
     //warm up 
     out_layer = model.getLayer('batch_normalization_4')
     console.log(out_layer.name)
