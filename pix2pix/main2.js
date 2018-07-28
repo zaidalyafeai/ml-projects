@@ -84,7 +84,6 @@ function getImageData() {
     var canvas = document.getElementById("canvas");
     const dpi = window.devicePixelRatio
     var ctx=canvas.getContext("2d");
-    console.log(dpi)
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     return imgData
 }
@@ -116,9 +115,6 @@ function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
         let tensor = tf.fromPixels(imgData).toFloat()
-        //tensor = tf.scalar(255).sub(tensor)
-        //resize 
-        let resized = tf.image.resizeBilinear(tensor, [256, 256])
                 
         //normalize 
         const offset = tf.scalar(127.5);
@@ -145,7 +141,6 @@ load the model
 async function start() {
     //load the model 
     model = await tf.loadModel('cats/model.json')
-    model.layers[1].getWeights()[1].print()
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
     
