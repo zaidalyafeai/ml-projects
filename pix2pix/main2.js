@@ -68,10 +68,10 @@ async function start() {
     //model.summary()
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
-    model.summary()
+    //model.summary()
     //warm up 
     out_layer = model.getLayer('conv_64')
-    out_layer.getWeights()[0].print()
+    //out_layer.getWeights()[0].print()
     //console.log(out_layer.name)
     //console.log(out_layer.shape)
     const model2 = tf.model({
@@ -79,9 +79,9 @@ async function start() {
         outputs: out_layer.output
       })
       
-    output = model2.predict(tf.ones([1, 256, 256, 3]))
+    output = model.predict(tf.ones([1, 256, 256, 3]))
     //console.log(output.shape)
-    //output.print()
+    output.print()
     $('button').prop('disabled', false);
 }
 
