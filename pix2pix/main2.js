@@ -12,7 +12,6 @@ function getImageData() {
     var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    console.log(canvas.width)
     return imgData
 }
 
@@ -66,6 +65,7 @@ async function start() {
     //load the model 
     model = await tf.loadModel('cats/model.json')
     
+    model.layers[1].getWeights()[0].print()
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
 
