@@ -71,7 +71,8 @@ async function start() {
 
     //warm up 
     out_layer = model.getLayer('batch_normalization_4')
-    print(out_layer.name)
+    console.log(out_layer.name)
+    console.log(out_layer.shape)
     const model2 = tf.model({
         inputs: model.layers[0].input, 
         outputs: out_layer.output
