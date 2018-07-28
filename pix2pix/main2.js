@@ -65,29 +65,18 @@ load the model
 async function start() {
     //load the model 
     model = await tf.loadModel('cats/model.json')
-    model.summary()
-    /*layers = model.layers;
-    let tensor = tf.zeros([256, 256, 3]).mul(tf.scalar(255)).toFloat()
-
-    //normalize 
-    const offset = tf.scalar(127.5);
-    const normalized = tensor.div(offset).sub(tf.scalar(1.0))
-    
-    //We add a dimension to get a batch shape 
-    const batched = normalized.expandDims(0)
-
-    const model2 = tf.model({
-        inputs: layers[0].input, 
-        outputs: layers[1].output
-    })
-
-    model2.predict(batched).print()
-    //model.layers[1].getWeights()[0].print()*/
+    //model.summary()
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
 
     //warm up 
-    model.getLayer('batch_normalization_6').apply(tf.ones([1, 256, 256, 3])).print()
+    out_layer = model.getLayer('batch_normalization_6')
+    const model2 = tf.model({
+        inputs: model.layers[0].input, 
+        outputs: out_layer.output
+      })
+      
+      
     $('button').prop('disabled', false);
 }
 
