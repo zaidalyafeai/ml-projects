@@ -42,6 +42,7 @@ function preprocess(imgData) {
         const offset = tf.scalar(127.5);
         const normalized = tensor.div(offset).sub(tf.scalar(1.0))
         
+        tf.mean(normalized).print()
         //We add a dimension to get a batch shape 
         const batched = normalized.expandDims(0)
         
@@ -65,7 +66,7 @@ async function start() {
     //load the model 
     model = await tf.loadModel('model2/model.json')
     
-    model.layers[1].getWeights()[0].print()
+    //model.layers[1].getWeights()[0].print()
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
 
