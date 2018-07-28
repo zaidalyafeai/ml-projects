@@ -144,7 +144,7 @@ load the model
 */
 async function start() {
     //load the model 
-    model = await tf.loadModel('facades/model.json')
+    model = await tf.loadModel('cats/model.json')
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
@@ -194,7 +194,7 @@ function erase() {
     var img = new Image;
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,c.width,c.height);
-    img.src = "shoe.jpg"
+    img.src = "cat.jpg"
     img.onload = function () {
 ctx.drawImage(img, 0, 0, c.width, c.height);
               start()
