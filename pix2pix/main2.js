@@ -63,7 +63,7 @@ load the model
 */
 async function start() {
     //load the model 
-    model = await tf.loadModel('model2/model.json')
+    model = await tf.loadModel('cats_model/model.json')
     
     //model.layers[1].getWeights()[0].print()
     //status 
