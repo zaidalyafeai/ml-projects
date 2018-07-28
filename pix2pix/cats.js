@@ -86,8 +86,7 @@ function getImageData() {
     const y = (mbb.min.y - margin) * dpi
     const w = (mbb.max.x - mbb.min.x + 2 * margin) * dpi 
     const h = (mbb.max.y - mbb.min.y + 2 * margin) * dpi 
-    console.log(x +' '+ y +' '+w+' '+h+' ')
-    const imgData = canvas.contextContainer.getImageData(x, y, w, h)
+    const imgData = canvas.contextContainer.getImageData(0, 0, 300 * dpi, 300 * dpi)
     return imgData
 }
 
