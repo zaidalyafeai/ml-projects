@@ -75,17 +75,8 @@ function getMinBox() {
 get the current image data 
 */
 function getImageData() {
-    //get the minimum bounding box around the drawing 
-    const mbb = getMinBox()
-
     //get image data according to dpi 
     const dpi = window.devicePixelRatio
-    const margin = 2 
-    
-    const x = (mbb.min.x - margin) * dpi 
-    const y = (mbb.min.y - margin) * dpi
-    const w = (mbb.max.x - mbb.min.x + 2 * margin) * dpi 
-    const h = (mbb.max.y - mbb.min.y + 2 * margin) * dpi 
     const imgData = canvas.contextContainer.getImageData(0, 0, 300 * dpi, 300 * dpi)
     return imgData
 }
@@ -93,21 +84,19 @@ function getImageData() {
 /*
 get the prediction 
 */
-function getFrame() {
-    //make sure we have at least two recorded coordinates 
-    if (coords.length >= 2) {
+function getFrame() {    
         
-        //get the image data from the canvas 
-        const imgData = getImageData();
+    //get the image data from the canvas 
+    const imgData = getImageData();
 
-        //get the prediction 
-        const gImg = model.predict(preprocess(imgData))
-        
-        //draw on canvas 
-        const gCanvas = document.getElementById('gCanvas');
-        const postImg = postprocess(gImg)
-        toImage(postImg, gCanvas)
-    }
+    //get the prediction 
+    const gImg = model.predict(preprocess(imgData))
+    
+    //draw on canvas 
+    const gCanvas = document.getElementById('gCanvas');
+    const postImg = postprocess(gImg)
+    toImage(postImg, gCanvas)
+    
 
 }
 
@@ -118,7 +107,7 @@ function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
         let tensor = tf.fromPixels(imgData).toFloat()
-        tenstor = tf.scalar(255).sub(tensor)
+
         //resize 
         let resized = tf.image.resizeBilinear(tensor, [256, 256])
                 
@@ -145,7 +134,7 @@ function postprocess(tensor){
         const squeezed = tensor.squeeze().add(tf.scalar(1.0)).mul(offset)
         
         //resize to canvas size 
-        let resized = tf.image.resizeBilinear(squeezed, [300, 300])
+        let resized = tf.image.resizeBilinear(squeezed, [300, 300]).toInt()
         return resized
     })
 }
@@ -214,9 +203,9 @@ function toImage(tensor, canvas) {
     for(var y = 0; y < height; y++) {
     for(var x = 0; x < width; x++) {
         var pos = (y * width + x) * 4;                   // position in buffer based on x and y
-        buffer[pos  ] =  Math.round(data[i])             // some R value [0, 255]
-        buffer[pos+1] =  Math.round(data[i+1])           // some G value
-        buffer[pos+2] =  Math.round(data[i+2])           // some B value
+        buffer[pos  ] =  data[i]             // some R value [0, 255]
+        buffer[pos+1] =  data[i+1]           // some G value
+        buffer[pos+2] =  data[i+2]           // some B value
         buffer[pos+3] = 255;                             // set alpha channel
         i+=3
     }
