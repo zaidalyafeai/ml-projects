@@ -53,7 +53,7 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
-    tf.mean(tensor).print()
+    tensor.print()
     const scale = tf.scalar(0.5);
     const unormalized = tensor.squeeze().mul(scale).add(scale)
     return unormalized
