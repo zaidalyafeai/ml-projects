@@ -142,9 +142,10 @@ function postprocess(tensor){
         
         //unnormalize and sqeeze 
         const squeezed = tensor.squeeze().add(tf.scalar(1.0)).mul(offset)
-
+        
         //resize to canvas size 
         let resized = tf.image.resizeBilinear(squeezed, [300, 300])
+        resized.print()
         return resized
     })
 }
