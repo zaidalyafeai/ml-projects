@@ -65,7 +65,7 @@ load the model
 async function start() {
     //load the model 
     model = await tf.loadModel('model2/model.json')
-    layers = model.layers;
+    /*layers = model.layers;
     let tensor = tf.zeros([256, 256, 3]).mul(tf.scalar(255)).toFloat()
 
     //normalize 
@@ -81,7 +81,7 @@ async function start() {
     })
 
     model2.predict(batched).print()
-    //model.layers[1].getWeights()[0].print()
+    //model.layers[1].getWeights()[0].print()*/
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
 
