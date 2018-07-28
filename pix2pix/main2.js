@@ -70,7 +70,7 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
     model.summary()
     //warm up 
-    out_layer = model.getLayer('batch_normalization_4')
+    out_layer = model.getLayer('conv_64')
     console.log(out_layer.name)
     console.log(out_layer.shape)
     const model2 = tf.model({
