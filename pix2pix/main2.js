@@ -38,20 +38,15 @@ function getImageData() {
 get the prediction 
 */
 function getFrame() {
-    //make sure we have at least two recorded coordinates 
-    //if (coords.length >= 2) {
-        
-        //get the image data from the canvas 
-        const imgData = getImageData();
-        
-        //get the prediction 
-        const gImg = model.predict(preprocess(imgData))
-        
-        //draw on canvas 
-        const gCanvas = document.getElementById('gCanvas');
-        tf.toPixels(postprocess(gImg), gCanvas)
-    //}
-
+    //get the image data from the canvas 
+    const imgData = getImageData();
+    
+    //get the prediction 
+    const gImg = model.predict(preprocess(imgData))
+    
+    //draw on canvas 
+    const gCanvas = document.getElementById('gCanvas');
+    tf.toPixels(postprocess(gImg), gCanvas)
 }
 
 /*
@@ -78,8 +73,9 @@ post process
 */
 function postprocess(tensor){
        const scale = tf.scalar(0.5);
-       tf.min(tensor).print()
-       return tensor.squeeze().mul(scale).add(scale)
+       const unormalized = tensor.squeeze().mul(scale).add(scale)
+       console.log(unormalized.shape)
+       return unormalized
 }
 
 /*
