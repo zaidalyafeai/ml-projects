@@ -131,12 +131,10 @@ function postprocess(tensor){
         const offset = tf.scalar(127.5);
         
         //unnormalize and sqeeze 
-        const squeezed = tensor.squeeze().add(tf.scalar(1.0)).mul(offset)
-        
-        //resize to canvas size 
-        let resized = tf.image.resizeBilinear(squeezed, [300, 300]).toInt()
-        resized.print()
-        return resized
+        const normalized = tensor.add(tf.scalar(1.0)).mul(offset)
+        const squeezed   = normalized.squeeze().toInt()
+        squeezed.shape.print()
+        return squeezed
     })
 }
 
@@ -193,7 +191,6 @@ function toImage(tensor, canvas) {
     const ctx = canvas.getContext('2d');
     //get the tensor shape
     const [height, width] = tensor.shape;
-    console.log(height+' '+width)
     //create a buffer array
     const buffer = new Uint8ClampedArray(width * height * 4)
     //create an Image data var 
@@ -205,8 +202,8 @@ function toImage(tensor, canvas) {
     for(var y = 0; y < height; y++) {
     for(var x = 0; x < width; x++) {
         var pos = (y * width + x) * 4;                   // position in buffer based on x and y
-        buffer[pos  ] =  data[i]             // some R value [0, 255]
-        buffer[pos+1] =  data[i+1]           // some G value
+        buffer[pos  ] =  data[i+1]             // some R value [0, 255]
+        buffer[pos+1] =  data[i]           // some G value
         buffer[pos+2] =  data[i+2]           // some B value
         buffer[pos+3] = 255;                             // set alpha channel
         i+=3
