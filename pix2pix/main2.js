@@ -78,7 +78,7 @@ post process
 */
 function postprocess(tensor){
        const scale = tf.scalar(0.5);
-       tensor.print()
+       tf.min(tensor).print()
        return tensor.squeeze().mul(scale).add(scale)
 }
 
