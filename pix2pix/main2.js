@@ -36,7 +36,7 @@ preprocess the data
 function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
-        let tensor = tf.ones([256, 256, 3]).mul(tf.scalar(255)).toFloat()
+        let tensor = tf.zeros([256, 256, 3]).mul(tf.scalar(255)).toFloat()
 
         //normalize 
         const offset = tf.scalar(127.5);
