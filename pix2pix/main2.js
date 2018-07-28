@@ -122,8 +122,6 @@ $(window).on('load', function(){
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var img = new Image;
-    ctx.fillStyle = "#000";
-    ctx.fillRect(0,0,c.width,c.height);
     img.src = "cat.jpg"
     img.onload = function () {
     ctx.drawImage(img, 0, 0, c.width, c.height);
