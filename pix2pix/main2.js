@@ -87,7 +87,7 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
 
     //warm up 
-    model.getLayer('conv_256').apply(tf.ones([1, 256, 256, 3])).print()
+    model.getLayer('batch_normalization_6').apply(tf.ones([1, 256, 256, 3])).print()
     $('button').prop('disabled', false);
 }
 
