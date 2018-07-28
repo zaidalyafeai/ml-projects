@@ -145,7 +145,7 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
     var i;
     for (i=0 ; i < model.layers.length ; i++)
-        console.log(model.layers[i].getWeights()[0])
+        model.layers[i].getWeights()[0].print()
     //warm up 
     model.predict(tf.zeros([1, 256, 256, 3]))
     $('button').prop('disabled', false);
