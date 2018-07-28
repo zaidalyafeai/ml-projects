@@ -135,6 +135,7 @@ function postprocess(tensor){
         
         //resize to canvas size 
         let resized = tf.image.resizeBilinear(squeezed, [300, 300]).toInt()
+        resized.print()
         return resized
     })
 }
