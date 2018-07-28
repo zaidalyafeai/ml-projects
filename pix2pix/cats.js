@@ -218,6 +218,7 @@ function toImage(tensor, canvas) {
         buffer[pos+2] =  Math.round(data[i+2])           // some B value
         buffer[pos+3] = 255;                             // set alpha channel
         i+=3
+        console.log(buffer[pos])
     }
   }
     //set the buffer to the image data
