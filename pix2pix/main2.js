@@ -145,7 +145,7 @@ load the model
 async function start() {
     //load the model 
     model = await tf.loadModel('cats/model.json')
-    
+    model.summary()
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
     
