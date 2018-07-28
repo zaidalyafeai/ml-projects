@@ -56,7 +56,7 @@ function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
         let tensor = tf.fromPixels(imgData).toFloat()
-                
+        tf.min(tensor).print()
         //normalize 
         const offset = tf.scalar(127.5);
         const normalized = tensor.div(offset).sub(tf.scalar(1.0));
@@ -74,7 +74,6 @@ post process
 function postprocess(tensor){
        const scale = tf.scalar(0.5);
        const unormalized = tensor.squeeze().mul(scale).add(scale)
-       console.log(unormalized.shape)
        return unormalized
 }
 
@@ -84,14 +83,13 @@ load the model
 async function start() {
     //load the model 
     model = await tf.loadModel('cats/model.json')
+    
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
-    var i;
+
     //warm up 
     model.predict(tf.zeros([1, 256, 256, 3]))
     $('button').prop('disabled', false);
-    //allow drawing on the canvas 
-    //allowDrawing()
 }
 
 /*
@@ -115,25 +113,20 @@ function allowDrawing() {
 clear the canvs 
 */
 function erase() {
-    //canvas.clear();
-    //canvas.backgroundColor = '#ffffff';
-    //coords = [];
     getFrame()
 
 }
 
 //start the script 
- $(window).on('load', function(){
-    //prepareCanvas();
-    
-     
-     var c = document.getElementById("canvas");
+$(window).on('load', function(){ 
+    var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var img = new Image;
     ctx.fillStyle = "#000";
     ctx.fillRect(0,0,c.width,c.height);
     img.src = "cat.jpg"
     img.onload = function () {
-ctx.drawImage(img, 0, 0, c.width, c.height);
-              start()
-    }});
+    ctx.drawImage(img, 0, 0, c.width, c.height);
+    start()
+    }
+});
