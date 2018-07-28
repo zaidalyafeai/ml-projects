@@ -65,6 +65,7 @@ load the model
 async function start() {
     //load the model 
     model = await tf.loadModel('cats/model.json')
+    model.summary()
     /*layers = model.layers;
     let tensor = tf.zeros([256, 256, 3]).mul(tf.scalar(255)).toFloat()
 
@@ -86,7 +87,7 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
 
     //warm up 
-    model.predict(tf.zeros([1, 256, 256, 3])).print()
+    model.getLayer('input_3').apply(tf.ones([1, 256, 256, 3])).print()
     $('button').prop('disabled', false);
 }
 
