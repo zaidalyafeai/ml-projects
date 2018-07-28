@@ -77,7 +77,7 @@ async function start() {
 
     const model2 = tf.model({
         inputs: layers[0].input, 
-        outputs: layers[0].output
+        outputs: layers[1].output
     })
 
     model2.predict(batched).print()
