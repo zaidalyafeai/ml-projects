@@ -5,32 +5,14 @@ var model;
 var canvas;
 
 /*
-prepare the drawing canvas 
-*/
-function prepareCanvas() {
-    canvas = window._canvas = new fabric.Canvas('canvas');
-    canvas.backgroundColor = '#ffffff';
-    canvas.isDrawingMode = 1;
-    canvas.freeDrawingBrush.color = "black";
-    canvas.freeDrawingBrush.width = 1;
-    canvas.renderAll();
-    //setup listeners 
-    canvas.on('mouse:up', function(e) {
-        getFrame();
-    });
-}
-
-/*
 get the current image data 
 */
 function getImageData() {
-    //get the minimum bounding box around the drawing 
-   // const mbb = getMinBox()
-
     //get image data according to dpi 
     var canvas = document.getElementById("canvas");
-    var ctx=canvas.getContext("2d");
+    var ctx = canvas.getContext("2d");
     const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    console.log(canvas.width)
     return imgData
 }
 
@@ -58,8 +40,8 @@ function preprocess(imgData) {
         let tensor = tf.fromPixels(imgData).toFloat()
 
         //normalize 
-        const offset = tf.scalar(255.0);
-        const normalized = tensor.div(offset)
+        const offset = tf.scalar(127.5);
+        const normalized = tensor.div(offset).sub(tf.scalar(1.0))
         
         //We add a dimension to get a batch shape 
         const batched = normalized.expandDims(0)
