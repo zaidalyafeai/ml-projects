@@ -139,7 +139,7 @@ post process
 function postprocess(tensor){
      return tf.tidy(() => {
         //normalization factor  
-        const offset = tf.scalar(127.5);
+        const offset = tf.scalar(0.5);
         
         //unnormalize and sqeeze 
         const squeezed = tensor.squeeze().add(tf.scalar(1.0)).mul(offset)
