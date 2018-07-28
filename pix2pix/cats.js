@@ -107,16 +107,17 @@ function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
         let tensor = tf.fromPixels(imgData).toFloat()
-        tensor.print()
-        //resize 
-        let resized = tf.image.resizeBilinear(tensor, [256, 256])
-                
+        
         //normalize 
         const offset = tf.scalar(127.5);
-        const normalized = resized.div(offset).sub(tf.scalar(1.0));
-        tf.min(normalized).print()
+        const normalized = tensor.div(offset).sub(tf.scalar(1.0));
+
+        //resize 
+        let resized = tf.image.resizeBilinear(normalized, [256, 256])
+                
+        
         //We add a dimension to get a batch shape 
-        const batched = normalized.expandDims(0)
+        const batched = resized.expandDims(0)
         
         return batched
     })
@@ -133,7 +134,7 @@ function postprocess(tensor){
         //unnormalize and sqeeze 
         const normalized = tensor.add(tf.scalar(1.0)).mul(offset)
         const squeezed   = normalized.squeeze().toInt()
-        squeezed.shape.print()
+        console.log(squeezed.shape)
         return squeezed
     })
 }
