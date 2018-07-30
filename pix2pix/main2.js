@@ -70,7 +70,7 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
     //model.summary()
     //warm up 
-    out_layer = model.getLayer('conv_64')
+    /*out_layer = model.getLayer('conv_64')
     //out_layer.getWeights()[0].print()
     //console.log(out_layer.name)
     //console.log(out_layer.shape)
@@ -81,7 +81,7 @@ async function start() {
       
     output = model.predict(tf.ones([1, 256, 256, 3]))
     //console.log(output.shape)
-    output.print()
+    output.print()*/
     $('button').prop('disabled', false);
 }
 
