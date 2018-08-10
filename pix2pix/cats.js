@@ -134,7 +134,6 @@ function postprocess(tensor){
         //unnormalize and sqeeze 
         const normalized = tensor.add(tf.scalar(1.0)).mul(offset)
         const squeezed   = normalized.squeeze().toInt()
-        console.log(squeezed.shape)
         return squeezed
     })
 }
