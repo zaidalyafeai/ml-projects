@@ -86,7 +86,8 @@ function mouseup(e) {
     square.set({hasControls:false, hasBorders:false})
     square.evented = false
     canvas.renderAll();
-    getFrame();
+    const imgData = getImageData();
+    predict(imgData)
  } 
 
 /*
@@ -106,9 +107,7 @@ function getImageData() {
 /*
 get the prediction 
 */
-function getFrame() {
-    //get the image data from the canvas 
-    const imgData = getImageData();
+function predict(imgData) {
 
     //get the prediction 
     const gImg = model.predict(preprocess(imgData))
@@ -160,6 +159,18 @@ function postprocess(tensor){
     })
 }
 
+function populateInitImage()
+{
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    var img = new Image;
+    img.src = "facade.png"
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        predict(img)
+    }
+}
+
 /*
 load the model
 */
@@ -171,7 +182,7 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
     
     //warm up 
-    model.predict(tf.zeros([1, 256, 256, 3]))
+    populateInitImage()
     
     $('button').prop('disabled', false);
 }
