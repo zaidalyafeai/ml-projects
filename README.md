@@ -3,7 +3,7 @@
 check this tutorial on TensorFlow.js https://medium.com/tensorflow/a-gentle-introduction-to-tensorflow-js-dba2e5257702
 
 ## pix2pix 
-Fast image-to-image check demo https://zaidalyafeai.github.io/pix2pix/
+Fast image-to-image check demo https://zaidalyafeai.github.io/pix2pix/cats.html
 ![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/pix2pix.PNG)
 
 ## fast-style 
