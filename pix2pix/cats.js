@@ -3,101 +3,119 @@ variables
 */
 var model;
 var canvas;
-var coords = [];
-var mousePressed = false;
+var currColor = '#002FFF'
+var backColor = '#0000DE'
+/*
+color pallette click events
+*/
+$(document).on("click","td", function(e){
+    //get the color 
+    const color = e.target.style.backgroundColor;
+    //set the color 
+    currColor = color;
+});
 
 /*
 prepare the drawing canvas 
 */
 function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
-    canvas.backgroundColor = '#ffffff';
-    canvas.isDrawingMode = 1;
-    canvas.freeDrawingBrush.color = "black";
-    canvas.freeDrawingBrush.width = 1;
+    canvas.backgroundColor = backColor;
     canvas.renderAll();
     //setup listeners 
-    canvas.on('mouse:up', function(e) {
-        getFrame();
-        mousePressed = false
-    });
-    canvas.on('mouse:down', function(e) {
-        mousePressed = true
-    });
-    canvas.on('mouse:move', function(e) {
-        recordCoor(e)
-    });
+    canvas.observe('mouse:down', function(e) { mousedown(e); });
+    canvas.observe('mouse:move', function(e) { mousemove(e); });
+    canvas.observe('mouse:up', function(e) { mouseup(e); });
+
 }
 
-/*
-record the current drawing coordinates
-*/
-function recordCoor(event) {
-    var pointer = canvas.getPointer(event.e);
-    var posX = pointer.x;
-    var posY = pointer.y;
+var started = false;
+var x = 0;
+var y = 0;
 
-    if (posX >= 0 && posY >= 0 && mousePressed) {
-        coords.push(pointer)
-    }
-}
+/* Mousedown */
+function mousedown(e) {
+    var mouse = canvas.getPointer(e);
+    started = true;
+    x = mouse.x;
+    y = mouse.y;
 
-/*
-get the best bounding box by trimming around the drawing
-*/
-function getMinBox() {
-    //get coordinates 
-    var coorX = coords.map(function(p) {
-        return p.x
-    });
-    var coorY = coords.map(function(p) {
-        return p.y
+    var square = new fabric.Rect({ 
+        width: 0, 
+        height: 0, 
+        left: x, 
+        top: y, 
+        fill: currColor
     });
 
-    //find top left and bottom right corners 
-    var min_coords = {
-        x: Math.min.apply(null, coorX),
-        y: Math.min.apply(null, coorY)
-    }
-    var max_coords = {
-        x: Math.max.apply(null, coorX),
-        y: Math.max.apply(null, coorY)
+    canvas.add(square); 
+    canvas.renderAll();
+    canvas.setActiveObject(square); 
+    square.set({selectable:false, hasControls:false, hasBorders:false})
+}
+
+
+/* Mousemove */
+function mousemove(e) {
+    if(!started) {
+        return false;
     }
 
-    //return as strucut 
-    return {
-        min: min_coords,
-        max: max_coords
+    var mouse = canvas.getPointer(e);
+
+    var w = Math.abs(mouse.x - x),
+    h = Math.abs(mouse.y - y);
+
+    if (!w || !h) {
+        return false;
     }
+
+    var square = canvas.getActiveObject(); 
+    square.set('width', w).set('height', h);
+    canvas.renderAll(); 
 }
+
+/* Mouseup */
+function mouseup(e) {
+    if(started) {
+        started = false;
+    }
+
+    var square = canvas.getActiveObject();
+    canvas.add(square); 
+    square.set({hasControls:false, hasBorders:false})
+    square.evented = false
+    canvas.renderAll();
+    const imgData = getImageData();
+    predict(imgData)
+ } 
 
 /*
 get the current image data 
 */
 function getImageData() {
     //get image data according to dpi 
-    const ctx = canvas.getContext("2d");
-    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+    const dpi = window.devicePixelRatio    
+    const x = 0 * dpi 
+    const y = 0 * dpi
+    const w = canvas.width * dpi 
+    const h = canvas.height * dpi 
+    const imgData = canvas.contextContainer.getImageData(x, y, w, h)
     return imgData
 }
 
 /*
 get the prediction 
 */
-function getFrame() {    
-        
-    //get the image data from the canvas 
-    const imgData = getImageData();
+function predict(imgData) {
 
     //get the prediction 
     const gImg = model.predict(preprocess(imgData))
-    
+
     //draw on canvas 
     const gCanvas = document.getElementById('gCanvas');
     const postImg = postprocess(gImg)
-    toImage(postImg, gCanvas)
-    
-
+    tf.toPixels(postImg, gCanvas)
 }
 
 /*
@@ -107,17 +125,15 @@ function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
         let tensor = tf.fromPixels(imgData).toFloat()
-        
+        //resize 
+        let resized = tf.image.resizeBilinear(tensor, [256, 256])
+                
         //normalize 
         const offset = tf.scalar(127.5);
-        const normalized = tensor.div(offset).sub(tf.scalar(1.0));
+        const normalized = resized.div(offset).sub(tf.scalar(1.0));
 
-        //resize 
-        let resized = tf.image.resizeBilinear(normalized, [256, 256])
-                
-        
         //We add a dimension to get a batch shape 
-        const batched = resized.expandDims(0)
+        const batched = normalized.expandDims(0)
         
         return batched
     })
@@ -127,15 +143,32 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
+     const w = canvas.width  
+     const h = canvas.height 
+     
      return tf.tidy(() => {
         //normalization factor  
-        const offset = tf.scalar(127.5);
+        const scale = tf.scalar(0.5);
         
         //unnormalize and sqeeze 
-        const normalized = tensor.add(tf.scalar(1.0)).mul(offset)
-        const squeezed   = normalized.squeeze().toInt()
-        return squeezed
+        const squeezed = tensor.squeeze().mul(scale).add(scale)
+
+        //resize to canvas size 
+        let resized = tf.image.resizeBilinear(squeezed, [w, h])
+        return resized
     })
+}
+
+function populateInitImage()
+{
+    var c = document.getElementById("canvas");
+    var ctx = c.getContext("2d");
+    var img = new Image;
+    img.src = "cat.png"
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        predict(img)
+    }
 }
 
 /*
@@ -149,27 +182,9 @@ async function start() {
     document.getElementById('status').innerHTML = 'Model Loaded';
     
     //warm up 
-    model.predict(tf.zeros([1, 256, 256, 3]))
+    populateInitImage()
     
-    //allow drawing on the canvas 
-    allowDrawing()
-}
-
-/*
-allow drawing on canvas
-*/
-function allowDrawing() {
-    //allow draing 
-    canvas.isDrawingMode = 1;
-    
-    //alow UI 
     $('button').prop('disabled', false);
-    
-    //setup slider 
-    var slider = document.getElementById('myRange');
-    slider.oninput = function() {
-        canvas.freeDrawingBrush.width = this.value;
-    };
 }
 
 /*
@@ -177,8 +192,7 @@ clear the canvas
 */
 function erase() {
     canvas.clear();
-    canvas.backgroundColor = '#ffffff';
-    coords = [];
+    canvas.backgroundColor = backColor;
 }
 
 //start the script 
@@ -186,31 +200,3 @@ function erase() {
     prepareCanvas();
     start();
  });
-
-function toImage(tensor, canvas) {
-    const ctx = canvas.getContext('2d');
-    //get the tensor shape
-    const [height, width] = tensor.shape;
-    //create a buffer array
-    const buffer = new Uint8ClampedArray(width * height * 4)
-    //create an Image data var 
-    const imageData = new ImageData(width, height);
-    //get the tensor values as data
-    const data = tensor.dataSync();
-    //map the values to the buffer
-    var i = 0;
-    for(var y = 0; y < height; y++) {
-    for(var x = 0; x < width; x++) {
-        var pos = (y * width + x) * 4;                   // position in buffer based on x and y
-        buffer[pos  ] =  data[i]             // some R value [0, 255]
-        buffer[pos+1] =  data[i+1]           // some G value
-        buffer[pos+2] =  data[i+2]           // some B value
-        buffer[pos+3] = 255;                             // set alpha channel
-        i+=3
-    }
-  }
-    //set the buffer to the image data
-    imageData.data.set(buffer)
-    //show the image on canvas
-    ctx.putImageData(imageData, 0, 0);
-  };
