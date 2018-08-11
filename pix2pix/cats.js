@@ -4,7 +4,23 @@ variables
 var model;
 var canvas;
 var currColor = '#002FFF'
-var backColor = '#0000DE'
+var backColor = '#ffffff'
+
+/*
+slider
+*/
+var max = 10,
+    min = 1,
+    step = 1,
+    output = $('#output').text(min);
+
+$("#range-slider")
+    .attr({'max': max, 'min':min, 'step': step,'value': String(min)})
+    .on('input change', function() {
+    
+        output.text(this.value);
+});
+
 /*
 color pallette click events
 */
@@ -20,75 +36,21 @@ prepare the drawing canvas
 */
 function prepareCanvas() {
     canvas = window._canvas = new fabric.Canvas('canvas');
-    canvas.backgroundColor = backColor;
+    canvas.backgroundColor = '#ffffff';
+    canvas.isDrawingMode = 1;
+    canvas.freeDrawingBrush.color = "black";
+    canvas.freeDrawingBrush.width = 1;
     canvas.renderAll();
     //setup listeners 
-    canvas.observe('mouse:down', function(e) { mousedown(e); });
-    canvas.observe('mouse:move', function(e) { mousemove(e); });
-    canvas.observe('mouse:up', function(e) { mouseup(e); });
-
-}
-
-var started = false;
-var x = 0;
-var y = 0;
-
-/* Mousedown */
-function mousedown(e) {
-    var mouse = canvas.getPointer(e);
-    started = true;
-    x = mouse.x;
-    y = mouse.y;
-
-    var square = new fabric.Rect({ 
-        width: 0, 
-        height: 0, 
-        left: x, 
-        top: y, 
-        fill: currColor
+    canvas.on('mouse:up', function(e) {
+        const imgData = getImageData();
+        predict(imgData)
+        mousePressed = false
     });
-
-    canvas.add(square); 
-    canvas.renderAll();
-    canvas.setActiveObject(square); 
-    square.set({selectable:false, hasControls:false, hasBorders:false})
+    canvas.on('mouse:down', function(e) {
+        mousePressed = true
+    });
 }
-
-
-/* Mousemove */
-function mousemove(e) {
-    if(!started) {
-        return false;
-    }
-
-    var mouse = canvas.getPointer(e);
-
-    var w = Math.abs(mouse.x - x),
-    h = Math.abs(mouse.y - y);
-
-    if (!w || !h) {
-        return false;
-    }
-
-    var square = canvas.getActiveObject(); 
-    square.set('width', w).set('height', h);
-    canvas.renderAll(); 
-}
-
-/* Mouseup */
-function mouseup(e) {
-    if(started) {
-        started = false;
-    }
-
-    var square = canvas.getActiveObject();
-    canvas.add(square); 
-    square.set({hasControls:false, hasBorders:false})
-    square.evented = false
-    canvas.renderAll();
-    const imgData = getImageData();
-    predict(imgData)
- } 
 
 /*
 get the current image data 
@@ -176,15 +138,32 @@ load the model
 */
 async function start() {
     //load the model 
-    model = await tf.loadModel('cats_model/model.json')
+    model = await tf.loadModel('cats_model/model.json');
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
     
     //warm up 
-    populateInitImage()
+    populateInitImage();
     
+    allowDrawing();
+}
+
+/*
+allow drawing on canvas
+*/
+function allowDrawing() {
+    //allow draing 
+    canvas.isDrawingMode = 1;
+    
+    //alow UI 
     $('button').prop('disabled', false);
+    
+    //setup slider 
+    var slider = document.getElementById('range-slider');
+    slider.oninput = function() {
+        canvas.freeDrawingBrush.width = this.value;
+    };
 }
 
 /*

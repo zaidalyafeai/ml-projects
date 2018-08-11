@@ -18,21 +18,28 @@
       <link rel = "stylesheet" href="main.css" >
    </head>
    <body>
-      <nav class="navbar navbar-expand-sm bg-light navbar-light">
-         <!-- Brand/logo -->
-         <a class="navbar-brand" href="#">
-            <h1>SKETCH<small>ER</small></h1>
-         </a>
-      </nav>
-      <div class="container-fluid">
-         <blockquote class="blockquote text-justify" style="margin:30px;">
-            <p> Sketcher is a simple tool that uses CNN to recognize drawings. 
-               The CNN was trained to recognize 100 <a href='https://github.com/zaidalyafeai/zaidalyafeai.github.io/blob/master/sketcher/mini_classes.txt'>classes</a> using the quick draw <a href='https://github.com/googlecreativelab/quickdraw-dataset'> dataset</a>. It achieves 6% top 5 error. The accuracy could be improved
-               but I focused on making the model light with around 1 million parameters. The table  will show the top 5 predictions. 
-            </p>
-            <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
-         </blockquote>
-      </div>
+      <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+          <a class="navbar-brand" href="#">Pix2Pix</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="cats.html">Cats</a>
+              <a class="nav-item nav-link active" href="facades.html">Facades</a>
+              <a class="nav-item nav-link" href="shoes.html">Shoes</a>
+            </div>
+          </div>
+        </nav>
+          <div class="container-fluid">
+             <blockquote class="blockquote text-justify" style="margin:30px;">
+                <p> A simple implementation of the pix2pix paper on the browser using TensorFlow.js. The code runs in real time
+                  after you draw some edges. Make sure you run the model in your laptop as mobile devices cannot handle the current models. 
+                  Use the mouse to draw. 
+                </p>
+                <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
+             </blockquote>
+          </div>
       <div class="row">
       <div class ="col text-center">				       
       <h4 id ='status' >Loading Model... </h4>
