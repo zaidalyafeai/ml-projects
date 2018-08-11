@@ -164,7 +164,7 @@ function populateInitImage()
     var c = document.getElementById("canvas");
     var ctx = c.getContext("2d");
     var img = new Image;
-    img.src = "facade.png"
+    img.src = "facade.jpg"
     img.onload = function () {
         ctx.drawImage(img, 0, 0, c.width, c.height);
         predict(img)
