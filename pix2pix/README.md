@@ -43,7 +43,7 @@ The process first uses a caffe model to create mat files. Then you can use matla
 ## Processed Dataset 
 
 Check `cats.zip` which contains 1000 images of cats. It was obtained from http://www.robots.ox.ac.uk/~vgg/data/pets/ by 
-frist using the segmentation to extract the cats and replace the background with white. Then the previous step was used 
+first using the segmentation to extract the cats and replace the background with white. Then the previous step was used 
 to generate the edges. 
 
 
