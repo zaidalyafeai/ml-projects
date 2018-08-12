@@ -32,3 +32,18 @@ Make sure to choose the correct direction `AtoB` or `BtoA` depending on the data
 
 `tensorflowjs_converter --input_format keras keras.h5 output_directory`
 
+## Train on your dataset 
+
+Use these scripts 
+
+https://github.com/zaidalyafeai/pix2pix/tree/master/scripts/edges
+
+The process first uses a caffe model to create mat files. Then you can use matlab to generate edges.
+
+## Processed Dataset 
+
+Check `cats.zip` which contains 1000 images of cats. It was obtained from http://www.robots.ox.ac.uk/~vgg/data/pets/ by 
+frist using the segmentation to extract the cats and replace the background with white. Then the previous step was used 
+to generate the edges. 
+
+
