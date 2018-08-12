@@ -123,13 +123,15 @@ function postprocess(tensor){
 
 function populateInitImage()
 {
-    var c = document.getElementById("canvas");
-    var ctx = c.getContext("2d");
-    var img = new Image;
-    img.src = "cat.png"
-    img.onload = function () {
-        ctx.drawImage(img, 0, 0, c.width, c.height);
-        predict(img)
+    var imgData = new Image;
+    imgData.src = "cat.png"
+    imgData.onload = function () {
+        var img = new fabric.Image(imgData, {
+            width: 256,
+            height: 256,
+        });
+        canvas.add(img)
+        predict(imgData)
     }
 }
 
