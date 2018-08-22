@@ -38,12 +38,14 @@ Use these scripts
 
 https://github.com/zaidalyafeai/pix2pix/tree/master/scripts/edges
 
-The process first uses a caffe model to create mat files. Then you can use matlab to generate edges.
+The process first uses a caffe model to create mat files. Then you can use matlab to generate edges. If you faced some difficulties with that you can use `cv2.canny` to extract the edge map of the input iamges. 
 
 ## Processed Dataset 
 
 Check `cats.zip` which contains 1000 images of cats. It was obtained from http://www.robots.ox.ac.uk/~vgg/data/pets/ by 
 first using the segmentation to extract the cats and replace the background with white. Then the previous step was used 
 to generate the edges. 
+
+Also, `pokemon.zip` contains 800 images of Pokemons that were optained from https://www.kaggle.com/kvpratama/pokemon-images-dataset. The edges were extracted using canny edge extractor. 
 
 
