@@ -9,16 +9,10 @@ var backColor = '#ffffff'
 /*
 slider
 */
-var max = 10,
-    min = 1,
-    step = 1,
-    output = $('#output').text(min);
-
 $("#range-slider")
-    .attr({'max': max, 'min':min, 'step': step,'value': String(min)})
     .on('input change', function() {
-    
-        output.text(this.value);
+        $('#output').text(this.value);
+        canvas.freeDrawingBrush.width = this.value;
 });
 
 /*
@@ -39,7 +33,7 @@ function prepareCanvas() {
     canvas.backgroundColor = '#ffffff';
     canvas.isDrawingMode = 1;
     canvas.freeDrawingBrush.color = "black";
-    canvas.freeDrawingBrush.width = 1;
+    canvas.freeDrawingBrush.width = $("#output").text();
     canvas.renderAll();
     //setup listeners 
     canvas.on('mouse:up', function(e) {
@@ -160,12 +154,6 @@ function allowDrawing() {
     
     //alow UI 
     $('button').prop('disabled', false);
-    
-    //setup slider 
-    var slider = document.getElementById('range-slider');
-    slider.oninput = function() {
-        canvas.freeDrawingBrush.width = this.value;
-    };
 }
 
 /*

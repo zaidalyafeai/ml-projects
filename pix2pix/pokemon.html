@@ -1,0 +1,71 @@
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <title>pix2pix</title>
+      <!-- bs4 css -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <!-- Popper JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+      <!-- TensorFlow.js script -->
+      <script src="tf.min.js"> </script>
+      <!-- canvas script -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.3/fabric.js"></script>
+      <!-- main css -->
+      <link rel = "stylesheet" href="main.css" >
+   </head>
+   <body>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+      <a class="navbar-brand" href="#">Pix2Pix</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="cats.html">Cats</a>
+          <a class="nav-item nav-link" href="facades.html">Facades</a>
+          <a class="nav-item nav-link" href="shoes.html">Shoes</a>
+          <a class="nav-item nav-link" href="faces.html">Faces</a>
+          <a class="nav-item nav-link active" href="pokemon.html">Pokemon</a>
+        </div>
+      </div>
+    </nav>
+      <div class="container-fluid">
+         <blockquote class="blockquote text-justify" style="margin:30px;">
+            <p> A simple implementation of the pix2pix paper on the browser using TensorFlow.js. The code runs in real time
+              after you draw some edges. Make sure you run the model in your laptop as mobile devices cannot handle the current models. 
+              Use the mouse to draw. 
+            </p>
+            <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
+         </blockquote>
+      </div>
+      <div class="row">
+      <div class ="col text-center">				       
+      <h4 id ='status' >Loading Model... </h4>
+      </div>
+   </div>
+      <div class="row">
+	    
+	    <div class= "col text-center">
+            <div class="btn-group" style = "margin-top:25px;">
+               <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9"></canvas>
+	       <canvas id="gCanvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9; margin-left:20px"></canvas>
+	      </div>
+	   </div>
+	   </div>
+	 <div class = "row">
+            <div class="col text-center">
+            <div class="btn-group text-center" style = 'margin-top:30px;margin-right:370px;'>
+                <output id="output">3</output>
+               <input id="range-slider" type="range" value = '3' min = '1' max = '5' style ='margin-top:10px;'>
+               <button type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
+            </div>
+		 </div>
+	</div>  
+   </body>
+   <!-- main script -->
+   <script src = "pokemon.js" > </script>
+</html>
