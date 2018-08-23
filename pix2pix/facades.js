@@ -169,6 +169,8 @@ function populateInitImage()
             height: 256,
         });
         canvas.add(img)
+        img.evented = false
+        canvas.renderAll();
         predict(imgData)
     }
 }
