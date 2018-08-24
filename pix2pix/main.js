@@ -3,10 +3,35 @@ variables
 */
 var model;
 var canvas;
-var classNames = [];
-var canvas;
-var coords = [];
-var mousePressed = false;
+var currColor = '#002FFF'
+var backColor = '#ffffff'
+
+modelPath = ""
+imgName   = ""
+/*
+slider
+*/
+var max = 10,
+    min = 1,
+    step = 1,
+    output = $('#output').text(min);
+
+$("#range-slider")
+    .attr({'max': max, 'min':min, 'step': step,'value': String(min)})
+    .on('input change', function() {
+    
+        output.text(this.value);
+});
+
+/*
+color pallette click events
+*/
+$(document).on("click","td", function(e){
+    //get the color 
+    const color = e.target.style.backgroundColor;
+    //set the color 
+    currColor = color;
+});
 
 /*
 prepare the drawing canvas 
@@ -20,75 +45,25 @@ function prepareCanvas() {
     canvas.renderAll();
     //setup listeners 
     canvas.on('mouse:up', function(e) {
-        getFrame();
+        const imgData = getImageData();
+        predict(imgData)
         mousePressed = false
     });
     canvas.on('mouse:down', function(e) {
         mousePressed = true
     });
-    canvas.on('mouse:move', function(e) {
-        recordCoor(e)
-    });
-}
-
-/*
-record the current drawing coordinates
-*/
-function recordCoor(event) {
-    var pointer = canvas.getPointer(event.e);
-    var posX = pointer.x;
-    var posY = pointer.y;
-
-    if (posX >= 0 && posY >= 0 && mousePressed) {
-        coords.push(pointer)
-    }
-}
-
-/*
-get the best bounding box by trimming around the drawing
-*/
-function getMinBox() {
-    //get coordinates 
-    var coorX = coords.map(function(p) {
-        return p.x
-    });
-    var coorY = coords.map(function(p) {
-        return p.y
-    });
-
-    //find top left and bottom right corners 
-    var min_coords = {
-        x: Math.min.apply(null, coorX),
-        y: Math.min.apply(null, coorY)
-    }
-    var max_coords = {
-        x: Math.max.apply(null, coorX),
-        y: Math.max.apply(null, coorY)
-    }
-
-    //return as strucut 
-    return {
-        min: min_coords,
-        max: max_coords
-    }
 }
 
 /*
 get the current image data 
 */
 function getImageData() {
-    //get the minimum bounding box around the drawing 
-    const mbb = getMinBox()
-
     //get image data according to dpi 
-    const dpi = window.devicePixelRatio
-    const margin = 2 
-    
-    const x = (mbb.min.x - margin) * dpi 
-    const y = (mbb.min.y - margin) * dpi
-    const w = (mbb.max.x - mbb.min.x + 2 * margin) * dpi 
-    const h = (mbb.max.y - mbb.min.y + 2 * margin) * dpi 
-    console.log(x +' '+ y +' '+w+' '+h+' ')
+    const dpi = window.devicePixelRatio    
+    const x = 0 * dpi 
+    const y = 0 * dpi
+    const w = canvas.width * dpi 
+    const h = canvas.height * dpi 
     const imgData = canvas.contextContainer.getImageData(x, y, w, h)
     return imgData
 }
@@ -96,22 +71,15 @@ function getImageData() {
 /*
 get the prediction 
 */
-function getFrame() {
-    //make sure we have at least two recorded coordinates 
-    if (coords.length >= 2) {
-        
-        //get the image data from the canvas 
-        const imgData = getImageData();
+function predict(imgData) {
 
-        //get the prediction 
-        const gImg = model.predict(preprocess(imgData))
-        
-        //draw on canvas 
-        const gCanvas = document.getElementById('gCanvas');
-        const postImg = postprocess(gImg)
-        tf.toPixels(postImg, gCanvas)
-    }
+    //get the prediction 
+    const gImg = model.predict(preprocess(imgData))
 
+    //draw on canvas 
+    const gCanvas = document.getElementById('gCanvas');
+    const postImg = postprocess(gImg)
+    tf.toPixels(postImg, gCanvas)
 }
 
 /*
@@ -139,6 +107,9 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
+     const w = canvas.width  
+     const h = canvas.height 
+     
      return tf.tidy(() => {
         //normalization factor  
         const scale = tf.scalar(0.5);
@@ -147,26 +118,39 @@ function postprocess(tensor){
         const squeezed = tensor.squeeze().mul(scale).add(scale)
 
         //resize to canvas size 
-        let resized = tf.image.resizeBilinear(squeezed, [300, 300])
+        let resized = tf.image.resizeBilinear(squeezed, [w, h])
         return resized
     })
+}
+
+function populateInitImage(imgName)
+{
+    var imgData = new Image;
+    imgData.src = imgName
+    imgData.onload = function () {
+        var img = new fabric.Image(imgData, {
+            width: 256,
+            height: 256,
+        });
+        canvas.add(img)
+        predict(imgData)
+    }
 }
 
 /*
 load the model
 */
-async function start() {
+async function start(imgName, modelPath) {
     //load the model 
-    model = await tf.loadModel('shoes/model.json')
+    model = await tf.loadModel(modelPath);
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
     
     //warm up 
-    model.predict(tf.zeros([1, 256, 256, 3]))
+    populateInitImage(imgName);
     
-    //allow drawing on the canvas 
-    allowDrawing()
+    allowDrawing();
 }
 
 /*
@@ -180,7 +164,7 @@ function allowDrawing() {
     $('button').prop('disabled', false);
     
     //setup slider 
-    var slider = document.getElementById('myRange');
+    var slider = document.getElementById('range-slider');
     slider.oninput = function() {
         canvas.freeDrawingBrush.width = this.value;
     };
@@ -191,12 +175,11 @@ clear the canvas
 */
 function erase() {
     canvas.clear();
-    canvas.backgroundColor = '#ffffff';
-    coords = [];
+    canvas.backgroundColor = backColor;
 }
 
 //start the script 
  $(window).on('load', function(){
     prepareCanvas();
-    start();
+    start(imgName, modelPath);
  });

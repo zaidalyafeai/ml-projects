@@ -33,3 +33,7 @@ table{
     width: 50px;
     height: 300px;
   }
+
+p{
+    font-size: 18px;
+}
