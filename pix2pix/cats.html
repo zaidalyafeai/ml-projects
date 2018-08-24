@@ -68,7 +68,12 @@
    </body>
    <!-- main script -->
    <script src = "main.js" >
-   modelPath = "cats_model/model.json"
-   imgName   = "cat.png"
+   </script>
+   
+   <script>
+   $(window).on('load', function(){
+      prepareCanvas();
+      start("cat.png", "cats_model/model.json");
+    });
    </script>
 </html>

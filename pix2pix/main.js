@@ -6,8 +6,6 @@ var canvas;
 var currColor = '#002FFF'
 var backColor = '#ffffff'
 
-modelPath = ""
-imgName   = ""
 /*
 slider
 */
@@ -178,8 +176,3 @@ function erase() {
     canvas.backgroundColor = backColor;
 }
 
-//start the script 
- $(window).on('load', function(){
-    prepareCanvas();
-    start(imgName, modelPath);
- });
