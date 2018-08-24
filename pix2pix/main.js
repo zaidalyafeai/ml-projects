@@ -139,7 +139,7 @@ async function start(imgName, modelPath) {
     
     //status 
     document.getElementById('status').innerHTML = 'Model Loaded';
-    
+    document.getElementById('bar').style.display = "none"
     //warm up 
     populateInitImage(imgName);
     
