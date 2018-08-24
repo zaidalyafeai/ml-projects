@@ -112,11 +112,13 @@
         console.log('numTensors After : ' + tf.memory().numTensors);
       }
       if (whichModel == "sm"){
+        document.getElementById('status').innerHTML = 'Loading Model';
         start("cat.png", "cats_model_small/model.json");
         $('#sm').prop('disabled', true)
         $('#bg').prop('disabled', false)
       }
       else{
+        document.getElementById('status').innerHTML = 'Loading Model';
         start("cat.png", "cats_model/model.json");
         $('#bg').prop('disabled', true)
         $('#sm').prop('disabled', false)
