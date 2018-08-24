@@ -1,10 +1,11 @@
 /*
 variables
 */
-var model;
+var model = undefined;
 var canvas;
 var currColor = '#002FFF'
 var backColor = '#ffffff'
+var gCanvas = document.getElementById('gCanvas');
 
 /*
 slider
@@ -39,7 +40,9 @@ function prepareCanvas() {
     //setup listeners 
     canvas.on('mouse:up', function(e) {
         const imgData = getImageData();
-        predict(imgData)
+        const pred = predict(imgData)
+        tf.toPixels(pred, gCanvas)
+
         mousePressed = false
     });
     canvas.on('mouse:down', function(e) {
@@ -65,14 +68,13 @@ function getImageData() {
 get the prediction 
 */
 function predict(imgData) {
-
-    //get the prediction 
-    const gImg = model.predict(preprocess(imgData))
-
-    //draw on canvas 
-    const gCanvas = document.getElementById('gCanvas');
-    const postImg = postprocess(gImg)
-    tf.toPixels(postImg, gCanvas)
+    return tf.tidy(() => {
+        //get the prediction 
+        const gImg = model.predict(preprocess(imgData))
+        //post process 
+        const postImg = postprocess(gImg)
+        return postImg   
+    })
 }
 
 /*
@@ -81,9 +83,9 @@ preprocess the data
 function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
-        let tensor = tf.fromPixels(imgData).toFloat()
+        const tensor = tf.fromPixels(imgData).toFloat()
         //resize 
-        let resized = tf.image.resizeBilinear(tensor, [256, 256])
+        const resized = tf.image.resizeBilinear(tensor, [256, 256])
                 
         //normalize 
         const offset = tf.scalar(127.5);
@@ -111,22 +113,26 @@ function postprocess(tensor){
         const squeezed = tensor.squeeze().mul(scale).add(scale)
 
         //resize to canvas size 
-        let resized = tf.image.resizeBilinear(squeezed, [w, h])
+        const resized = tf.image.resizeBilinear(squeezed, [w, h])
         return resized
     })
 }
 
+/*
+predict on initial image
+*/
 function populateInitImage(imgName)
 {
     var imgData = new Image;
     imgData.src = imgName
     imgData.onload = function () {
-        var img = new fabric.Image(imgData, {
+        const img = new fabric.Image(imgData, {
             width: 256,
             height: 256,
         });
         canvas.add(img)
-        predict(imgData)
+        const pred = predict(imgData)
+        tf.toPixels(pred, gCanvas)
     }
 }
 
@@ -154,7 +160,7 @@ function allowDrawing() {
     canvas.isDrawingMode = 1;
     
     //alow UI 
-    $('button').prop('disabled', false);
+    $('#clear').prop('disabled', false);
     
     //setup slider 
     var slider = document.getElementById('range-slider');
@@ -170,4 +176,23 @@ function erase() {
     canvas.clear();
     canvas.backgroundColor = backColor;
 }
+
+/*
+release resources when leaving the current page
+*/
+function release()
+{
+    if(model != undefined)
+    {
+        model.dispose()
+    }
+}
+window.onbeforeunload = function (e) {
+    console.log('leaving the page')
+    release()
+}
+$('.nav-link').click(function ()
+{
+    release()
+})
 

@@ -45,7 +45,11 @@
       <div class="row">
       <div class ="col text-center">				       
       <h4 id ='status' >Loading Model</h4>
-      <div id = "bar" class="loader loader--style1" title="0">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" id = 'bg' class="btn btn-outline-primary" onclick="load('bg')">50 MB</button>
+        <button type="button" id = 'sm' class="btn btn-outline-primary" onclick="load('sm')">13 MB</button>
+      </div>
+      <div id = "bar" class="loader loader--style1" title="0" style="display:none">
         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
          width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
         <path opacity="0.2" fill="#0000ff" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
@@ -79,7 +83,7 @@
             <div class="btn-group text-center" style = 'margin-top:30px;margin-right:370px;'>
                 <output id="output">1</output>
                 <input id="range-slider" type="range" value = '1' min = '1' max = '5' style ='margin-top:10px;'>
-               <button type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
+               <button id = 'clear' type="button" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
             </div>
 		 </div>
 	</div>  
@@ -91,7 +95,32 @@
    <script>
    $(window).on('load', function(){
       prepareCanvas();
-      start("cat.png", "cats_model/model.json");
+      //start("cat.png", "cats_model/model.json");
     });
+   </script>
+    
+   <script>
+    function load(whichModel)
+    {
+      
+      document.getElementById('bar').style.display = "block"
+      if (model != undefined)
+      {
+        console.log('numTensors Before: ' + tf.memory().numTensors);
+        model.dispose()
+        model = undefined
+        console.log('numTensors After : ' + tf.memory().numTensors);
+      }
+      if (whichModel == "sm"){
+        start("cat.png", "cats_model_small/model.json");
+        $('#sm').prop('disabled', true)
+        $('#bg').prop('disabled', false)
+      }
+      else{
+        start("cat.png", "cats_model/model.json");
+        $('#bg').prop('disabled', true)
+        $('#sm').prop('disabled', false)
+      }
+    }
    </script>
 </html>
