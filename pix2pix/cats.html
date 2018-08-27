@@ -30,6 +30,7 @@
           <a class="nav-item nav-link" href="shoes.html">Shoes</a>
           <a class="nav-item nav-link" href="faces.html">Faces</a>
           <a class="nav-item nav-link" href="pokemon.html">Pokemon</a>
+          <a class="nav-item nav-link" href="faceSeg.html">Faces v2</a>
         </div>
       </div>
     </nav>
@@ -46,7 +47,7 @@
       <div class ="col text-center">				       
       <h4 id ='status' >Choose a Model</h4>
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" id = 'bg' class="btn btn-outline-primary" onclick="load('bg')">50 MB</button>
+        <button type="button" id = 'md' class="btn btn-outline-primary" onclick="load('md')">50 MB</button>
         <button type="button" id = 'sm' class="btn btn-outline-primary" onclick="load('sm')">13 MB</button>
       </div>
       <div id = "bar" class="loader loader--style1" title="0" style="display:none">
@@ -115,13 +116,13 @@
         document.getElementById('status').innerHTML = 'Loading Model';
         start("cat.png", "cats_model_small/model.json");
         $('#sm').prop('disabled', true)
-        $('#bg').prop('disabled', false)
+        $('#md').prop('disabled', false)
       }
       else{
         document.getElementById('status').innerHTML = 'Loading Model';
         start("cat.png", "cats_model/model.json");
-        $('#bg').prop('disabled', true)
         $('#sm').prop('disabled', false)
+        $('#md').prop('disabled', true)
       }
     }
    </script>
