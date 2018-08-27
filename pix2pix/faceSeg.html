@@ -45,8 +45,12 @@
       </div>
       <div class="row">
       <div class ="col text-center">				       
-      <h4 id ='status' >Loading Model</h4>
-      <div id = "bar" class="loader loader--style1" title="0">
+      <h4 id ='status' >Choose a Model </h4>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" id = 'v1' class="btn btn-outline-primary" onclick="load('v1')">V1</button>
+        <button type="button" id = 'v2' class="btn btn-outline-primary" onclick="load('v2')">V2</button>
+      </div>
+      <div id = "bar" class="loader loader--style1" style="display:none" title="0">
         <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
          width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
         <path opacity="0.2" fill="#0000ff" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
@@ -107,12 +111,37 @@
    </body>
    <!-- main script -->
    <script src = "faceSeg.js" >
-   </script>
-   
+  </script>
    <script>
-   $(window).on('load', function(){
-      prepareCanvas();
-      start("faceSeg.png", "faceSeg_model/model.json");
-    });
-   </script>
+    $(window).on('load', function(){
+       prepareCanvas();
+     });
+    </script>
+     
+    <script>
+     function load(whichModel)
+     {
+       
+       document.getElementById('bar').style.display = "block"
+       if (model != undefined)
+       {
+         console.log('numTensors Before: ' + tf.memory().numTensors);
+         model.dispose()
+         model = undefined
+         console.log('numTensors After : ' + tf.memory().numTensors);
+       }
+       if (whichModel == "v1"){
+         document.getElementById('status').innerHTML = 'Loading Model';
+         start("faceSeg.png", "faceSeg_model_v1/model.json");
+         $('#v1').prop('disabled', true)
+         $('#v2').prop('disabled', false)
+       }
+       else{
+         document.getElementById('status').innerHTML = 'Loading Model';
+         start("faceSeg.png", "faceSeg_model_v2/model.json");
+         $('#v1').prop('disabled', false)
+         $('#v2').prop('disabled', true)
+       }
+     }
+    </script>
 </html>
