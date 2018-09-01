@@ -127,8 +127,8 @@ function populateInitImage(imgName)
     imgData.src = imgName
     imgData.onload = function () {
         const img = new fabric.Image(imgData, {
-            width: 256,
-            height: 256,
+            scaleX: canvas.width / 256,
+            scaleY: canvas.height / 256,
         });
         canvas.add(img)
         const pred = predict(imgData)
