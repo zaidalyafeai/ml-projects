@@ -24,11 +24,11 @@ Make sure to choose the correct direction `AtoB` or `BtoA` depending on the data
 ## Convert the model to TensorFlow.js 
 
 1. First export the model by changing the `mode` to `export`. This will create export files. 
-2. Use this the `extract_weights.py` script to save the weights files as `.npy` files. 
-3. Create a keras model using `save_keras.py` to load the weights and generate a `keras.h5` file 
-4. Install tensorflowjs package using 
+2. use the `convert_keras.py` script to convert the model to keras 
+`python conver_keras.py --dir input_dir --out output_dir`
+3. Install tensorflowjs package using 
 `pip install tensorflowjs`
-5. Convert the model  
+4. Convert the model  
 
 `tensorflowjs_converter --input_format keras keras.h5 output_directory`
 
