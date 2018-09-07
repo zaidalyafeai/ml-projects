@@ -1,6 +1,6 @@
 # Implementation of pix2pix 
 
-![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/pix2pix.PNG)
+![alt text](https://github.com/zaidalyafeai/zaidalyafeai.github.io/blob/master/pix2pix/pix2pix.gif)
 
 
 ## Implementation 
