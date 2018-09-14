@@ -25,7 +25,6 @@ Make sure to choose the correct direction `AtoB` or `BtoA` depending on the data
 
 1. First export the model by changing the `mode` to `export`. This will create export files. 
 2. use the `convert_keras.py` script to convert the model to keras 
-
 `python convert_keras.py --dir input_dir --out output_dir`
 3. Install tensorflowjs package using 
 `pip install tensorflowjs`
