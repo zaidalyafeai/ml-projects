@@ -3,7 +3,7 @@ variables
 */
 var model = undefined;
 var canvas;
-var backColor = 'red'
+var backColor = 'white'
 var gCanvas = document.getElementById('gCanvas');
 
 /*

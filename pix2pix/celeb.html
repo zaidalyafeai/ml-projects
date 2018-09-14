@@ -1,0 +1,135 @@
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <title>pix2pix</title>
+      <!-- bs4 css -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <!-- Popper JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+      <!-- TensorFlow.js script -->
+      <script src="tf.min.js"> </script>
+      <!-- canvas script -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/2.3.3/fabric.js"></script>
+      <!-- main css -->
+      <link rel = "stylesheet" href="main.css" >
+   </head>
+   <body>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+      <a class="navbar-brand font-weight-bold" href="#">Pix2Pix</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="cats.html">Cats <span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="facades.html">Facades</a>
+          <a class="nav-item nav-link" href="shoes.html">Shoes</a>
+          <a class="nav-item nav-link" href="pokemon.html">Pokemon</a>
+          <a class="nav-item nav-link active" href="celeb.html">Celebrity</a>
+          <a class="nav-item nav-link" href="scene.html">Scene</a>
+        </div>
+      </div>
+    </nav>
+      <div class="container-fluid">
+         <blockquote class="blockquote text-justify" style="margin:30px;">
+            <p> A simple implementation of the pix2pix paper on the browser using TensorFlow.js. The code runs in real time
+              after you draw some edges. Make sure you run the model in your laptop as mobile devices cannot handle the current models. 
+              Use the mouse to draw. For detailed information about the implementation see the <a href="https://github.com/zaidalyafeai/zaidalyafeai.github.io/tree/master/pix2pix">code</a>.
+              This face model was trained on this <a href="http://www.mut1ny.com/face-headsegmentation-dataset">dataset</a>. 
+            </p>
+            <footer class="blockquote-footer">ZAID ALYAFEAI</footer>
+         </blockquote>
+      </div>
+      <div class="row">
+      <div class ="col text-center">				       
+      <h4 id ='status' >Loading Model </h4>
+      <div id = "bar" class="loader loader--style1" title="0">
+        <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+         width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+        <path opacity="0.2" fill="#0000ff" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+          s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+          c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+        <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+          C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml"
+            attributeName="transform"
+            type="rotate"
+            from="0 20 20"
+            to="360 20 20"
+            dur="0.5s"
+            repeatCount="indefinite"/>
+          </path>
+        </svg>
+      </div>
+      </div>
+   </div>
+      <div class="row">
+	    
+          <div class= "col text-center">
+              <div class="btn-group" style = "margin-top:25px;">
+                 <table style = 'height:400px; width:100px'>
+                    <tr>
+                        <td >Face</td> <td  style ="background-color:#808080;" ></td>
+                    </tr> 
+                    <tr>
+                        <td >Hair</td> <td style="background-color:#ffff00;"></td>
+                    </tr>
+                    <tr>
+                        <td >Eye</td> <td style = "background-color:#00ff00"></td>
+                    </tr>
+                    <tr>
+                        <td >Eyebrow</td> <td  style ="background-color:#ff00ff;" ></td>
+                    </tr> 
+                    <tr>
+                        <td >Nose</td> <td  style ="background-color: #0000FF;"></td>
+                    </tr>
+                    <tr>
+                        <td >Mouth</td> <td style ="background-color: #FF0000;" ></td>
+                    </tr>
+                    <tr>
+                        <td >Teeth</td> <td style ="background-color: #ffffff;"></td>
+                    </tr>
+                    <tr>
+                        <td >Ears</td> <td style ="background-color: #00ffff;"></td>
+                    </tr>
+                 </table>
+                 <canvas id="canvas" width="400" height="400" class="canvas" style="border:1px solid #b9bfc9"></canvas>
+           <canvas id="gCanvas" width="400" height="400" class="canvas" style="border:1px solid #b9bfc9; margin-left:20px"></canvas>
+          </div>
+       </div>
+	   </div>
+	 <div class = "row">
+            <div class="col text-center">
+            <div class="btn-group text-center" style = 'margin-top:30px;margin-right:370px;'>
+                <output id="output">50</output>
+               <input id="range-slider" type="range" value = '50' min ='10' max = '50' step = '10' style ='margin-top:10px;'>
+               <button type="button" id = "clear" class="btn btn-outline-primary" onclick ='erase()' disabled>Clear</button>
+            </div>
+		 </div>
+	</div>  
+   </body>
+   <!-- main script -->
+   <script src = "faceSeg.js" >
+  </script>
+   <script>
+    $(window).on('load', function(){
+       prepareCanvas();
+     });
+    </script>
+     
+    <script>      
+       if (model != undefined)
+       {
+         console.log('numTensors Before: ' + tf.memory().numTensors);
+         model.dispose()
+         model = undefined
+         console.log('numTensors After : ' + tf.memory().numTensors);
+       }
+       backColor = 'white'
+        start("celeb.png", "celeb_model/model.json");
+    </script>
+</html>
