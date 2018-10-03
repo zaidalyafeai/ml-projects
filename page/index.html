@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+</head>
+<body>
+
+<h1 class = "sec">Projects </h1>
+<hr>
+
+<h2 class = "subsec">Fast pix2pix in the Browser <span class = 'LINK'><a href = "https://goo.gl/oXk2qV">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/rJE1uP">[DEMO]</a></span></h2>
+<p> The main purpose of this project is to create a web applications for quick image to image translation.  The implementation is based
+    on the paper "Image-to-Image Translation with Conditional Adversarial Networks" by <a href  = "https://arxiv.org/abs/1611.07004">Philip Isola, et al. </a>    . The user can draw a sketch or a semantic map to the left and the application will render it to a real image on the right canvas. 
+    The model was trained using Tensorflow and converted to a web application using Tensorflow.js. 
+</p>
+
+<video controls><source src="videos/pix2pix.mp4" type="video/mp4"></video>
+
+<h2 class = "subsec" >Real Time Face Segmentation <span class = 'LINK'><a href = "https://goo.gl/mE9Tsi">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/qp3EMg">[DEMO]</a></span> </h2>
+<p> The main purpose of this project is to design an application to make face segmentation directly from the webcam. The basic model is a U-Net 
+    model extracted from pix2pix trained on this faces <a href = "http://www.mut1ny.com/face-headsegmentation-dataset">dataset</a>. To make sure that the model runs in real time the model was trained with less
+    parameters and more augmented dataset.  
+</p>
+
+<video controls><source src="videos/segmentation.mp4" type="video/mp4"></video>
+
+
+<h2 class = "subsec">Webcam Image Reconstruction <span class = 'LINK'><a href = "https://goo.gl/SAhkoE">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/ZJAhev">[DEMO]</a></span></h2>
+<p> In this project the model takes live feed from the webcam and tries to reconstuct the original image. It is based on two models. The first 
+    model is based on the face semgnetation project; so basically it creates face segmentation. The second model was trained on a celebrity dataset
+    where the input is a segmented face and the output is a celebirty face. 
+</p>
+
+<video controls><source src="videos/reconstruction.mp4" type="video/mp4"></video>
+
+
+<h2 class = "subsec">Sketcher <span class = 'LINK'><a href = "https://goo.gl/uqsznz">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/crTzY9">[DEMO]</a></span></h2>
+<p> This projects is designed to recognize drawings in real time. The user draws a shape in the canvas and the model will predict the top 5 
+    objects that match the drawing. It was trained on 100 classes taken from the quick draw dataset by <a href ="https://github.com/googlecreativelab/quickdraw-dataset">Google creative lab</a>. 
+</p>
+
+<video controls><source src="videos/sketcher.mp4" type="video/mp4"></video>
+
+<h2 class = "subsec">Texter <span class = 'LINK'><a href = "https://goo.gl/jzd1Qb">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/TnD2Np">[DEMO]</a></span></h2>
+<p> This project is designed to recognize latex symbols in real time. The user draws a shape in the canvas and the model will predict the top 5 
+    symbols that match the drawing. It was trained on 369  classes taken from the <a href="https://github.com/MartinThoma/HASY">HASY dataset</a>. 
+</p>
+
+<video controls><source src="videos/texter.webm" type="video/mp4"></video>
+
+<h2 class = "subsec">Style Transfer <span class = 'LINK'><a href = "https://goo.gl/jzd1Qb">[CODE]</a></span> <span class = 'LINK'><a href = "https://goo.gl/TnD2Np">[DEMO]</a></span></h2>
+<p>  
+This projects implements 5 pretrained fast style transfer models. The web model was converted from these keras <a href = "https://github.com/misgod/fast-neural-style-keras">models</a>. 
+The keras implementation is based on the paper Perceptual Losses for Real-Time Style Transfer and Super-Resolution by <a href = "https://arxiv.org/abs/1603.08155">Justin Johnson, et al.</a>
+</p>
+    
+    <video controls><source src="videos/style-transfer.mp4" type="video/mp4"></video>
+
+
+<h1 class = "sec">Tutorials </h1>
+<hr>
+
+<h2 class = "subsec">A Gentle Introduction to Tensorflow.js <span class = 'LINK'><a href = "https://goo.gl/Ezu1SU">[LINK]</a></span></h2>
+<p>A complete walk-through on how to create machine learning models in the browser. The new Tensorflow.js library from Google opens new possibities
+    for developers to start training and deploying machine learning models using javascript. I start by explaining the basic blocks of the language 
+    then I devele deep to explain how to create models and load pretrained ones. 
+
+</p>
+
+<img src = "imgs/tfjs.PNG"></img>
+
+<h2 class = "subsec">From Colab to the Browser <span class = 'LINK'><a href = "https://goo.gl/BYv8Ez">[LINK]</a></span></h2>
+<p>In this tutorial I explain how to train a model in colab with tf.keras then deploy it in the browser with Tensorflow.js. Colab from google allows
+    training on GPU and TPU for free for around 12 hours. 
+</p>
+
+<img src = "imgs/colab-browser.PNG"></img>
+
+<h2 class = "subsec">Sentiment Classification from Keras to the Browser <span class = 'LINK'><a href = "https://goo.gl/fsYsv2">[LINK]</a></span></h2>
+<p>In this tutorial I explain how to make a sentiement classification in keras then deploy it in the browser using Tensorflow.js. The RNN model 
+    is trained on a movie review dataset that classifies bad/good movies from text inputs. The model is designed with keras and converted to a web 
+    model using Tensorflow.js.  
+
+</p>
+
+<img src = "imgs/sentiement.PNG"></img>
+
+
+<h2 class = "subsec">Train  and Deploy ML models using One Notebook <span class = 'LINK'><a href = "https://goo.gl/Yyhp1t">[LINK]</a></span></h2>
+<p>In this tutorial I explain how to create anotebook on google colab. The notebook explores the possiblitiy of training, testing and deploying a model 
+    a model in the browser without leaving the notebook. I also explained how to post the project on GitHub directely from Colab using tokens. 
+</p>
+
+<img src = "imgs/one-place.PNG"></img>
+
+
+<h2 class = "subsec">Fast pix2pix in the Browser <span class = 'LINK'><a href = "https://goo.gl/gQAdMh">[LINK]</a></span></h2>
+<p>In this tutorial I explain how I created the fast pix2pix application. It gives a compete walk-though of training then porting the model to the 
+    browser. 
+
+</p>
+
+<img src = "imgs/pix2pix.PNG"></img>
+
+
+<h1 class = "sec">Notebooks</h1>
+<hr>
+<h2 class = "subsec">Training pix2pix <span class = 'LINK'><a href = "https://goo.gl/rS5pXV">[LINK]</a></span></h2>
+<p> This notebook shows a simple pipeline for training pix2pix on a simple dataset. 
+
+</p>
+
+<img src = "imgs/colab-pix2pix.PNG"></img>
+
+
+<h2 class = "subsec">One Place <span class = 'LINK'><a href = "https://goo.gl/RHHm9p">[LINK]</a></span></h2>
+<p> This notebook shows how to train, test then deploy models in the browser directly from one notebook.  We use a simple XOR example 
+    to prove this simple concept. 
+
+</p>
+
+<img src = "imgs/colab-oneplace.PNG"></img>
+
+<h2 class = "subsec">TPU vs GPU <span class = 'LINK'><a href = "https://goo.gl/yJYQWc">[LINK]</a></span></h2>
+<p> Google recently allowed training on TPUs for free on colab. This notebook explains how to enable TPU training. Also, it reports some 
+    benchmarks using mnist dataset by comparing TPU and GPU performance.   
+</p>
+
+<img src = "imgs/colab-tpuvsgpu.PNG"></img>
+
+
+<h2 class = "subsec">Keras Custom Generator <span class = 'LINK'><a href = "https://goo.gl/Np9sND">[LINK]</a></span></h2>
+<p> This notebook shows to create a custom data genertor in keras.  
+</p>
+
+
+<h1 class = "sec">Math Notes </h1>
+<hr>
+<h2 class = "subsec">Advanced Integration Techniques <span class = 'LINK'><a href = "https://goo.gl/C6A2tc">[LINK]</a></span></h2>
+<p> A book exploring different approaches to solve advanced integrals. In this book I gather many special functions like, gamma, beta, zeta, 
+    hypergeometric, etc .. and explore the analyticity of such functions. Also, I use complex analysis approaches to solve some advanced integrals
+    that are unsolvable by elementary approaches. 
+</p>
+
+<img src = "imgs/adi.PNG"></img>
+
+<h2 class = "subsec">Probability Notes <span class = 'LINK'><a href = "https://goo.gl/8bHFEU">[LINK]</a></span></h2>
+<p> A summary of the probability course by MIT.  
+</p>
+
+<img src = "imgs/probability.PNG"></img>
+
+</body>
+</html>

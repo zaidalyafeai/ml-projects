@@ -1,0 +1,43 @@
+.subsec{
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    padding-bottom: 20px;
+    font-weight: normal;
+}
+
+.sec{
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 40px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.LINK{
+    font-size: 15px;
+}
+p{
+    font-family: Georgia, serif;
+    line-height: 200%;
+    font-size: 18px;
+    padding-bottom: 20px;
+    text-align: justify;
+}
+
+body{
+    padding-left: 15%;
+    padding-right:15%;
+}
+
+video{
+    width:50%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+}
+
+img{
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+}
