@@ -39,5 +39,6 @@ video{
 img{
     margin-left: auto;
     margin-right: auto;
-    display: block
+    display: block;
+    width: 100%;
 }
