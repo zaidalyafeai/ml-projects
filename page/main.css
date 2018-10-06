@@ -5,10 +5,11 @@
     font-weight: normal;
 }
 
-h4{
+span{
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 25px;
     padding-bottom: 20px;
+    font-weight: bold;
 }
 
 .sec{
