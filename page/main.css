@@ -55,7 +55,6 @@ ul {
 .footer-social-icons {
     width: 350px;
     display:block;
-    margin: 0 auto;
 }
 .social-icon {
     color: #fff;
@@ -97,24 +96,8 @@ ul.social-icons {
     background-color: #00aced;
 }
 
-
-
-
-.fa-google-plus {
-    padding:10px 9px;
-    -o-transition:.5s;
-    -ms-transition:.5s;
-    -moz-transition:.5s;
-    -webkit-transition:.5s;
-    transition: .5s;
-    background-color: #322f30;
-}
-.fa-google-plus:hover {
-    background-color: #e25714;
-}
-
 .fa-github {
-    padding:10px 9px;
+    padding:10px 12px;
     -o-transition:.5s;
     -ms-transition:.5s;
     -moz-transition:.5s;
