@@ -5,6 +5,12 @@
     font-weight: normal;
 }
 
+h4{
+    font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 25px;
+    padding-bottom: 20px;
+}
+
 .sec{
     font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 40px;
