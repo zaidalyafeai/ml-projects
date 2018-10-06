@@ -115,3 +115,9 @@ ul.social-icons {
 .fa-github:hover {
     background-color: #e25714;
 }
+
+.footer-social-icons{
+    margin-left: auto;
+    margin-right: auto;
+    display: block
+ }
