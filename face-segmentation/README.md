@@ -7,7 +7,7 @@
 
 I used pix2pix trained on this dataset http://www.mut1ny.com/face-headsegmentation-dataset. 
 
-## Demoe 
+## Demo
 
 Check https://zaidalyafeai.github.io/face-segmentation/index.html
 
