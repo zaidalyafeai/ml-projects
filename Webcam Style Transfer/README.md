@@ -6,5 +6,5 @@ I used pix2pix trained on a dataset of faces styled using a style transfer netwo
 
 ## Demo
 
-Check https://zaidalyafeai.github.io/face-segmentation/index.html
+Check https://zaidalyafeai.github.io/Webcam%20Style%20Transfer/
 
