@@ -130,13 +130,10 @@ function preprocess(imgData) {
     return tf.tidy(() => {
         //convert to a tensor 
         const tensor = tf.fromPixels(imgData).toFloat()
-
-        //resize 
-        const resized = tf.image.resizeBilinear(tensor, [256, 256])
                 
         //normalize 
         const offset = tf.scalar(127.5);
-        const normalized = resized.div(offset).sub(tf.scalar(1.0));
+        const normalized = tensor.div(offset).sub(tf.scalar(1.0));
 
         //We add a dimension to get a batch shape 
         const batched = normalized.expandDims(0)
@@ -149,10 +146,6 @@ function preprocess(imgData) {
 post process 
 */
 function postprocess(tensor){
-     const dpi = window.devicePixelRatio    
-    const w = gCanvas.width * dpi 
-    const h = gCanvas.height * dpi 
-     
      return tf.tidy(() => {
         //normalization factor  
         const scale = tf.scalar(0.5);
@@ -160,9 +153,7 @@ function postprocess(tensor){
         //unnormalize and sqeeze 
         const squeezed = tensor.squeeze().mul(scale).add(scale)
 
-        //resize to canvas size 
-        const resized = tf.image.resizeBilinear(squeezed, [w, h])
-        return resized
+        return squeezed
     })
 }
 
