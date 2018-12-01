@@ -10,6 +10,19 @@ Fast image-to-image check demo https://zaidalyafeai.github.io/pix2pix/cats.html
 Fast style transfer check demo https://zaidalyafeai.github.io/fast-style/
 ![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/fast-style.PNG)
 
+## Real Time Face Segmentation
+Fast style transfer check demo https://zaidalyafeai.github.io/fast-style/
+![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/segmentation.png)
+
+## Real Time style transfer
+Fast style transfer check demo https://zaidalyafeai.github.io/RST/
+![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/rst.png)
+
+## Real Time Face recunstruction 
+Fast style transfer check demo https://zaidalyafeai.github.io/fast-style/
+![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/reconstuct.png)
+
+
 ## Texter 
 Recognition of latex symbols check demo https://zaidalyafeai.github.io/texter/
 
