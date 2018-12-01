@@ -11,7 +11,7 @@ Fast style transfer check demo https://zaidalyafeai.github.io/fast-style/
 ![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/fast-style.PNG)
 
 ## Real Time Face Segmentation
-Real Time Face Segmentation check demo https://zaidalyafeai.github.io/fast-style/
+Real Time Face Segmentation check demo https://zaidalyafeai.github.io/face-segmentation/
 ![alt text](https://raw.githubusercontent.com/zaidalyafeai/zaidalyafeai.github.io/master/images/segmentation.png)
 
 ## Real Time style transfer
