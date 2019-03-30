@@ -1,0 +1,74 @@
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+
+<script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
+
+<img id="img1" src="https://i.imgur.com/gQLIJkN.png" crossorigin="" style = 'display:none;' />
+
+<img id="img2" src="https://i.imgur.com/bBEmh5a.jpg" crossorigin="" style = 'display:none;' />
+
+<img id="img3" src="https://i.imgur.com/rfKl00b.jpg" crossorigin="" style = 'display:none;' />
+
+<img id="img4" src="https://i.imgur.com/NsQJJyt.jpg" crossorigin="" style = 'display:none;' />
+
+<img id="img5" src="https://i.imgur.com/rHFJiFU.jpg" crossorigin="" style = 'display:none;' />
+
+ <table>
+    <td>Browser</td>
+    <td id = 'browserName'></td>
+    <td id = 'browserVersion'></td>
+  </tr>
+  <tr>
+    <td>OS</td>
+    <td id = 'osName'></td>
+    <td id = 'osVersion'></td>
+  </tr>
+
+  <tr>
+    <td>Time</td>
+    <td id = 'time'></td>
+    <td >ms</td>
+  </tr>
+</table> 
+
+<script>
+
+async function infer(input)
+{
+    const prediction =  await mobilenet.predict(input);
+    return prediction;
+}
+
+var parser = new UAParser();
+var output = parser.getResult();
+var mobilenet;
+
+console.log(output);
+document.getElementById('browserVersion').innerHTML = output.browser.version;
+document.getElementById('browserName').innerHTML = output.browser.name;
+document.getElementById('osName').innerHTML = output.os.name;
+document.getElementById('osVersion').innerHTML = output.os.version;
+
+const path = 'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json'
+
+ tf.loadLayersModel(path).then(model => {
+    mobilenet = model;
+    //warm up 
+
+    var start = new Date();
+
+    mobilenet.predict(tf.zeros([1, 224, 224, 3]));
+    var image;
+    for (i= 1 ; i <= 5; i++){
+       image = document.getElementById('img'+i);
+       const tensor = tf.browser.fromPixels(image);
+       const batch = tf.expandDims(tensor);
+       const input = tf.image.resizeBilinear (batch, [224, 224]);
+       console.log(infer(input));
+       console.log('processed img '+i);
+    }
+    const time = (new Date()-start)/5;
+    document.getElementById('time').innerHTML = time;
+    
+ });
+
+</script>
