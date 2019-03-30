@@ -32,7 +32,7 @@
 
 <script>
 
-async function infer(input)
+async function predict(input)
 {
     const prediction =  await mobilenet.predict(input);
     return prediction;
@@ -53,18 +53,16 @@ const path = 'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_
  tf.loadLayersModel(path).then(model => {
     mobilenet = model;
     //warm up 
-
-    var start = new Date();
-
     mobilenet.predict(tf.zeros([1, 224, 224, 3]));
+    var start = new Date();
+  
     var image;
     for (i= 1 ; i <= 5; i++){
        image = document.getElementById('img'+i);
        const tensor = tf.browser.fromPixels(image);
        const batch = tf.expandDims(tensor);
        const input = tf.image.resizeBilinear (batch, [224, 224]);
-       console.log(infer(input));
-       console.log('processed img '+i);
+       predict(input);
     }
     const time = (new Date()-start)/5;
     document.getElementById('time').innerHTML = time;
