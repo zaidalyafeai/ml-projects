@@ -38,20 +38,12 @@ document.getElementById('osVersion').innerHTML = output.os.version;
  tf.loadLayersModel(path).then(model => {
     //warm up 
     model.predict(tf.zeros([1, 224, 224, 3]));
-
-    //preprocess
-    image = document.getElementById('img');
-    const tensor = tf.browser.fromPixels(image);
-    const batch = tf.expandDims(tensor);
-    const input = tf.image.resizeBilinear (batch, [224, 224]);
-  
-    var image;
     var time = 0;
     const num_iter = 20;
 
     for (i= 1 ; i <= num_iter; i++){
         const t0 = tf.util.now ();
-        const output = model.predict(input);
+        const output = model.predict(tf.randomNormal([1, 224, 224, 3]));
         output.dataSync();
         const t1 = tf.util.now ();
         time += (t1-t0);
